@@ -4,6 +4,7 @@ import android.database.Observable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.TextViewCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -55,12 +56,20 @@ public class TestActivity extends BaseActivity{
                 });
                 BmobQuery<Tea_Org> query1 = new BmobQuery<Tea_Org>();
                 query1.addWhereEqualTo("teacher",new BmobPointer(teacher));
-                query1.include("organization");
+                query1.include("organization.Oname");
                 query1.findObjects(new FindListener<Tea_Org>() {
                     @Override
                     public void done(List<Tea_Org> list, BmobException e) {
-                        if(list.size()>0)tea_org = list.get(0);
-                        tv.setText(tea_org.toString()+"\n"+tea_org.getOrganization().toString());
+//                        if(list.size()>0)
+//                            tea_org = list.get(0);
+                        //tv.setText(tea_org.toString()+"\n"+tea_org.getOrganization().toString());
+                        if (e != null){
+                            Log.e("exception" , e.toString());
+                        }if (list.isEmpty()){
+                            Log.d("teacher",list.size() + "");
+                            return;
+                        }
+                        Log.d("teacher",list.get(0).getOrganization().toString() + "");
                     }
                 });
             }
