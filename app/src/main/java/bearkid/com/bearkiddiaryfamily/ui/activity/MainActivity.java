@@ -38,6 +38,7 @@ public class MainActivity extends BaseActivity {
         tab[3].setOnClickListener(tabViewOnClickListener);
         tab[4].setOnClickListener(tabViewOnClickListener);
         selected = 0;
+        onTabViewSelected(0);
     }
 
     View.OnClickListener tabViewOnClickListener = new View.OnClickListener() {
@@ -66,10 +67,10 @@ public class MainActivity extends BaseActivity {
     };
 
     public void changeTab(int tabNum) {
-        onTabViewChanged(tabNum);
+        onTabViewSelected(tabNum);
     }
 
-    private void onTabViewChanged(int tabNum){
+    private void onTabViewSelected(int tabNum){
         ((TextView)tab[selected].getChildAt(0)).setTextColor(0xffffaf00);
         ((TextView)tab[tabNum].getChildAt(0)).setTextColor(0xffffff00);
         selected = tabNum;
