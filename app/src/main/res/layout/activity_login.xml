@@ -56,6 +56,17 @@
                 android:textColor="#000000"
                 android:textSize="16sp" />
 
+            <TextView
+                android:id="@+id/tv_login_error"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:padding="8dp"
+                android:text="用户名或密码不正确"
+                android:textColor="#ff0000"
+                android:textSize="14sp"
+                android:visibility="gone" />
+
             <com.gc.materialdesign.views.ButtonFlat
                 android:id="@+id/btn_login_ok"
                 android:layout_width="wrap_content"

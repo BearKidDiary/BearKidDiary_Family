@@ -5,10 +5,16 @@ import cn.bmob.v3.BmobObject;
 /**
  * 家庭版用户
  */
-public class FamilyUser extends BmobObject{
+public class FamilyUser extends BmobObject {
+    public static final String NAME = "FUname";
+    public static final String EMAIL = "FUemail";
+    public static final String PHONE = "FUphone";
+    public static final String AREA = "FUarea";
+    public static final String PSW = "FUpsw";
+
     private String FUname;
     private String FUphone;
-    private String FUare;
+    private String FUarea;
     private String FUemail;
     private String FUpsw;
 
@@ -28,12 +34,12 @@ public class FamilyUser extends BmobObject{
         this.FUphone = FUphone;
     }
 
-    public String getFUare() {
-        return FUare;
+    public String getFUarea() {
+        return FUarea;
     }
 
-    public void setFUare(String FUare) {
-        this.FUare = FUare;
+    public void setFUarea(String FUarea) {
+        this.FUarea = FUarea;
     }
 
     public String getFUemail() {

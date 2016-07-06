@@ -1,5 +1,7 @@
 package bearkid.com.bearkiddiaryfamily.ui.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -95,6 +97,11 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
     }
 
     @Override
+    public void postRunnable(Runnable runnable){
+        runOnUiThread(runnable);
+    }
+
+    @Override
     public void smscodeUnClickable() {
         btn_sms.setClickable(false);
         btn_sms.setBackgroundColor(getResources().getColor(R.color.colorUnClickable));
@@ -110,5 +117,9 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
         btn_sms.setText("获取验证码");
         btn_sms.setClickable(true);
         btn_sms.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+    }
+
+    public static void startActivity(Context context) {
+        context.startActivity(new Intent(context, RegisterActivity.class));
     }
 }

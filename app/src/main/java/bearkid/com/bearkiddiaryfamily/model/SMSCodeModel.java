@@ -14,6 +14,9 @@ public class SMSCodeModel {
      */
     public static final String TEMPLE = "验证码";
 
+    private SMSCodeModel() {
+    }
+
     public static Observable<Integer> requestSMSCode(String number) {
         return BmobSMS.requestSMSCodeObservable(number, TEMPLE)
                 .subscribeOn(Schedulers.io());
