@@ -1,14 +1,14 @@
 package bearkid.com.bearkiddiaryfamily.model;
 
+import android.content.Context;
 import android.util.TimeUtils;
 
+import java.net.ContentHandler;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
+import bearkid.com.bearkiddiaryfamily.global.LocalDB;
 import bearkid.com.bearkiddiaryfamily.model.bean.FamilyUser;
 import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.FindListener;
 import rx.Observable;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
@@ -20,6 +20,10 @@ public class LoginModel {
     private LoginModel() {
     }
 
+    /**
+     * @param phoneNum 用户的手机号码
+     * @param psw      用户的密码
+     */
     public static Observable<Boolean> login(String phoneNum, final String psw) {
         BmobQuery<FamilyUser> query = new BmobQuery<>();
         query.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK); // 先从缓存获取数据，如果没有，再从网络获取
@@ -34,6 +38,29 @@ public class LoginModel {
                             return psw.equals(familyUsers.get(0).getFUpsw());
                         }
                         return false;
+                    }
+                });
+    }
+
+    /**
+     * 获取当前登录的用户信息
+     * 可用于判断当前手机是否已经登陆过了
+     *
+     * @return FamilyUser的Observable对象 FamilyUser可能为null
+     */
+    public static Observable<FamilyUser> getCurrentUser(Context context) {
+        String phoneNum = new LocalDB(context).getPhoneNum();
+        BmobQuery<FamilyUser> query = new BmobQuery<>();
+        query.setCachePolicy(BmobQuery.CachePolicy.CACHE_ONLY); // 只从缓存获取
+        query.addWhereEqualTo(FamilyUser.PHONE, phoneNum);
+        return query.findObjectsObservable(FamilyUser.class)
+                .subscribeOn(Schedulers.io())
+                .map(new Func1<List<FamilyUser>, FamilyUser>() {
+                    @Override
+                    public FamilyUser call(List<FamilyUser> familyUsers) {
+                        if (familyUsers.size() > 0)
+                            return familyUsers.get(0);
+                        return null;
                     }
                 });
     }

@@ -1,6 +1,5 @@
 package bearkid.com.bearkiddiaryfamily.presenter;
 
-import android.app.Activity;
 import android.util.Log;
 
 import java.util.Timer;
@@ -38,7 +37,7 @@ public class RegisterPresenter {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<String>() {
                     @Override
-                    public void call(String s) {
+                    public void call(String s) {/* 成功注册 s是ObjectId */
                         view.registerClickable();
                         Log.i("zy", "RegisterPresenter register success" + s);
                     }
@@ -62,7 +61,7 @@ public class RegisterPresenter {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<Integer>() {
                     @Override
-                    public void call(Integer smsId) {
+                    public void call(Integer smsId) {/* 发送验证码成功 smsId是验证码编号（用于跟踪详情）而不是验证码 */
                         Log.i("zy", "RegisterPresenter request smsCode: " + smsId);
                     }
                 }, new Action1<Throwable>() {
