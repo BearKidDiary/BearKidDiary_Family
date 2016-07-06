@@ -10,11 +10,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import bearkid.com.bearkiddiaryfamily.R;
+import bearkid.com.bearkiddiaryfamily.ui.fragment.GalleryFragment;
 import bearkid.com.bearkiddiaryfamily.ui.fragment.TestFragment;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     protected LinearLayout[] tab = new LinearLayout[5];
-    protected int selected = 0;
+    protected int selected;
     protected static int[] tabIcon = {1,2,3,4,5};
     protected Fragment[] mFragments = new Fragment[5];
 
@@ -41,7 +42,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initContain() {
-        onTabSelected(0);
+        selected = 0;
+        ((ImageView)tab[0].getChildAt(0)).setImageResource(R.drawable.admin);
+        ((TextView)tab[0].getChildAt(1)).setTextColor(0xffffaf00);
         mFragments[0] = new TestFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.activity_main_contain, mFragments[0]);
@@ -62,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     mFragments[2] = new TestFragment();
                     break;
                 case 3:
-                    mFragments[3] = new TestFragment();
+                    mFragments[3] = new GalleryFragment();
                     break;
                 case 4:
                     mFragments[4] = new TestFragment();

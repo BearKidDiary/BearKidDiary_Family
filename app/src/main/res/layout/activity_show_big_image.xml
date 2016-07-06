@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    android:clickable="true"
+    android:id="@+id/activity_show_big_image_root"
+    tools:context="bearkid.com.bearkiddiaryfamily.ui.activity.ShowBigImageActivity">
+    <ImageView
+        android:id="@+id/activity_show_big_image_img"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/image_default"
+        android:layout_centerInParent="true"/>
+</RelativeLayout>
