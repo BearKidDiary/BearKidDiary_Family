@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_margin="16dp"
-        android:background="#efffffff">
+        android:background="#9fffffff">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,10 +23,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="欢迎回来"
-                android:layout_marginTop="32dp"
                 android:layout_marginBottom="16dp"
-                android:textColor="@color/colorPrimary"
+                android:layout_marginTop="32dp"
+                android:text="欢迎回来"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="25sp" />
 
             <EditText
@@ -39,6 +39,7 @@
                 android:inputType="phone"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
+                android:textColor="#000000"
                 android:textSize="16sp" />
 
             <EditText
@@ -52,7 +53,19 @@
                 android:inputType="textPassword"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
+                android:textColor="#000000"
                 android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_login_error"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:padding="8dp"
+                android:text="用户名或密码不正确"
+                android:textColor="#ff0000"
+                android:textSize="14sp"
+                android:visibility="gone" />
 
             <com.gc.materialdesign.views.ButtonFlat
                 android:id="@+id/btn_login_ok"
@@ -70,9 +83,9 @@
         android:id="@+id/btn_login_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="还没有账号？注册"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_margin="32dp"
-        android:background="@color/colorPrimaryDark"/>
+        android:background="@color/colorPrimaryDark"
+        android:text="还没有账号？注册" />
 </RelativeLayout>
