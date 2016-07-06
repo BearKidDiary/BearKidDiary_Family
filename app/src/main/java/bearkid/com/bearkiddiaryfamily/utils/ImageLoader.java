@@ -81,7 +81,6 @@ public class ImageLoader {
     };
 
     private Context mContext;
-    private ImageResizer mImageResizer = new ImageResizer();
     private LruCache<String, Bitmap> mMemoryCache;
     private DiskLruCache mDiskLruCache;
 
@@ -240,7 +239,7 @@ public class ImageLoader {
         if (snapShot != null) {
             FileInputStream fileInputStream = (FileInputStream)snapShot.getInputStream(DISK_CACHE_INDEX);
             FileDescriptor fileDescriptor = fileInputStream.getFD();
-            bitmap = mImageResizer.decodeSampledBitmapFromFileDescriptor(fileDescriptor,
+            bitmap = ImageResizer.decodeSampledBitmapFromFileDescriptor(fileDescriptor,
                     reqWidth, reqHeight);
             if (bitmap != null) {
                 addBitmapToMemoryCache(key, bitmap);
