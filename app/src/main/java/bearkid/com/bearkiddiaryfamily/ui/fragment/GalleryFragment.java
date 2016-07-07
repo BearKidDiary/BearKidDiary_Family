@@ -18,6 +18,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import bearkid.com.bearkiddiaryfamily.R;
@@ -28,7 +29,7 @@ import bearkid.com.bearkiddiaryfamily.utils.ImageLoader;
  * Created by admin on 2016/7/6.
  * 相册界面
  */
-public class GalleryFragment extends Fragment  implements OnScrollListener {
+public class GalleryFragment extends BaseFragment implements OnScrollListener {
     protected Context mContext;
     protected List<String> mUrList;
     ImageLoader mImageLoader;
@@ -41,7 +42,7 @@ public class GalleryFragment extends Fragment  implements OnScrollListener {
     protected boolean mCanGetBitmapFromNetWork = false;
 
     @Override
-    public View onCreateView(LayoutInflater layoutInflater, ViewGroup container, Bundle saveInstanceState){
+    public View onCreateView(LayoutInflater layoutInflater, ViewGroup container, Bundle saveInstanceState) {
         View view = layoutInflater.inflate(R.layout.fragment_gallery, container, false);
         mContext = getContext();
         mUrList = new ArrayList<>();
@@ -77,11 +78,16 @@ public class GalleryFragment extends Fragment  implements OnScrollListener {
                 "http://pic25.nipic.com/20121210/7447430_172514301000_2.jpg",
                 "http://h.hiphotos.baidu.com/zhidao/wh%3D450%2C600/sign=429e7b1b92ef76c6d087f32fa826d1cc/7acb0a46f21fbe09cc206a2e69600c338744ad8a.jpg"
         };
-        for (String url : imageUrls) {
-            mUrList.add(url);
-        }
+//        for (String url : imageUrls) {
+//            mUrList.add(url);
+//        }
+        /**
+         * 2016/07/07 我改用了Arrays.asList这个方法 效率可能更高
+         */
+        mUrList = Arrays.asList(imageUrls);
+
         int screenWidth = getScreenMetrics(mContext).widthPixels;
-        int space = (int)dp2px(mContext, 20f);
+        int space = (int) dp2px(mContext, 20f);
         mImageWidth = (screenWidth - space) / 3;
         mIsWifi = isWifi(mContext);
         if (mIsWifi) {
@@ -129,7 +135,7 @@ public class GalleryFragment extends Fragment  implements OnScrollListener {
                 holder = (ViewHolder) convertView.getTag();
             }
             ImageView imageView = holder.imageView;
-            final String tag = (String)imageView.getTag();
+            final String tag = (String) imageView.getTag();
             final String uri = getItem(position);
             if (!uri.equals(tag)) {
                 imageView.setImageResource(R.drawable.image_default);

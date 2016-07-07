@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".ui.fragment.TimeLineTypeFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,124 +19,67 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical">
+
             <ImageButton
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:scaleType="fitCenter"
                 android:layout_gravity="center"
-                android:src="@drawable/timeline_camera"/>
+                android:scaleType="fitCenter"
+                android:src="@drawable/timeline_camera" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="20sp"
+                android:text="拍照"
                 android:textColor="@color/colorPrimaryDark"
-                android:text="拍照"/>
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical">
+
             <ImageButton
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:scaleType="fitCenter"
                 android:layout_gravity="center"
-                android:src="@drawable/timeline_body"/>
+                android:scaleType="fitCenter"
+                android:src="@drawable/timeline_body" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="20sp"
+                android:text="身体状况"
                 android:textColor="@color/colorPrimaryDark"
-                android:text="身体状况"/>
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1">
-            <ImageButton
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:scaleType="fitCenter"
-                android:layout_gravity="center"
-                android:src="@drawable/timeline_first_time"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:textColor="@color/colorPrimaryDark"
-                android:text="第一次"/>
-        </LinearLayout>
-    </LinearLayout>
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1">
             <ImageButton
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:scaleType="fitCenter"
                 android:layout_gravity="center"
-                android:src="@drawable/timeline_eat"/>
+                android:scaleType="fitCenter"
+                android:src="@drawable/timeline_first_time" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="20sp"
+                android:text="第一次"
                 android:textColor="@color/colorPrimaryDark"
-                android:text="吃饭"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1">
-            <ImageButton
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:scaleType="fitCenter"
-                android:layout_gravity="center"
-                android:src="@drawable/timeline_sport"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:textColor="@color/colorPrimaryDark"
-                android:text="运动"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1">
-            <ImageButton
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:scaleType="fitCenter"
-                android:layout_gravity="center"
-                android:src="@drawable/timeline_study"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:textColor="@color/colorPrimaryDark"
-                android:text="学习"/>
+                android:textSize="20sp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -146,21 +91,95 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical">
+
             <ImageButton
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:scaleType="fitCenter"
                 android:layout_gravity="center"
-                android:src="@drawable/timeline_add"/>
+                android:scaleType="fitCenter"
+                android:src="@drawable/timeline_eat" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="20sp"
+                android:text="吃饭"
                 android:textColor="@color/colorPrimaryDark"
-                android:text="自定义"/>
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_gravity="center"
+                android:scaleType="fitCenter"
+                android:src="@drawable/timeline_sport" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="运动"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_gravity="center"
+                android:scaleType="fitCenter"
+                android:src="@drawable/timeline_study" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="学习"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_gravity="center"
+                android:scaleType="fitCenter"
+                android:src="@drawable/timeline_add" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="自定义"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20sp" />
         </LinearLayout>
     </LinearLayout>
 

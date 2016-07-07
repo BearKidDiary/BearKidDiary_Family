@@ -8,15 +8,10 @@ import android.view.ViewGroup;
 
 import bearkid.com.bearkiddiaryfamily.R;
 
-/**
- * 主界面上 中间“+”号显示的页面
- * <p/>
- * 时间轴事件类型选择界面
- */
-public class TimeLineTypeFragment extends BaseFragment {
+public class FamilyFragment extends BaseFragment {
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_timeline_type, container, false);
-        return view;
+        return inflater.inflate(R.layout.fragment_family, container, false);
     }
 }
