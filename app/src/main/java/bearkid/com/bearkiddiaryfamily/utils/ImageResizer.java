@@ -6,10 +6,10 @@ import android.graphics.BitmapFactory;
 
 public class ImageResizer {
 
-    public ImageResizer() {
+    private ImageResizer() {
     }
 
-    public Bitmap decodeSampledBitmapFromFileDescriptor(FileDescriptor fd, int reqWidth, int reqHeight) {
+    public static Bitmap decodeSampledBitmapFromFileDescriptor(FileDescriptor fd, int reqWidth, int reqHeight) {
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeFileDescriptor(fd, null, options);
@@ -21,7 +21,7 @@ public class ImageResizer {
         return BitmapFactory.decodeFileDescriptor(fd, null, options);
     }
 
-    public int calculateInSampleSize(BitmapFactory.Options options,
+    public static int calculateInSampleSize(BitmapFactory.Options options,
             int reqWidth, int reqHeight) {
         if (reqWidth == 0 || reqHeight == 0) {
             return 1;
