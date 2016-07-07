@@ -22,7 +22,7 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <ImageButton
+            <bearkid.com.bearkiddiaryfamily.ui.view.IconButton
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_gravity="center"
@@ -44,7 +44,7 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <ImageButton
+            <bearkid.com.bearkiddiaryfamily.ui.view.IconButton
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_gravity="center"
@@ -66,7 +66,7 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <ImageButton
+            <bearkid.com.bearkiddiaryfamily.ui.view.IconButton
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_gravity="center"
@@ -94,7 +94,7 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <ImageButton
+            <bearkid.com.bearkiddiaryfamily.ui.view.IconButton
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_gravity="center"
@@ -116,7 +116,7 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <ImageButton
+            <bearkid.com.bearkiddiaryfamily.ui.view.IconButton
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_gravity="center"
@@ -138,7 +138,7 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <ImageButton
+            <bearkid.com.bearkiddiaryfamily.ui.view.IconButton
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_gravity="center"
@@ -166,7 +166,7 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <ImageButton
+            <bearkid.com.bearkiddiaryfamily.ui.view.IconButton
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_gravity="center"

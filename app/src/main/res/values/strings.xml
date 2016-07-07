@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BearKidDiaryFamily</string>
+    <string name="app_name">熊孩子家校通</string>
     <string name="tabView_1">动态</string>
     <string name="tabView_2">孩子</string>
     <string name="tabView_4">相册</string>
