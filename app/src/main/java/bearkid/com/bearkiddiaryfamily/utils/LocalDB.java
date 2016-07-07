@@ -1,4 +1,4 @@
-package bearkid.com.bearkiddiaryfamily.global;
+package bearkid.com.bearkiddiaryfamily.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
