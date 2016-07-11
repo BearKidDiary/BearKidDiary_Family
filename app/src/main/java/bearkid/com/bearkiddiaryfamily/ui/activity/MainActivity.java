@@ -12,6 +12,8 @@ import android.widget.TextView;
 import bearkid.com.bearkiddiaryfamily.R;
 import bearkid.com.bearkiddiaryfamily.ui.fragment.FamilyFragment;
 import bearkid.com.bearkiddiaryfamily.ui.fragment.GalleryFragment;
+import bearkid.com.bearkiddiaryfamily.ui.fragment.MessageFragment;
+import bearkid.com.bearkiddiaryfamily.ui.fragment.MeFragment;
 import bearkid.com.bearkiddiaryfamily.ui.fragment.TestFragment;
 import bearkid.com.bearkiddiaryfamily.ui.fragment.TimeLineTypeFragment;
 
@@ -61,7 +63,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         ((ImageView) tab[selected].getChildAt(0)).setImageResource(selectedIcon[selected]);
         ((TextView) tab[selected].getChildAt(1)).setTextColor(getResources().getColor(R.color.colorPrimaryDark));
 
-        mFragments[0] = new TestFragment();
+        mFragments[0] = new MessageFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.activity_main_contain, mFragments[0]);
         transaction.commit();
@@ -72,7 +74,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         if (mFragments[tabNum] == null) {
             switch (tabNum) {
                 case 0:
-                    mFragments[0] = new TestFragment();
+                    mFragments[0] = new MessageFragment();
                     break;
                 case 1:
                     mFragments[1] = new FamilyFragment();
@@ -84,7 +86,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     mFragments[3] = new GalleryFragment();
                     break;
                 case 4:
-                    mFragments[4] = new TestFragment();
+                    mFragments[4] = new MeFragment();
                     break;
                 default:
                     break;

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:background="@color/bg_gray_Me_lv"
+    tools:context="bearkid.com.bearkiddiaryfamily.ui.activity.PersonInfoActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/colorPrimary">
+
+        <ImageView
+            android:id="@+id/img_title_back"
+            android:layout_width="24dp"
+            android:layout_height="36dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:src="@drawable/selector_title_back"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textSize="20sp"
+            android:textColor="@color/txt_title"
+            android:text="@string/txt_title_personinfo"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlayout_personinfo_avatar"
+        android:layout_width="match_parent"
+        android:background="@drawable/selector_personinfo_item"
+        android:layout_height="64dp"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_item_avatar"
+            android:layout_centerVertical="true"
+            android:textSize="16sp"
+            android:layout_marginLeft="16dp"/>
+
+        <ImageView
+            android:id="@+id/img_personinfo_avatar"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:src="@drawable/avatar"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="@color/bg_gray_Me_lv"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_alignParentBottom="true"></View>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlayout_personinfo_name"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/selector_personinfo_item">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_item_name"
+            android:layout_centerVertical="true"
+            android:textSize="16sp"
+            android:layout_marginLeft="16dp"/>
+
+        <TextView
+            android:id="@+id/txt_personinfo_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="张三"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="16dp"
+            android:textSize="16sp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="@color/bg_gray_Me_lv"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_alignParentBottom="true"></View>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlayout_personinfo_phone"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/selector_personinfo_item">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_item_phone"
+            android:layout_centerVertical="true"
+            android:textSize="16sp"
+            android:layout_marginLeft="16dp"/>
+
+        <TextView
+            android:id="@+id/txt_personinfo_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="156123123"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="16dp"
+            android:textSize="16sp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="@color/bg_gray_Me_lv"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_alignParentBottom="true"></View>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlayout_personinfo_address"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/selector_personinfo_item">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_item_address"
+            android:layout_centerVertical="true"
+            android:textSize="16sp"
+            android:layout_marginLeft="16dp"/>
+
+        <TextView
+            android:id="@+id/txt_personinfo_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="广州"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="16dp"
+            android:textSize="16sp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="@color/bg_gray_Me_lv"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_alignParentBottom="true"></View>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlayout_personinfo_email"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/selector_personinfo_item">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_item_email"
+            android:layout_centerVertical="true"
+            android:textSize="16sp"
+            android:layout_marginLeft="16dp"/>
+
+        <TextView
+            android:id="@+id/txt_personinfo_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="123456789@163.com"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="16dp"
+            android:textSize="16sp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="@color/bg_gray_Me_lv"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_alignParentBottom="true"></View>
+    </RelativeLayout>
+
+</LinearLayout>

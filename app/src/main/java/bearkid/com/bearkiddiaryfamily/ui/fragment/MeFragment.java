@@ -25,7 +25,7 @@ import bearkid.com.bearkiddiaryfamily.ui.view.CircleImageview;
 /**
  * Created by admin on 2016/7/7.
  */
-public class MeFragment extends BaseFragment implements View.OnClickListener {
+public class MeFragment extends Fragment implements View.OnClickListener {
 
     private Context context;
     private LinearLayout mychildrenLlayout;
@@ -37,8 +37,9 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
 
     private ImageView addImg;
 
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frament_me, container, false);
         context = getContext();
 
