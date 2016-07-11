@@ -11,4 +11,11 @@
     <string name="txt_item_qr">我的二维码</string>
     <string name="txt_item_contacts">联系人</string>
     <string name="txt_item_setting">设置</string>
+
+    <string name="txt_title_personinfo">个人信息</string>
+    <string name="txt_item_avatar">头像</string>
+    <string name="txt_item_name">姓名</string>
+    <string name="txt_item_phone">电话号码</string>
+    <string name="txt_item_address">地址</string>
+    <string name="txt_item_email">邮箱</string>
 </resources>
