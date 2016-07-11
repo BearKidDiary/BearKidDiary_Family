@@ -8,6 +8,7 @@ import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
 import bearkid.com.bearkiddiaryfamily.R;
 import bearkid.com.bearkiddiaryfamily.model.bean.FamilyKidMsg;
 import bearkid.com.bearkiddiaryfamily.ui.view.CircleImageview;
+import bearkid.com.bearkiddiaryfamily.ui.view.IconButton;
 
 public class FamilyFragment extends BaseFragment {
 
@@ -47,7 +49,7 @@ public class FamilyFragment extends BaseFragment {
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             if (viewType == 1) {
                 View view = LayoutInflater.from(FamilyFragment.this.getContext()).inflate(R.layout.item_family_kid, parent, false);
-                return new RelativeViewHolder(view);
+                return new KidViewHolder(view);
             } else {
                 return null;
             }
@@ -55,6 +57,12 @@ public class FamilyFragment extends BaseFragment {
 
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+            if(holder instanceof KidViewHolder){
+                onBindKidViewHolder((KidViewHolder) holder,position);
+            }
+        }
+
+        private void onBindKidViewHolder(KidViewHolder v,int position){
 
         }
 
@@ -72,10 +80,16 @@ public class FamilyFragment extends BaseFragment {
 
         class KidViewHolder extends RecyclerView.ViewHolder {
             CircleImageview civ_avatar;
+            TextView tv_name, tv_age;
+            IconButton ib_graph, ib_show;
 
             public KidViewHolder(View view) {
                 super(view);
                 civ_avatar = (CircleImageview) view.findViewById(R.id.civ_family_kid_avatar);
+                tv_name = (TextView) view.findViewById(R.id.tv_family_kid_name);
+                tv_age = (TextView) view.findViewById(R.id.tv_family_kid_age);
+                ib_graph = (IconButton) view.findViewById(R.id.ib_family_kid_graph);
+                ib_show = (IconButton) view.findViewById(R.id.ib_family_kid_show);
             }
         }
 
