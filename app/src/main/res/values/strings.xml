@@ -1,7 +1,14 @@
 <resources>
-    <string name="app_name">熊孩子家校通</string>
+    <string name="app_name">BearKidDiaryFamily</string>
     <string name="tabView_1">动态</string>
     <string name="tabView_2">孩子</string>
     <string name="tabView_4">相册</string>
     <string name="tabView_5">我</string>
+
+    <!-- 我 -->
+    <string name="txt_item_title_mychildren">我的孩子</string>
+    <string name="txt_item_scan">扫一扫</string>
+    <string name="txt_item_qr">我的二维码</string>
+    <string name="txt_item_contacts">联系人</string>
+    <string name="txt_item_setting">设置</string>
 </resources>
