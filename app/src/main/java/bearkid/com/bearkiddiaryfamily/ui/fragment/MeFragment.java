@@ -74,7 +74,6 @@ public class MeFragment extends Fragment implements View.OnClickListener {
      * 添加孩子
      */
     private void addChild(){
-        Log.d("child","添加");
         CircleImageview imageview = new CircleImageview(context);
         imageview.setImageResource(R.drawable.avatar);
         float density = getDensity();
@@ -109,54 +108,4 @@ public class MeFragment extends Fragment implements View.OnClickListener {
         settingRlayout.setOnClickListener(this);
         addImg.setOnClickListener(this);
     }
-
-//    class ItemAdapter extends BaseAdapter {
-//
-//        private LayoutInflater minflater;
-//
-//        public ItemAdapter(Context context) {
-//            this.minflater = LayoutInflater.from(context);
-//        }
-//
-//        @Override
-//        public int getCount() {
-//            return funcs.length;
-//        }
-//
-//        @Override
-//        public Object getItem(int i) {
-//            return icons[i];
-//        }
-//
-//        @Override
-//        public long getItemId(int i) {
-//            return i;
-//        }
-//
-//        @Override
-//        public View getView(int i, View view, ViewGroup viewGroup) {
-//            ViewHolder viewHolder = null;
-//            if (view == null) {
-//                view = minflater.inflate(R.layout.item_lv_me, null);
-//                viewHolder = new ViewHolder(view);
-//                view.setTag(viewHolder);
-//            } else {
-//                viewHolder = (ViewHolder) view.getTag();
-//            }
-//            viewHolder.iconIv.setImageResource(icons[i]);
-//            viewHolder.functionTv.setText(funcs[i]);
-//            return view;
-//        }
-//
-//        class ViewHolder {
-//            public ImageView iconIv;
-//            public TextView functionTv;
-//
-//            public ViewHolder(View view) {
-//                iconIv = (ImageView) view.findViewById(R.id.iv_item_me);
-//                functionTv = (TextView) view.findViewById(R.id.tv_item_me);
-//            }
-//
-//        }
-//    }
 }
