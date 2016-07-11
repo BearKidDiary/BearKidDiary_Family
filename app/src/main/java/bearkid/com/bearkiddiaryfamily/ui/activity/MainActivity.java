@@ -12,6 +12,7 @@ import android.widget.TextView;
 import bearkid.com.bearkiddiaryfamily.R;
 import bearkid.com.bearkiddiaryfamily.ui.fragment.FamilyFragment;
 import bearkid.com.bearkiddiaryfamily.ui.fragment.GalleryFragment;
+import bearkid.com.bearkiddiaryfamily.ui.fragment.MeFragment;
 import bearkid.com.bearkiddiaryfamily.ui.fragment.TestFragment;
 import bearkid.com.bearkiddiaryfamily.ui.fragment.TimeLineTypeFragment;
 
@@ -84,7 +85,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     mFragments[3] = new GalleryFragment();
                     break;
                 case 4:
-                    mFragments[4] = new TestFragment();
+                    mFragments[4] = new MeFragment();
                     break;
                 default:
                     break;
