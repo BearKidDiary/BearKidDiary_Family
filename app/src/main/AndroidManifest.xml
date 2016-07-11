@@ -33,6 +33,7 @@
         <activity android:name=".ui.activity.RegisterActivity" />
         <activity android:name=".ui.activity.ShowBigImageActivity" />
         <activity android:name=".ui.activity.PersonInfoActivity" />
+        <activity android:name=".ui.activity.ChatActivity"></activity>
         <activity android:name=".ui.activity.CourseActivity"></activity>
     </application>
 
