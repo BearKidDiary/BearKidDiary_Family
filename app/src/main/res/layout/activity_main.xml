@@ -6,108 +6,133 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context=".ui.activity.MainActivity">
+
     <FrameLayout
         android:id="@+id/activity_main_contain"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
-    </FrameLayout>
+        android:layout_weight="1"></FrameLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:baselineAligned="false">
+
         <LinearLayout
             android:id="@+id/activity_main_tab1"
-            android:clickable="true"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
             android:orientation="vertical">
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:src="@drawable/watchman"/>
+                android:padding="8dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/watchman" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/tabView_1"
-                android:textColor= "@android:color/black" />
+                android:textColor="@android:color/black" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/activity_main_tab2"
-            android:clickable="true"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
             android:orientation="vertical">
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:src="@drawable/watchman"/>
+                android:padding="8dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/watchman" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/tabView_2"
-                android:textColor= "@android:color/black" />
+                android:textColor="@android:color/black" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/activity_main_tab3"
-            android:clickable="true"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
             android:orientation="vertical">
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
                 android:padding="3dp"
-                android:src="@drawable/watchman"/>
+                android:src="@drawable/watchman" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="gone"/>
+                android:visibility="gone" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/activity_main_tab4"
-            android:clickable="true"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
             android:orientation="vertical">
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:src="@drawable/watchman"/>
+                android:padding="8dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/watchman" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/tabView_4"
-                android:textColor= "@android:color/black" />
+                android:textColor="@android:color/black" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/activity_main_tab5"
-            android:clickable="true"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
             android:orientation="vertical">
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:src="@drawable/watchman"/>
+                android:padding="8dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/watchman" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/tabView_5"
-                android:textColor= "@android:color/black" />
+                android:textColor="@android:color/black" />
         </LinearLayout>
 
     </LinearLayout>

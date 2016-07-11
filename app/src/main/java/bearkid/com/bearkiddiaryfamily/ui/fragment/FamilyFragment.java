@@ -18,6 +18,7 @@ import bearkid.com.bearkiddiaryfamily.R;
 import bearkid.com.bearkiddiaryfamily.model.bean.Course;
 import bearkid.com.bearkiddiaryfamily.model.bean.FamilyKidMsg;
 import bearkid.com.bearkiddiaryfamily.presenter.FamilyPresenter;
+import bearkid.com.bearkiddiaryfamily.ui.activity.CourseActivity;
 import bearkid.com.bearkiddiaryfamily.ui.view.CircleImageview;
 import bearkid.com.bearkiddiaryfamily.ui.view.IconButton;
 
@@ -89,7 +90,12 @@ public class FamilyFragment extends BaseFragment {
                     ((TextView) courseView.findViewById(R.id.tv_family_kid_course_name)).setText(course.getCname());
                     ((TextView) courseView.findViewById(R.id.tv_family_kid_course_time)).setText(course.getCclasstime().getDate());
                     ((TextView) courseView.findViewById(R.id.tv_family_kid_course_org)).setText("春田花花");
-                    // v.ll_root.addView(courseView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                    courseView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            CourseActivity.startActivity(getContext());
+                        }
+                    });
                 }
             }
         }
