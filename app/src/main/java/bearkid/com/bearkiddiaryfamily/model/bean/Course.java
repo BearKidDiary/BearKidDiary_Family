@@ -4,31 +4,155 @@ import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.datatype.BmobDate;
 
 /**
- * è¯¾ç¨‹ä¿¡æ¯
+ * ¿Î³ÌĞÅÏ¢
  */
-public class Course extends BmobObject{
+public class Course extends BmobObject {
     /**
-     * å¼€è¯¾æ—¶é—´
+     * ¿ª¿ÎÊ±¼ä
      */
-    private BmobDate Cstarttime;
+    private BmobDate Cclasstime;
     /**
-     * ç»“æŸæ—¶é—´
+     * ½áÊøÊ±¼ä
      */
     private BmobDate Cendtime;
     /**
-     * å¼€è¯¾å®¡æ‰¹äºº
+     * ¿ªÑ§Ê±¼ä
+     */
+    private BmobDate Ctime;
+    /**
+     * ±ÏÒµÊ±¼ä
+     */
+    private BmobDate Cofftime;
+    /**
+     * ¿ª¿ÎÉóÅúÈË
      */
     private Teacher Capprover;
     /**
-     * è¯¾ç¨‹çš„å¼€è¯¾èƒŒæ™¯ã€åŸå› 
+     * ¿Î³ÌµÄ¿ª¿Î±³¾°¡¢Ô­Òò
      */
     private String Cbackground;
     /**
-     * è¯¾ç¨‹æè¿°
+     * ¿Î³ÌÃèÊö
      */
     private String Cdesc;
     /**
-     * è¯¾ç¨‹åç§°
+     * ¿Î³ÌÃû³Æ
      */
     private String Cname;
+    /**
+     * ÖÜÒ»µ½ÖÜÈÕÊÇ·ñĞèÒªÉÏ¿Î
+     */
+    private Boolean Cmonday, Ctuesday, Cwednesday, Cthursday, Cfriday, Csaturday;
+
+    public BmobDate getCclasstime() {
+        return Cclasstime;
+    }
+
+    public void setCclasstime(BmobDate cclasstime) {
+        Cclasstime = cclasstime;
+    }
+
+    public BmobDate getCendtime() {
+        return Cendtime;
+    }
+
+    public void setCendtime(BmobDate cendtime) {
+        Cendtime = cendtime;
+    }
+
+    public BmobDate getCtime() {
+        return Ctime;
+    }
+
+    public void setCtime(BmobDate ctime) {
+        Ctime = ctime;
+    }
+
+    public BmobDate getCofftime() {
+        return Cofftime;
+    }
+
+    public void setCofftime(BmobDate cofftime) {
+        Cofftime = cofftime;
+    }
+
+    public Teacher getCapprover() {
+        return Capprover;
+    }
+
+    public void setCapprover(Teacher capprover) {
+        Capprover = capprover;
+    }
+
+    public String getCbackground() {
+        return Cbackground;
+    }
+
+    public void setCbackground(String cbackground) {
+        Cbackground = cbackground;
+    }
+
+    public String getCdesc() {
+        return Cdesc;
+    }
+
+    public void setCdesc(String cdesc) {
+        Cdesc = cdesc;
+    }
+
+    public String getCname() {
+        return Cname;
+    }
+
+    public void setCname(String cname) {
+        Cname = cname;
+    }
+
+    public Boolean getCmonday() {
+        return Cmonday;
+    }
+
+    public void setCmonday(Boolean cmonday) {
+        Cmonday = cmonday;
+    }
+
+    public Boolean getCtuesday() {
+        return Ctuesday;
+    }
+
+    public void setCtuesday(Boolean ctuesday) {
+        Ctuesday = ctuesday;
+    }
+
+    public Boolean getCwednesday() {
+        return Cwednesday;
+    }
+
+    public void setCwednesday(Boolean cwednesday) {
+        Cwednesday = cwednesday;
+    }
+
+    public Boolean getCthursday() {
+        return Cthursday;
+    }
+
+    public void setCthursday(Boolean cthursday) {
+        Cthursday = cthursday;
+    }
+
+    public Boolean getCfriday() {
+        return Cfriday;
+    }
+
+    public void setCfriday(Boolean cfriday) {
+        Cfriday = cfriday;
+    }
+
+    public Boolean getCsaturday() {
+        return Csaturday;
+    }
+
+    public void setCsaturday(Boolean csaturday) {
+        Csaturday = csaturday;
+    }
 }

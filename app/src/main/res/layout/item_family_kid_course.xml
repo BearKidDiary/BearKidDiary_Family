@@ -8,6 +8,7 @@
         android:background="#ffffff">
 
         <TextView
+            android:id="@+id/tv_family_kid_course_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -23,6 +24,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_family_kid_course_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
@@ -32,6 +34,7 @@
                 android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/tv_family_kid_course_org"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
