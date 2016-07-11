@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import bearkid.com.bearkiddiaryfamily.R;
 import bearkid.com.bearkiddiaryfamily.ui.view.RefreshRecyclerView;
@@ -41,22 +42,22 @@ public class MessageFragment extends BaseFragment {
         @Override
         public void onBindViewHolder(MyViewHolder holder, int position)
         {
-            holder.tv.setText(mDatas.get(position));
+            //holder.txt.setText("1");//mDatas.get(position)
         }
 
         @Override
         public int getItemCount()
         {
-            return mDatas.size();
+            return 16;//mDatas.size()
         }
 
         class MyViewHolder extends RecyclerView.ViewHolder
         {
-
+            TextView txt;
             public MyViewHolder(View view)
             {
                 super(view);
-                //tv = (TextView) view.findViewById(R.id.id_num);
+                txt = (TextView) view.findViewById(R.id.item_message_txt);
             }
         }
     }
