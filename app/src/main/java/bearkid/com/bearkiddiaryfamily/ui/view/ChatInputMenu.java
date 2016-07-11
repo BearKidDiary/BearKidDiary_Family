@@ -22,6 +22,7 @@ public class ChatInputMenu extends LinearLayout {
 
 
     private Context context;
+    private boolean inited;
 
     public ChatInputMenu(Context context, AttributeSet attrs, int defStyle) {
         this(context, attrs);
@@ -47,6 +48,14 @@ public class ChatInputMenu extends LinearLayout {
     }
 
     public void initView() {
+        if (inited) {
+            return;
+        }
+        //primaryMenu = (ChatPrimaryMenu) layoutInflater.inflate(R.layout.ease_layout_chat_primary_menu, null);
+        //primaryMenuContainer.addView(primaryMenu);
+        //emojiMenu = (ChatEmojiMenu)  layoutInflater.inflate(R.layout.ease_layout_chat_primary_menu, null);
+        //emojiMenuContainer.addView(emojiMenu);
 
+        inited = true;
     }
 }
