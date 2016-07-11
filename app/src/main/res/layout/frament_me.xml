@@ -46,17 +46,6 @@
                 android:layout_marginLeft="16dp"
                 android:src="@drawable/avatar" />
 
-            <!--<bearkid.com.bearkiddiaryfamily.ui.view.CircleImageview-->
-                <!--android:layout_width="64dp"-->
-                <!--android:layout_height="64dp"-->
-                <!--android:layout_marginLeft="8dp"-->
-                <!--android:src="@drawable/avatar" />-->
-
-            <!--<bearkid.com.bearkiddiaryfamily.ui.view.CircleImageview-->
-                <!--android:layout_width="64dp"-->
-                <!--android:layout_height="64dp"-->
-                <!--android:layout_marginLeft="8dp"-->
-                <!--android:src="@drawable/avatar" />-->
 
             <ImageView
                 android:id="@+id/img_me_add"

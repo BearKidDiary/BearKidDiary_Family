@@ -19,6 +19,7 @@ public class PersonInfoActivity extends BaseActivity implements IPersonInfoView,
     private RelativeLayout addressRlayout;
     private RelativeLayout emailRlayout;
 
+    //返回按钮
     private ImageView backImg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,6 @@ public class PersonInfoActivity extends BaseActivity implements IPersonInfoView,
         }
 
     }
-
     @Override
     public Bitmap getAvatar() {
         return null;
