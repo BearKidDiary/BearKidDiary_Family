@@ -14,11 +14,11 @@ public class Tea_Org extends BmobObject{
     /**
      * 教师
      */
-    private BmobPointer teacher;
+    private Teacher teacher;
     /**
      * 机构
      */
-    private BmobPointer organization;
+    private Organization organization;
 
     public Integer getIdentity() {
         return identity;
@@ -28,19 +28,19 @@ public class Tea_Org extends BmobObject{
         this.identity = identity;
     }
 
-    public BmobPointer getTeacher() {
+    public Teacher getTeacher() {
         return teacher;
     }
 
-    public void setTeacher(BmobPointer teacher) {
+    public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
     }
 
-    public BmobPointer getOrganization() {
+    public Organization getOrganization() {
         return organization;
     }
 
-    public void setOrganization(BmobPointer organization) {
+    public void setOrganization(Organization organization) {
         this.organization = organization;
     }
 }
