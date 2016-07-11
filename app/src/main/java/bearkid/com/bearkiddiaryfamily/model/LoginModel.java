@@ -1,12 +1,10 @@
 package bearkid.com.bearkiddiaryfamily.model;
 
 import android.content.Context;
-import android.util.TimeUtils;
 
-import java.net.ContentHandler;
 import java.util.List;
 
-import bearkid.com.bearkiddiaryfamily.global.LocalDB;
+import bearkid.com.bearkiddiaryfamily.utils.LocalDB;
 import bearkid.com.bearkiddiaryfamily.model.bean.FamilyUser;
 import cn.bmob.v3.BmobQuery;
 import rx.Observable;

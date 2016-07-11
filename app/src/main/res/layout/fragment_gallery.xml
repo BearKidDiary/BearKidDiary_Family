@@ -12,6 +12,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:textSize="20sp"
+            android:textColor="#ffffff"
             android:text="@string/tabView_4"/>
     </RelativeLayout>
 
