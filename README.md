@@ -7,3 +7,5 @@ Bmob的部分API会用到RxJava来代替监听者模式 先学习一下Rxjava常
 create(),from(),just(),map(),flatMap(),ObserveOn(),SubscriOn(),filter(),debounce()...
 RxJava中文参考文档：https://mcxiaoke.gitbooks.io/rxdocs/content/Intro.html
 ——张宇 2016/07/09
+
+SlidBar项目网址：https://github.com/kongnanlive/SideBar
