@@ -7,4 +7,5 @@
     <color name="colorUnClickable">#B8B8B8</color>
     <color name="bg_gray_Me_lv">#EDEDED</color>
     <color name="txt_title">#ffffff</color>
+    <color name="bg_light">#FFEFEF</color>
 </resources>
