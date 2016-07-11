@@ -4,7 +4,6 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -127,7 +126,7 @@ public class GalleryFragment extends BaseFragment implements OnScrollListener {
         public View getView(int position, View convertView, ViewGroup parent) {
             ViewHolder holder;
             if (convertView == null) {
-                convertView = mInflater.inflate(R.layout.gallery_list_item, parent, false);
+                convertView = mInflater.inflate(R.layout.item_gallery_image, parent, false);
                 holder = new ViewHolder();
                 holder.imageView = (ImageView) convertView.findViewById(R.id.fragment_gallery_image);
                 convertView.setTag(holder);
