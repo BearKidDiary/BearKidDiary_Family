@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import bearkid.com.bearkiddiaryfamily.R;
+import bearkid.com.bearkiddiaryfamily.ui.fragment.FamilyFragment;
 import bearkid.com.bearkiddiaryfamily.ui.fragment.GalleryFragment;
 import bearkid.com.bearkiddiaryfamily.ui.fragment.TestFragment;
 import bearkid.com.bearkiddiaryfamily.ui.fragment.TimeLineTypeFragment;
@@ -74,7 +75,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     mFragments[0] = new TestFragment();
                     break;
                 case 1:
-                    mFragments[1] = new TestFragment();
+                    mFragments[1] = new FamilyFragment();
                     break;
                 case 2:
                     mFragments[2] = new TimeLineTypeFragment();
