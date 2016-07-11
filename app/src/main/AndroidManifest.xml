@@ -32,7 +32,8 @@
         <activity android:name=".ui.activity.LoginActivity" />
         <activity android:name=".ui.activity.RegisterActivity" />
         <activity android:name=".ui.activity.ShowBigImageActivity" />
-        <activity android:name=".ui.activity.PersonInfoActivity"></activity>
+        <activity android:name=".ui.activity.PersonInfoActivity" />
+        <activity android:name=".ui.activity.CourseActivity"></activity>
     </application>
 
 </manifest>

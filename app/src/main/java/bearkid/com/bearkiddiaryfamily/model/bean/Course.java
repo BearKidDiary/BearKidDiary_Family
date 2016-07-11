@@ -4,43 +4,43 @@ import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.datatype.BmobDate;
 
 /**
- * ¿Î³ÌĞÅÏ¢
+ * è¯¾ç¨‹ä¿¡æ¯
  */
 public class Course extends BmobObject {
     /**
-     * ¿ª¿ÎÊ±¼ä
+     * å¼€è¯¾æ—¶é—´
      */
     private BmobDate Cclasstime;
     /**
-     * ½áÊøÊ±¼ä
+     * ç»“æŸæ—¶é—´
      */
     private BmobDate Cendtime;
     /**
-     * ¿ªÑ§Ê±¼ä
+     * å¼€å­¦æ—¶é—´
      */
     private BmobDate Ctime;
     /**
-     * ±ÏÒµÊ±¼ä
+     * æ¯•ä¸šæ—¶é—´
      */
     private BmobDate Cofftime;
     /**
-     * ¿ª¿ÎÉóÅúÈË
+     * å¼€è¯¾å®¡æ‰¹äºº
      */
     private Teacher Capprover;
     /**
-     * ¿Î³ÌµÄ¿ª¿Î±³¾°¡¢Ô­Òò
+     * è¯¾ç¨‹çš„å¼€è¯¾èƒŒæ™¯ã€åŸå› 
      */
     private String Cbackground;
     /**
-     * ¿Î³ÌÃèÊö
+     * è¯¾ç¨‹æè¿°
      */
     private String Cdesc;
     /**
-     * ¿Î³ÌÃû³Æ
+     * è¯¾ç¨‹åç§°
      */
     private String Cname;
     /**
-     * ÖÜÒ»µ½ÖÜÈÕÊÇ·ñĞèÒªÉÏ¿Î
+     * å‘¨ä¸€åˆ°å‘¨æ—¥æ˜¯å¦éœ€è¦ä¸Šè¯¾
      */
     private Boolean Cmonday, Ctuesday, Cwednesday, Cthursday, Cfriday, Csaturday;
 

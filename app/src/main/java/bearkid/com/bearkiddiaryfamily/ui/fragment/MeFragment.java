@@ -25,7 +25,7 @@ import bearkid.com.bearkiddiaryfamily.ui.view.CircleImageview;
 /**
  * Created by admin on 2016/7/7.
  */
-public class MeFragment extends Fragment implements View.OnClickListener {
+public class MeFragment extends BaseFragment implements View.OnClickListener {
 
     private Context context;
     private LinearLayout mychildrenLlayout;
@@ -37,9 +37,8 @@ public class MeFragment extends Fragment implements View.OnClickListener {
 
     private ImageView addImg;
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frament_me, container, false);
         context = getContext();
 
@@ -53,12 +52,12 @@ public class MeFragment extends Fragment implements View.OnClickListener {
      */
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.img_me_add:
                 addChild();
                 break;
             case R.id.rlayout_me_scan:
-                Toast.makeText(context,"扫一扫",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "扫一扫", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.rlayout_me_qr:
                 break;
@@ -73,26 +72,28 @@ public class MeFragment extends Fragment implements View.OnClickListener {
      * 点击加号图标，添加头像
      * 添加孩子
      */
-    private void addChild(){
+    private void addChild() {
         CircleImageview imageview = new CircleImageview(context);
         imageview.setImageResource(R.drawable.avatar);
         float density = getDensity();
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams((int)(64 * density),(int) (64 * density));
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams((int) (64 * density), (int) (64 * density));
         params.leftMargin = 8;
-        mychildrenLlayout.addView(imageview,0,params);
+        mychildrenLlayout.addView(imageview, 0, params);
     }
 
     /**
      * 获取屏幕密度
+     *
      * @return
      */
-    private float getDensity(){
+    private float getDensity() {
         float density;
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         density = displayMetrics.density;
         return density;
     }
+
     private void initView(View view) {
         mychildrenLlayout = (LinearLayout) view.findViewById(R.id.llayout_me_mychildren);
 

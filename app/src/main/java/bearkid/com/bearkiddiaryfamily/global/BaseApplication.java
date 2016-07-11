@@ -20,26 +20,26 @@ public class BaseApplication extends Application{
         super.onCreate();
         activityStack = new Stack<>();
 
-        //��һ��Ĭ�ϳ�ʼ��
+        //第一：默认初始化
         Bmob.initialize(this, "c5470e90b9e42cb978bd22fa1309c7b4");
 
-        //�ڶ�����v3.4.7�汾��ʼ,����BmobConfig,������������ʱʱ�䡢�ļ���Ƭ�ϴ�ʱÿƬ�Ĵ�С���ļ��Ĺ���ʱ��(��λΪ��)��
+        //第二：自v3.4.7版本开始,设置BmobConfig,允许设置请求超时时间、文件分片上传时每片的大小、文件的过期时间(单位为秒)，
         //BmobConfig config =new BmobConfig.Builder(this)
-        ////����appkey
+        ////设置appkey
         //.setApplicationId("Your Application ID")
-        ////����ʱʱ�䣨��λΪ�룩��Ĭ��15s
+        ////请求超时时间（单位为秒）：默认15s
         //.setConnectTimeout(30)
-        ////�ļ���Ƭ�ϴ�ʱÿƬ�Ĵ�С����λ�ֽڣ���Ĭ��512*1024
+        ////文件分片上传时每片的大小（单位字节），默认512*1024
         //.setUploadBlockSize(1024*1024)
-        ////�ļ��Ĺ���ʱ��(��λΪ��)��Ĭ��1800s
+        ////文件的过期时间(单位为秒)：默认1800s
         //.setFileExpiration(2500)
         //.build();
         //Bmob.initialize(config);
     }
 
     /**
-     * �˳���������
-     * ������д�ͷ�SDK��Դ�ȴ���
+     * 退出整个程序
+     * 在这里写释放SDK资源等代码
      */
     public void exit(){
         while(activityStack.size()!=0){
