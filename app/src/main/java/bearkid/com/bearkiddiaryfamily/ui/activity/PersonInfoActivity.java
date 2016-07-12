@@ -32,7 +32,7 @@ public class PersonInfoActivity extends BaseActivity implements IPersonInfoView,
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.img_title_back:
+            case R.id.img_title_back_personinfo:
                 finish();
                 break;
         }
@@ -69,7 +69,7 @@ public class PersonInfoActivity extends BaseActivity implements IPersonInfoView,
         phoneRlayout = (RelativeLayout) findViewById(R.id.rlayout_personinfo_phone);
         addressRlayout = (RelativeLayout) findViewById(R.id.rlayout_personinfo_address);
         emailRlayout = (RelativeLayout) findViewById(R.id.rlayout_personinfo_email);
-        backImg = (ImageView) findViewById(R.id.img_title_back);
+        backImg = (ImageView) findViewById(R.id.img_title_back_personinfo);
 
         avatarRlayout.setOnClickListener(this);
         nameRlayout.setOnClickListener(this);

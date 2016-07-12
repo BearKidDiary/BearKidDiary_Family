@@ -14,11 +14,13 @@
         android:background="@color/colorPrimary">
 
         <ImageView
-            android:id="@+id/img_title_back"
-            android:layout_width="24dp"
-            android:layout_height="36dp"
+            android:id="@+id/img_title_back_personinfo"
+            android:layout_width="32dp"
+            android:layout_height="40dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
             android:src="@drawable/selector_title_back"/>
 
 

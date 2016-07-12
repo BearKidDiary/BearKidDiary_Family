@@ -2,12 +2,14 @@ package bearkid.com.bearkiddiaryfamily.ui.fragment;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -20,6 +22,8 @@ import android.widget.Toast;
 
 
 import bearkid.com.bearkiddiaryfamily.R;
+import bearkid.com.bearkiddiaryfamily.ui.activity.ContactsListActivity;
+import bearkid.com.bearkiddiaryfamily.ui.activity.PersonInfoActivity;
 import bearkid.com.bearkiddiaryfamily.ui.view.CircleImageview;
 
 /**
@@ -29,6 +33,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
 
     private Context context;
     private LinearLayout mychildrenLlayout;
+    private CircleImageview avatarImg;
 
     private RelativeLayout scanRlayout;//扫一扫
     private RelativeLayout qrRlayout;//二维码
@@ -36,6 +41,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
     private RelativeLayout settingRlayout;//设置
 
     private ImageView addImg;
+    private Intent intent;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,15 +59,24 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.img_me_avatar:
+                Log.d("avatarImg","点击");
+                intent = new Intent(context, PersonInfoActivity.class);
+                startActivity(intent);
+                break;
             case R.id.img_me_add:
                 addChild();
                 break;
             case R.id.rlayout_me_scan:
+//                intent = new Intent(context, ContactsListActivity.class);
+//                startActivity(intent);
                 Toast.makeText(context, "扫一扫", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.rlayout_me_qr:
                 break;
             case R.id.rlayout_me_contacts:
+                intent = new Intent(context, ContactsListActivity.class);
+                startActivity(intent);
                 break;
             case R.id.rlayout_me_setting:
                 break;
@@ -78,7 +93,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
         float density = getDensity();
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams((int) (64 * density), (int) (64 * density));
         params.leftMargin = 8;
-        mychildrenLlayout.addView(imageview, 0, params);
+        mychildrenLlayout.addView(imageview, 1, params);
     }
 
     /**
@@ -102,11 +117,14 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
         contactsRlayout = (RelativeLayout) view.findViewById(R.id.rlayout_me_contacts);
         settingRlayout = (RelativeLayout) view.findViewById(R.id.rlayout_me_setting);
         addImg = (ImageView) view.findViewById(R.id.img_me_add);
+        avatarImg = (CircleImageview) view.findViewById(R.id.img_me_avatar);
 
         scanRlayout.setOnClickListener(this);
         qrRlayout.setOnClickListener(this);
         contactsRlayout.setOnClickListener(this);
         settingRlayout.setOnClickListener(this);
         addImg.setOnClickListener(this);
+        avatarImg.setOnClickListener(this);
     }
+
 }
