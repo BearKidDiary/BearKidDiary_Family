@@ -7,4 +7,6 @@ import android.content.Context;
  */
 public interface IBaseFragment {
     Context getContext();
+
+    void showToast(String str);
 }

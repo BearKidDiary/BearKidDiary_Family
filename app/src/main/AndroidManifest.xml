@@ -36,7 +36,8 @@
         <activity android:name=".ui.activity.ChatActivity" />
         <activity android:name=".ui.activity.CourseActivity" />
         <activity android:name=".ui.activity.ContactsListActivity" />
-        <activity android:name=".ui.activity.DataAnalysisActivity"></activity>
+        <activity android:name=".ui.activity.DataAnalysisActivity" />
+        <activity android:name=".ui.activity.FamilyCreateActivity"></activity>
     </application>
 
 </manifest>

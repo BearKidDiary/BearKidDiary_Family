@@ -11,9 +11,10 @@ import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -27,15 +28,19 @@ import bearkid.com.bearkiddiaryfamily.model.bean.FamilyUser;
 import bearkid.com.bearkiddiaryfamily.presenter.FamilyPresenter;
 import bearkid.com.bearkiddiaryfamily.ui.activity.CourseActivity;
 import bearkid.com.bearkiddiaryfamily.ui.activity.DataAnalysisActivity;
+import bearkid.com.bearkiddiaryfamily.ui.activity.FamilyCreateActivity;
+import bearkid.com.bearkiddiaryfamily.ui.activity.MainActivity;
 import bearkid.com.bearkiddiaryfamily.ui.view.CircleImageview;
 import bearkid.com.bearkiddiaryfamily.ui.view.IconButton;
 
 public class FamilyFragment extends BaseFragment {
 
     private RecyclerView rv_family;
-    private ImageView iv_menu;
-    final private FamilyPresenter presenter = new FamilyPresenter(this);
-    final private FamilyAdapter mAdapter = new FamilyAdapter();
+    private IconButton ib_menu;
+    private PopupMenu popupMenu;
+    private final FamilyPresenter presenter = new FamilyPresenter(this);
+    private final FamilyAdapter mAdapter = new FamilyAdapter();
+    private final static String[] items = {"创建家庭", "编辑信息", "添加孩子", "添加亲戚"};
     /**
      * 对应家庭的孩子的数据
      */
@@ -63,10 +68,18 @@ public class FamilyFragment extends BaseFragment {
         rv_family.addItemDecoration(new FamilyDecoration());
 
         //家庭管理“+”菜单
-        iv_menu = (ImageView) v.findViewById(R.id.iv_family_menu);
-
-        PopupMenu menu = new PopupMenu(getContext(), iv_menu);
-
+        ib_menu = (IconButton) v.findViewById(R.id.ib_family_menu);
+        ib_menu.setOnClickListener(view -> popupMenu.show());
+        popupMenu = new PopupMenu(getContext(), ib_menu);
+        for (int i = 0; i < items.length; i++)
+            popupMenu.getMenu().add(items[i]);
+        popupMenu.setOnMenuItemClickListener(item -> {
+            FamilyFragment.this.showToast(item.getTitle() + ", " + item.getGroupId() + " , " + item.getOrder());
+            if (item.getTitle() == items[0]) {
+                FamilyCreateActivity.startActivity(getContext());
+            }
+            return false;
+        });
     }
 
     private final void initData() {
@@ -102,16 +115,14 @@ public class FamilyFragment extends BaseFragment {
 
         private final static int TYPE_KID = 1;
         private final static int TYPE_RELATIVE = 2;
-        private final Context context = FamilyFragment.this.getContext();
-
 
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             if (viewType == TYPE_KID) {
-                View view = LayoutInflater.from(FamilyFragment.this.getContext()).inflate(R.layout.item_family_kid, parent, false);
+                View view = LayoutInflater.from(getContext()).inflate(R.layout.item_family_kid, parent, false);
                 return new KidViewHolder(view);
             } else if (viewType == TYPE_RELATIVE) {
-                View view = LayoutInflater.from(FamilyFragment.this.getContext()).inflate(R.layout.item_family_relative, parent, false);
+                View view = LayoutInflater.from(getContext()).inflate(R.layout.item_family_relative, parent, false);
                 return new RelativeViewHolder(view);
             } else {
                 Log.e("zy", "FamilyFragment onCreateViewHolder error: unknown viewType");
@@ -218,22 +229,32 @@ public class FamilyFragment extends BaseFragment {
 
         {
             paint.setColor(0xff000000);
-            paint.setStrokeWidth(2.0f);
+            paint.setStyle(Paint.Style.FILL_AND_STROKE);
         }
 
         @Override
         public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
             super.onDrawOver(c, parent, state);
-            int width = parent.getWidth();
-            Log.i("zy", "drawLine " + width);
-            c.drawLine(0, 0, width, 0, paint);
+
+            final int left = parent.getPaddingLeft();
+            final int right = parent.getWidth() - parent.getPaddingRight();
+
+            final int childCount = parent.getChildCount();
+            for (int i = 0; i < childCount; i++) {
+                final View child = parent.getChildAt(i);
+                final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child
+                        .getLayoutParams();
+                final int top = child.getBottom() + params.bottomMargin;
+                final int bottom = top + 1;
+
+                c.drawRect(left, top, right, bottom, paint);
+            }
         }
 
         @Override
         public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
             super.getItemOffsets(outRect, view, parent, state);
-            //outRect.set(0, 0, parent.getWidth(), 10);
-            Log.i("zy", "rect:" + outRect != null ? outRect.toString() : "null");
+            outRect.set(0, 0, 0, 1);
         }
     }
 }
