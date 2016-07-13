@@ -1,6 +1,7 @@
 package bearkid.com.bearkiddiaryfamily.ui.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -149,7 +150,7 @@ public class FamilyFragment extends BaseFragment {
                 }
             }
             v.ib_graph.setOnClickListener(view -> {
-                DataAnalysisActivity.startActivity(context);
+                DataAnalysisActivity.startActivity(getContext());
             });
             v.ib_show.setOnClickListener(view -> {
 

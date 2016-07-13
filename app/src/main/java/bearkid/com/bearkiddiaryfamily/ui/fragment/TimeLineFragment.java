@@ -15,7 +15,7 @@ public class TimeLineFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_timeline_type, container, false);
+        View view = inflater.inflate(R.layout.fragment_time_line, container, false);
         return view;
     }
 }

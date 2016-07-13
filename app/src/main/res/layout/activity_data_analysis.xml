@@ -13,7 +13,7 @@
         android:background="@color/colorPrimary">
 
         <ImageView
-            android:id="@+id/img_title_back_contacts"
+            android:id="@+id/img_title_back_data_analysis"
             android:layout_width="32dp"
             android:layout_height="40dp"
             android:layout_centerVertical="true"
@@ -55,7 +55,13 @@
             android:clickable="true"/>
 
     </LinearLayout>
-    
+
+    <ImageView
+        android:id="@+id/img_tab_bottom_holo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/holo"/>
+
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager_data_analysis"
         android:layout_width="match_parent"

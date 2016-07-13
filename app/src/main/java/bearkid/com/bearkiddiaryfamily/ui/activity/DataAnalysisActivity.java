@@ -8,6 +8,11 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
+import android.util.DisplayMetrics;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -18,7 +23,7 @@ import bearkid.com.bearkiddiaryfamily.adapter.FragmentAdapter;
 import bearkid.com.bearkiddiaryfamily.ui.fragment.DataChartFragment;
 import bearkid.com.bearkiddiaryfamily.ui.fragment.TimeLineFragment;
 
-public class DataAnalysisActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
+public class DataAnalysisActivity extends BaseActivity implements ViewPager.OnPageChangeListener, View.OnClickListener {
 
     private ViewPager viewPager;
     private FragmentPagerAdapter adapter;
@@ -29,18 +34,28 @@ public class DataAnalysisActivity extends AppCompatActivity implements ViewPager
 
     private TextView timelineText;
     private TextView chartText;
+    private ImageView holoImg;
+    private ImageView backImg;
+    //当前页面
+    private int currentIndex;
+    //屏幕宽度
+    private int screenWidth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_analysis);
 
         initView();
+        initBottomHoloWidth();
+        setTextColor();
     }
 
     public void initView(){
         viewPager = (ViewPager) findViewById(R.id.viewpager_data_analysis);
         timelineText = (TextView) findViewById(R.id.txt_tab_timeline);
         chartText = (TextView) findViewById(R.id.txt_tab_chart);
+        holoImg = (ImageView) findViewById(R.id.img_tab_bottom_holo);
+        backImg = (ImageView) findViewById(R.id.img_title_back_data_analysis);
 
         fragmentList = new ArrayList<>();
         timeLineFragment = new TimeLineFragment();
@@ -49,6 +64,7 @@ public class DataAnalysisActivity extends AppCompatActivity implements ViewPager
         fragmentList.add(timeLineFragment);
         fragmentList.add(dataChartFragment);
 
+        backImg.setOnClickListener(this);
 
         adapter = new FragmentAdapter(this.getSupportFragmentManager(),fragmentList);
         viewPager.setAdapter(adapter);
@@ -57,7 +73,16 @@ public class DataAnalysisActivity extends AppCompatActivity implements ViewPager
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) holoImg.getLayoutParams();
 
+        if (currentIndex == 0 && position == 0){
+            lp.leftMargin = (int) (positionOffset * (screenWidth * 1.0 / 2) + currentIndex * (screenWidth / 2));
+        }else if (currentIndex == 1 && position == 0){
+            lp.leftMargin = (int) (-(1 - positionOffset) * (screenWidth * 1.0 / 2) + currentIndex * (screenWidth / 2));
+        }else if (currentIndex == 1 && position == 1){
+            lp.leftMargin = (int) (positionOffset * (screenWidth * 1.0 / 2) + currentIndex * (screenWidth / 2));
+        }
+        holoImg.setLayoutParams(lp);
     }
 
     @Override
@@ -78,6 +103,29 @@ public class DataAnalysisActivity extends AppCompatActivity implements ViewPager
 
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.img_title_back_data_analysis:
+                finish();
+                break;
+        }
+    }
+
+    public void initBottomHoloWidth(){
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        screenWidth = displayMetrics.widthPixels;
+
+        LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) holoImg.getLayoutParams();
+        lp.width = screenWidth / 2;
+        holoImg.setLayoutParams(lp);
+
+    }
+
+    /**
+     * 设置时间轴，图表的tab颜色为黑色
+     */
     private void setTextColor(){
         timelineText.setTextColor(Color.BLACK);
         chartText.setTextColor(Color.BLACK);
@@ -86,4 +134,6 @@ public class DataAnalysisActivity extends AppCompatActivity implements ViewPager
     public static void startActivity(Context context){
         context.startActivity(new Intent(context,DataAnalysisActivity.class));
     }
+
+
 }

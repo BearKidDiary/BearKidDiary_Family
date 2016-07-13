@@ -53,4 +53,5 @@ dependencies {
     compile 'cn.bmob.android:bmob-im:2.0.5@aar'
     //compile 'cn.bmob.android:http-legacy:1.0'
     compile 'com.belerweb:pinyin4j:2.5.1'
+    compile files('libs/achartengine-1.2.0.jar')
 }

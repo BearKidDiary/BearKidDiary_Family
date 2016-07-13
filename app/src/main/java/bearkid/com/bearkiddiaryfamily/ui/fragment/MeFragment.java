@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import bearkid.com.bearkiddiaryfamily.R;
 import bearkid.com.bearkiddiaryfamily.ui.activity.ContactsListActivity;
+import bearkid.com.bearkiddiaryfamily.ui.activity.DataAnalysisActivity;
 import bearkid.com.bearkiddiaryfamily.ui.activity.PersonInfoActivity;
 import bearkid.com.bearkiddiaryfamily.ui.view.CircleImageview;
 
@@ -68,9 +69,9 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
                 addChild();
                 break;
             case R.id.rlayout_me_scan:
-//                intent = new Intent(context, ContactsListActivity.class);
+//                intent = new Intent(context, DataAnalysisActivity.class);
 //                startActivity(intent);
-                Toast.makeText(context, "扫一扫", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "扫一扫", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.rlayout_me_qr:
                 break;
