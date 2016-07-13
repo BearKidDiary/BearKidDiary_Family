@@ -18,7 +18,6 @@ public class ButtonFlat extends Button {
 
     public ButtonFlat(Context context, AttributeSet attrs) {
         super(context, attrs);
-
     }
 
     protected void setDefaultProperties() {
