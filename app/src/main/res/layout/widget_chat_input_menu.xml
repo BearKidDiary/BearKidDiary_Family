@@ -19,7 +19,7 @@
         android:background="#fff"
         android:visibility="gone" >
 
-        <bearkid.com.bearkiddiaryfamily.ui.view.ChatExtendMenu
+        <bearkid.com.bearkiddiaryfamily.ui.view.chatwidget.ChatExtendMenu
             android:id="@+id/extend_menu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/emoji_menu_container">
+            android:id="@+id/emojicon_menu_container">
         </FrameLayout>
 
     </FrameLayout>

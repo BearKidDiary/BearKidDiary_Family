@@ -11,6 +11,8 @@
         android:layout_height="56dp"
         android:background="@color/colorPrimary">
         <ImageView
+            android:id="@+id/activity_chat_back"
+            android:clickable="true"
             android:layout_width="24dp"
             android:layout_height="36dp"
             android:layout_marginLeft="16dp"
@@ -25,7 +27,8 @@
             android:textColor="#ffffff"/>
     </RelativeLayout>
 
-    <bearkid.com.bearkiddiaryfamily.ui.view.ChatInputMenu
+    <bearkid.com.bearkiddiaryfamily.ui.view.chatwidget.ChatInputMenu
+        android:id="@+id/input_menu"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
