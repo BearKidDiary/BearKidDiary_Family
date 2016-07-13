@@ -9,7 +9,9 @@
     <RelativeLayout
         android:id="@+id/rlayout_me_scan"
         android:layout_width="match_parent"
-        android:layout_height="64dp">
+        android:layout_height="64dp"
+        android:background="@drawable/selector_me_item"
+        android:clickable="true">
 
         <ImageView
             android:id="@+id/img_me_scan"
@@ -39,7 +41,9 @@
     <RelativeLayout
         android:id="@+id/rlayout_me_qr"
         android:layout_width="match_parent"
-        android:layout_height="64dp">
+        android:layout_height="64dp"
+        android:clickable="true"
+        android:background="@drawable/selector_me_item">
 
         <ImageView
             android:id="@+id/img_me_qr"
@@ -69,7 +73,9 @@
     <RelativeLayout
         android:id="@+id/rlayout_me_contacts"
         android:layout_width="match_parent"
-        android:layout_height="64dp">
+        android:layout_height="64dp"
+        android:clickable="true"
+        android:background="@drawable/selector_me_item">
 
         <ImageView
             android:id="@+id/img_me_contacts"
@@ -99,7 +105,9 @@
     <RelativeLayout
         android:id="@+id/rlayout_me_setting"
         android:layout_width="match_parent"
-        android:layout_height="64dp">
+        android:layout_height="64dp"
+        android:clickable="true"
+        android:background="@drawable/selector_me_item">
 
         <ImageView
             android:id="@+id/img_me_setting"

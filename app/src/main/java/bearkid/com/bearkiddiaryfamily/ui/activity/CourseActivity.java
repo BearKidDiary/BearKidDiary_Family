@@ -12,7 +12,7 @@ import com.gc.materialdesign.views.Card;
 
 import bearkid.com.bearkiddiaryfamily.R;
 
-public class CourseActivity extends AppCompatActivity {
+public class CourseActivity extends BaseActivity {
 
     private ImageView iv_back;
     private TextView tv_name, tv_phone, tv_course_desc, tv_course_time, tv_course_area;
@@ -44,7 +44,8 @@ public class CourseActivity extends AppCompatActivity {
         card_teacher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                finish();
+                ChatActivity.startActivity(getContext());
             }
         });
     }

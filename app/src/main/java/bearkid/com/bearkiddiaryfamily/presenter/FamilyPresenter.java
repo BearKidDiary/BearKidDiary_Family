@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bearkid.com.bearkiddiaryfamily.model.FadeModel;
+import bearkid.com.bearkiddiaryfamily.model.bean.Family;
 import bearkid.com.bearkiddiaryfamily.model.bean.FamilyKidMsg;
+import bearkid.com.bearkiddiaryfamily.model.bean.FamilyUser;
 import bearkid.com.bearkiddiaryfamily.ui.fragment.FamilyFragment;
 
 /**
@@ -17,13 +19,22 @@ public class FamilyPresenter {
         this.view = view;
     }
 
-    public void initDate() {
+    public void initData() {
         List<FamilyKidMsg> list = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             FamilyKidMsg msg = FadeModel.getFamilyKidMsg();
             list.add(msg);
         }
-
         view.updateKidList(list);
+
+        List<FamilyUser> members = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            FamilyUser member = new FamilyUser();
+            member.setFUname("王大" + i);
+            members.add(member);
+        }
+        view.updateRelativeList(members);
+
+        view.notifyUpdate();
     }
 }

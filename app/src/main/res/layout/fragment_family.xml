@@ -25,7 +25,8 @@
             android:textColor="#ffffff"
             android:textSize="20sp" />
 
-        <ImageView
+        <bearkid.com.bearkiddiaryfamily.ui.view.IconButton
+            android:id="@+id/ib_family_menu"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_alignParentRight="true"

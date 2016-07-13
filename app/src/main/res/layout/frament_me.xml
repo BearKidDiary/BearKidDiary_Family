@@ -32,29 +32,35 @@
             android:text="@string/txt_item_title_mychildren"
             android:textSize="16sp" />
 
-        <LinearLayout
-            android:id="@+id/llayout_me_mychildren"
+        <HorizontalScrollView
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:background="@android:color/white"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:background="@android:color/white">
+            <LinearLayout
+                android:id="@+id/llayout_me_mychildren"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@android:color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-            <bearkid.com.bearkiddiaryfamily.ui.view.CircleImageview
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:layout_marginLeft="16dp"
-                android:src="@drawable/avatar" />
+                <bearkid.com.bearkiddiaryfamily.ui.view.CircleImageview
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_marginLeft="16dp"
+                    android:src="@drawable/avatar" />
 
 
-            <ImageView
-                android:id="@+id/img_me_add"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginLeft="16dp"
-                android:src="@drawable/ic_me_add"/>
+                <ImageView
+                    android:id="@+id/img_me_add"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="16dp"
+                    android:src="@drawable/ic_me_add"/>
 
-        </LinearLayout>
+            </LinearLayout>
+        </HorizontalScrollView>
+
 
         <include
             layout="@layout/items_me"></include>

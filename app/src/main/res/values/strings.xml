@@ -19,6 +19,12 @@
     <string name="txt_item_address">地址</string>
     <string name="txt_item_email">邮箱</string>
 
+
+    <!--  -->
+    <string name="txt_title_data_analysis">数据分析</string>
+    <string name="txt_tab_timeline">时间轴</string>
+    <string name="txt_tab_chart">图表</string>
+
     <!-- 即时通讯界面 -->
     <string name="button_send">发送</string>
 </resources>
