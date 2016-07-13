@@ -1,4 +1,4 @@
-package bearkid.com.bearkiddiaryfamily.utils;
+package bearkid.com.bearkiddiaryfamily.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

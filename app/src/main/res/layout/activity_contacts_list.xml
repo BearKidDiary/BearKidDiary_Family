@@ -78,7 +78,7 @@
             android:layout_gravity="center"
             android:background="@drawable/shape_show_head_toast"
             android:gravity="center"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@android:color/white"
             android:textSize="40dp"
             android:visibility="invisible" />
 
@@ -86,7 +86,6 @@
             android:id="@+id/sideBar"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-
     </FrameLayout>
 
 </LinearLayout>
