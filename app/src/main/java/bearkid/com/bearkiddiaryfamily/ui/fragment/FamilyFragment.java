@@ -1,5 +1,6 @@
 package bearkid.com.bearkiddiaryfamily.ui.fragment;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -24,6 +25,7 @@ import bearkid.com.bearkiddiaryfamily.model.bean.FamilyKidMsg;
 import bearkid.com.bearkiddiaryfamily.model.bean.FamilyUser;
 import bearkid.com.bearkiddiaryfamily.presenter.FamilyPresenter;
 import bearkid.com.bearkiddiaryfamily.ui.activity.CourseActivity;
+import bearkid.com.bearkiddiaryfamily.ui.activity.DataAnalysisActivity;
 import bearkid.com.bearkiddiaryfamily.ui.view.CircleImageview;
 import bearkid.com.bearkiddiaryfamily.ui.view.IconButton;
 
@@ -99,6 +101,7 @@ public class FamilyFragment extends BaseFragment {
 
         private final static int TYPE_KID = 1;
         private final static int TYPE_RELATIVE = 2;
+        private final Context context = FamilyFragment.this.getContext();
 
 
         @Override
@@ -146,7 +149,7 @@ public class FamilyFragment extends BaseFragment {
                 }
             }
             v.ib_graph.setOnClickListener(view -> {
-
+                DataAnalysisActivity.startActivity(context);
             });
             v.ib_show.setOnClickListener(view -> {
 
