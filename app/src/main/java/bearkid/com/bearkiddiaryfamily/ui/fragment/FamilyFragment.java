@@ -4,14 +4,14 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,7 +20,6 @@ import java.util.List;
 
 import bearkid.com.bearkiddiaryfamily.R;
 import bearkid.com.bearkiddiaryfamily.model.bean.Course;
-import bearkid.com.bearkiddiaryfamily.model.bean.Family;
 import bearkid.com.bearkiddiaryfamily.model.bean.FamilyKidMsg;
 import bearkid.com.bearkiddiaryfamily.model.bean.FamilyUser;
 import bearkid.com.bearkiddiaryfamily.presenter.FamilyPresenter;
@@ -30,9 +29,10 @@ import bearkid.com.bearkiddiaryfamily.ui.view.IconButton;
 
 public class FamilyFragment extends BaseFragment {
 
-    private FamilyPresenter presenter;
     private RecyclerView rv_family;
-    private FamilyAdapter mAdapter;
+    private ImageView iv_menu;
+    final private FamilyPresenter presenter = new FamilyPresenter(this);
+    final private FamilyAdapter mAdapter = new FamilyAdapter();
     /**
      * 对应家庭的孩子的数据
      */
@@ -46,22 +46,24 @@ public class FamilyFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_family, container, false);
 
-        initPresenter();
         initView(view);
         initData();
 
         return view;
     }
 
-    private final void initPresenter() {
-        presenter = new FamilyPresenter(this);
-    }
-
     private final void initView(View v) {
+        //RecyclerView列表
         rv_family = (RecyclerView) v.findViewById(R.id.rv_family);
-        rv_family.setAdapter(mAdapter = new FamilyAdapter());
+        rv_family.setAdapter(mAdapter);
         rv_family.setLayoutManager(new LinearLayoutManager(getContext()));
         rv_family.addItemDecoration(new FamilyDecoration());
+
+        //家庭管理“+”菜单
+        iv_menu = (ImageView) v.findViewById(R.id.iv_family_menu);
+
+        PopupMenu menu = new PopupMenu(getContext(), iv_menu);
+
     }
 
     private final void initData() {
@@ -73,7 +75,6 @@ public class FamilyFragment extends BaseFragment {
      */
     public void updateKidList(List<FamilyKidMsg> list) {
         kidList = list;
-        //mAdapter.notifyDataSetChanged();
     }
 
     /**
@@ -81,7 +82,14 @@ public class FamilyFragment extends BaseFragment {
      */
     public void updateRelativeList(List<FamilyUser> list) {
         relativeList = list;
-        //mAdapter.notifyDataSetChanged();
+    }
+
+    public void notifyUpdate() {
+        mAdapter.notifyDataSetChanged();
+    }
+
+    public void addKid(FamilyKidMsg msg) {
+        kidList.add(msg);
     }
 
     /**
@@ -89,8 +97,9 @@ public class FamilyFragment extends BaseFragment {
      */
     class FamilyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-        final static int TYPE_KID = 1;
-        final static int TYPE_RELATIVE = 2;
+        private final static int TYPE_KID = 1;
+        private final static int TYPE_RELATIVE = 2;
+
 
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -133,14 +142,15 @@ public class FamilyFragment extends BaseFragment {
                     ((TextView) courseView.findViewById(R.id.tv_family_kid_course_name)).setText(course.getCname());
                     ((TextView) courseView.findViewById(R.id.tv_family_kid_course_time)).setText(course.getCclasstime().getDate());
                     ((TextView) courseView.findViewById(R.id.tv_family_kid_course_org)).setText("春田花花");
-                    courseView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            CourseActivity.startActivity(FamilyFragment.this.getContext());
-                        }
-                    });
+                    courseView.setOnClickListener(view -> CourseActivity.startActivity(FamilyFragment.this.getContext()));
                 }
             }
+            v.ib_graph.setOnClickListener(view -> {
+
+            });
+            v.ib_show.setOnClickListener(view -> {
+
+            });
         }
 
         private final void onBindRelativeViewHolder(RelativeViewHolder v, int position) {
@@ -198,12 +208,12 @@ public class FamilyFragment extends BaseFragment {
     /**
      * 普通的列表分割线
      */
-    class FamilyDecoration extends RecyclerView.ItemDecoration {
+    static class FamilyDecoration extends RecyclerView.ItemDecoration {
 
-        Paint paint = new Paint();
+        final Paint paint = new Paint();
 
         {
-            paint.setColor(0xff00ff00);
+            paint.setColor(0xff000000);
             paint.setStrokeWidth(2.0f);
         }
 
@@ -218,7 +228,7 @@ public class FamilyFragment extends BaseFragment {
         @Override
         public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
             super.getItemOffsets(outRect, view, parent, state);
-            outRect.set(0, 0, view.getWidth(), 10);
+            //outRect.set(0, 0, parent.getWidth(), 10);
             Log.i("zy", "rect:" + outRect != null ? outRect.toString() : "null");
         }
     }

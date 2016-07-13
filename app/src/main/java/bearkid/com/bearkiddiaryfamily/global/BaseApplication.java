@@ -42,6 +42,8 @@ public class BaseApplication extends Application{
      * 在这里写释放SDK资源等代码
      */
     public void exit(){
+        //TODO: 释放SDK的资源
+        
         while(activityStack.size()!=0){
             activityStack.peek().finish();
         }

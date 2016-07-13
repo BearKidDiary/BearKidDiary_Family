@@ -34,5 +34,7 @@ public class FamilyPresenter {
             members.add(member);
         }
         view.updateRelativeList(members);
+
+        view.notifyUpdate();
     }
 }
