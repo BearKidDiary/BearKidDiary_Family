@@ -1,7 +1,6 @@
 package bearkid.com.bearkiddiaryfamily.ui.activity;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -20,7 +19,7 @@ import bearkid.com.bearkiddiaryfamily.R;
 import bearkid.com.bearkiddiaryfamily.model.bean.ContactBean;
 import bearkid.com.bearkiddiaryfamily.ui.view.ClearEditText;
 import bearkid.com.bearkiddiaryfamily.ui.view.SideBar;
-import bearkid.com.bearkiddiaryfamily.utils.ContactsAdapter;
+import bearkid.com.bearkiddiaryfamily.adapter.ContactsAdapter;
 import bearkid.com.bearkiddiaryfamily.utils.PinyinUtils;
 
 
