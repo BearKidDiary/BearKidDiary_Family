@@ -1,10 +1,14 @@
 package bearkid.com.bearkiddiaryfamily.ui.fragment;
 
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Layout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +20,9 @@ import java.util.List;
 
 import bearkid.com.bearkiddiaryfamily.R;
 import bearkid.com.bearkiddiaryfamily.model.bean.Course;
+import bearkid.com.bearkiddiaryfamily.model.bean.Family;
 import bearkid.com.bearkiddiaryfamily.model.bean.FamilyKidMsg;
+import bearkid.com.bearkiddiaryfamily.model.bean.FamilyUser;
 import bearkid.com.bearkiddiaryfamily.presenter.FamilyPresenter;
 import bearkid.com.bearkiddiaryfamily.ui.activity.CourseActivity;
 import bearkid.com.bearkiddiaryfamily.ui.view.CircleImageview;
@@ -26,7 +32,15 @@ public class FamilyFragment extends BaseFragment {
 
     private FamilyPresenter presenter;
     private RecyclerView rv_family;
+    private FamilyAdapter mAdapter;
+    /**
+     * 对应家庭的孩子的数据
+     */
     private List<FamilyKidMsg> kidList = new ArrayList<>();
+    /**
+     * 对应家庭成员的数据
+     */
+    private List<FamilyUser> relativeList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,7 +48,7 @@ public class FamilyFragment extends BaseFragment {
 
         initPresenter();
         initView(view);
-        presenter.initDate();
+        initData();
 
         return view;
     }
@@ -45,15 +59,34 @@ public class FamilyFragment extends BaseFragment {
 
     private final void initView(View v) {
         rv_family = (RecyclerView) v.findViewById(R.id.rv_family);
-
-        rv_family.setAdapter(new FamilyAdapter());
+        rv_family.setAdapter(mAdapter = new FamilyAdapter());
         rv_family.setLayoutManager(new LinearLayoutManager(getContext()));
+        rv_family.addItemDecoration(new FamilyDecoration());
     }
 
+    private final void initData() {
+        presenter.initData();
+    }
+
+    /**
+     * 更新所有孩子的信息
+     */
     public void updateKidList(List<FamilyKidMsg> list) {
-        this.kidList = list;
+        kidList = list;
+        //mAdapter.notifyDataSetChanged();
     }
 
+    /**
+     * 更新整个亲戚列表
+     */
+    public void updateRelativeList(List<FamilyUser> list) {
+        relativeList = list;
+        //mAdapter.notifyDataSetChanged();
+    }
+
+    /**
+     * RecyclerView的适配器 适配 孩子（kidList）和家庭成员（RelativeList）的数据
+     */
     class FamilyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         final static int TYPE_KID = 1;
@@ -61,28 +94,38 @@ public class FamilyFragment extends BaseFragment {
 
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            if (viewType == 1) {
+            if (viewType == TYPE_KID) {
                 View view = LayoutInflater.from(FamilyFragment.this.getContext()).inflate(R.layout.item_family_kid, parent, false);
                 return new KidViewHolder(view);
+            } else if (viewType == TYPE_RELATIVE) {
+                View view = LayoutInflater.from(FamilyFragment.this.getContext()).inflate(R.layout.item_family_relative, parent, false);
+                return new RelativeViewHolder(view);
             } else {
+                Log.e("zy", "FamilyFragment onCreateViewHolder error: unknown viewType");
                 return null;
             }
         }
 
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+            //TODO: 根据holder的类型分发到对应的处理函数
             if (holder instanceof KidViewHolder) {
                 onBindKidViewHolder((KidViewHolder) holder, position);
+            } else if (holder instanceof RelativeViewHolder) {
+                onBindRelativeViewHolder((RelativeViewHolder) holder, position);
+            } else {
+                Log.e("zy", "FamilyFragment onBindViewHolder error: unknown type");
             }
         }
 
         private void onBindKidViewHolder(KidViewHolder v, int position) {
+            //TODO：处理显示孩子的数据
             FamilyKidMsg msg = kidList.get(position);
 
             v.tv_age.setText(msg.getAge() + "岁");
             v.tv_name.setText(msg.getName());
             v.civ_avatar.setImageResource(R.drawable.avatar);
-
+            v.ll_root.removeAllViews();
             List<Course> courses;
             if ((courses = msg.getCourses()) != null && courses.size() != 0) {
                 for (Course course : courses) {
@@ -93,23 +136,33 @@ public class FamilyFragment extends BaseFragment {
                     courseView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            CourseActivity.startActivity(getContext());
+                            CourseActivity.startActivity(FamilyFragment.this.getContext());
                         }
                     });
                 }
             }
         }
 
+        private final void onBindRelativeViewHolder(RelativeViewHolder v, int position) {
+            //TODO：处理显示家庭其他成员的数据
+            int pos = position - kidList.size();
+            FamilyUser member = relativeList.get(pos);
+
+            v.tv_name.setText(member.getFUname());
+            v.tv_relation.setText("妈妈");
+        }
+
         @Override
         public int getItemCount() {
-            return kidList.size();
+            return kidList.size() + relativeList.size();
         }
 
         @Override
         public int getItemViewType(int position) {
-            return TYPE_KID;
-//            if (position < kidList.size()) return TYPE_KID;
-//            return TYPE_RELATIVE;
+            if (position < kidList.size())
+                return TYPE_KID;
+            else
+                return TYPE_RELATIVE;
         }
 
         class KidViewHolder extends RecyclerView.ViewHolder {
@@ -117,7 +170,6 @@ public class FamilyFragment extends BaseFragment {
             TextView tv_name, tv_age;
             IconButton ib_graph, ib_show;
             LinearLayout ll_root;
-            View courseView;
 
             public KidViewHolder(View view) {
                 super(view);
@@ -131,9 +183,43 @@ public class FamilyFragment extends BaseFragment {
         }
 
         class RelativeViewHolder extends RecyclerView.ViewHolder {
+            CircleImageview civ_avatar;
+            TextView tv_name, tv_relation;
+
             public RelativeViewHolder(View view) {
                 super(view);
+                civ_avatar = (CircleImageview) view.findViewById(R.id.civ_family_relative_avatar);
+                tv_name = (TextView) view.findViewById(R.id.tv_family_relative_name);
+                tv_relation = (TextView) view.findViewById(R.id.tv_family_relative_relation);
             }
+        }
+    }
+
+    /**
+     * 普通的列表分割线
+     */
+    class FamilyDecoration extends RecyclerView.ItemDecoration {
+
+        Paint paint = new Paint();
+
+        {
+            paint.setColor(0xff00ff00);
+            paint.setStrokeWidth(2.0f);
+        }
+
+        @Override
+        public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
+            super.onDrawOver(c, parent, state);
+            int width = parent.getWidth();
+            Log.i("zy", "drawLine " + width);
+            c.drawLine(0, 0, width, 0, paint);
+        }
+
+        @Override
+        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+            super.getItemOffsets(outRect, view, parent, state);
+            outRect.set(0, 0, view.getWidth(), 10);
+            Log.i("zy", "rect:" + outRect != null ? outRect.toString() : "null");
         }
     }
 }
