@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
@@ -15,7 +16,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -38,6 +41,7 @@ public class FamilyFragment extends BaseFragment {
     private RecyclerView rv_family;
     private IconButton ib_menu;
     private PopupMenu popupMenu;
+    private AppCompatSpinner spinner_family;
     private final FamilyPresenter presenter = new FamilyPresenter(this);
     private final FamilyAdapter mAdapter = new FamilyAdapter();
     private final static String[] items = {"创建家庭", "编辑信息", "添加孩子", "添加亲戚"};
@@ -79,6 +83,18 @@ public class FamilyFragment extends BaseFragment {
                 FamilyCreateActivity.startActivity(getContext());
             }
             return false;
+        });
+
+        //下拉家庭列表
+        spinner_family = (AppCompatSpinner) v.findViewById(R.id.spinner_family);
+        spinner_family.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, new String[]{"我的家庭"}) {
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                TextView tv = new TextView(getContext());
+                tv.setText("我的家庭");
+                tv.setTextColor(0xffffffff);
+                return tv;
+            }
         });
     }
 
@@ -223,13 +239,20 @@ public class FamilyFragment extends BaseFragment {
     /**
      * 普通的列表分割线
      */
-    static class FamilyDecoration extends RecyclerView.ItemDecoration {
+    class FamilyDecoration extends RecyclerView.ItemDecoration {
 
         final Paint paint = new Paint();
+        final Paint textPaint = new Paint();
+        final Paint backgroundPaint = new Paint();
 
         {
             paint.setColor(0xff000000);
             paint.setStyle(Paint.Style.FILL_AND_STROKE);
+
+            textPaint.setTextSize(60);
+            textPaint.setColor(0xff000000);
+
+            backgroundPaint.setColor(0xffffff00);
         }
 
         @Override
@@ -239,22 +262,31 @@ public class FamilyFragment extends BaseFragment {
             final int left = parent.getPaddingLeft();
             final int right = parent.getWidth() - parent.getPaddingRight();
 
-            final int childCount = parent.getChildCount();
-            for (int i = 0; i < childCount; i++) {
+            final int first = ((LinearLayoutManager) rv_family.getLayoutManager()).findFirstVisibleItemPosition();
+            final int last = ((LinearLayoutManager) rv_family.getLayoutManager()).findLastCompletelyVisibleItemPosition();
+//            final int childCount = parent.getChildCount();
+            for (int i = first; i <= last; i++) {
                 final View child = parent.getChildAt(i);
-                final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child
-                        .getLayoutParams();
-                final int top = child.getBottom() + params.bottomMargin;
+                final int top = child.getBottom();
                 final int bottom = top + 1;
-
                 c.drawRect(left, top, right, bottom, paint);
+
+                if (i == kidList.size() - 1) {
+                    int b = top + 150;
+                    c.drawRect(left, top, right, b, backgroundPaint);
+                    c.drawText("我的家庭", left + 40, (b - top) / 2f + top, textPaint);
+                }
             }
         }
 
         @Override
         public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-            super.getItemOffsets(outRect, view, parent, state);
             outRect.set(0, 0, 0, 1);
+
+            int pos = parent.getChildLayoutPosition(view);
+            if (pos == kidList.size() - 1) {
+                outRect.set(0, 0, 0, 150);
+            }
         }
     }
 }

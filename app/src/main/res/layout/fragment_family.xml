@@ -11,10 +11,11 @@
         android:background="@color/colorPrimary">
 
         <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/spinner_family"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="8dp"
             android:spinnerMode="dropdown" />
 
         <TextView
@@ -34,11 +35,6 @@
             android:layout_marginRight="16dp"
             android:src="@drawable/child_add" />
     </RelativeLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="我的孩子" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_family"
