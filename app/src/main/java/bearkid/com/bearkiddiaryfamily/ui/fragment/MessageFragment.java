@@ -49,7 +49,7 @@ public class MessageFragment extends BaseFragment {
             holder.root.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ChatActivity.startActivity(mContext);//v.getTag()
+                    //ChatActivity.startActivity(mContext);//v.getTag()
                 }
             });
         }

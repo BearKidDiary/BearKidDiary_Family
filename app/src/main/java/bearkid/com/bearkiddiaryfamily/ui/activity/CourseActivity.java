@@ -45,7 +45,7 @@ public class CourseActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                ChatActivity.startActivity(getContext());
+                //ChatActivity.startActivity(getContext());
             }
         });
     }
