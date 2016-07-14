@@ -162,6 +162,7 @@ public class FamilyFragment extends BaseFragment {
             }
             v.ib_graph.setOnClickListener(view -> {
                 DataAnalysisActivity.startActivity(getContext());
+
             });
             v.ib_show.setOnClickListener(view -> {
 

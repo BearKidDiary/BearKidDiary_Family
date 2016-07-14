@@ -15,6 +15,7 @@ import org.achartengine.GraphicalView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import bearkid.com.bearkiddiaryfamily.R;
 import bearkid.com.bearkiddiaryfamily.utils.Chart;

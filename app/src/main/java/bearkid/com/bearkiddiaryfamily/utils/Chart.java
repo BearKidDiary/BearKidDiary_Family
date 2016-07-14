@@ -13,6 +13,7 @@ import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by -HungXum on 2015/12/22.
@@ -38,6 +39,16 @@ public class Chart {
     }
 
     //获取数据集，及xy坐标的集合
+
+
+    public void setMultipleSeriesDataset(String[] curveTitle) {//设置每个图底下的点与线的样板
+        multipleSeriesDataset = new XYMultipleSeriesDataset();
+        for (int i = 0; i < curveTitle.length;i++){
+            series = new XYSeries(curveTitle[i]);
+            multipleSeriesDataset.addSeries(series);
+        }
+    }
+
 
     public void setMultipleSeriesDataset(String curveTitle) {//设置每个图底下的点与线的样板
         multipleSeriesDataset = new XYMultipleSeriesDataset();

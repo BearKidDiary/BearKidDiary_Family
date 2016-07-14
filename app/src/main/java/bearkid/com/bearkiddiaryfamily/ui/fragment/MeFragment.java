@@ -4,26 +4,18 @@ package bearkid.com.bearkiddiaryfamily.ui.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 
 import bearkid.com.bearkiddiaryfamily.R;
 import bearkid.com.bearkiddiaryfamily.ui.activity.ContactsListActivity;
-import bearkid.com.bearkiddiaryfamily.ui.activity.DataAnalysisActivity;
 import bearkid.com.bearkiddiaryfamily.ui.activity.PersonInfoActivity;
 import bearkid.com.bearkiddiaryfamily.ui.view.CircleImageview;
 
@@ -69,9 +61,6 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
                 addChild();
                 break;
             case R.id.rlayout_me_scan:
-//                intent = new Intent(context, DataAnalysisActivity.class);
-//                startActivity(intent);
-//                Toast.makeText(context, "扫一扫", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.rlayout_me_qr:
                 break;
