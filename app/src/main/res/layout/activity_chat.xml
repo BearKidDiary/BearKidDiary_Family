@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/ll_chat"
     tools:context=".ui.activity.ChatActivity">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -27,10 +28,51 @@
             android:textColor="#ffffff"/>
     </RelativeLayout>
 
-    <bearkid.com.bearkiddiaryfamily.ui.view.chatwidget.ChatInputMenu
-        android:id="@+id/input_menu"
-        android:layout_alignParentBottom="true"
+    <FrameLayout
+        android:layout_weight="1.0"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="0dp">
 
-</RelativeLayout>
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/sw_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rc_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_record"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:visibility="invisible"
+            android:background="@drawable/chat_top_voice_bg"
+            android:padding="10dp" >
+
+            <ImageView
+                android:id="@+id/iv_record"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerHorizontal="true"
+                android:contentDescription="@string/action_settings"
+                android:src="@mipmap/chat_icon_voice1" />
+
+            <TextView
+                android:id="@+id/tv_voice_tips"
+                style="@style/style_text_white"
+                android:layout_below="@id/iv_record"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="@string/voice_up_tips"
+                android:textSize="14sp" />
+        </RelativeLayout>
+    </FrameLayout>
+
+    <include layout="@layout/include_chat_bottom_bar"/>
+
+</LinearLayout>

@@ -11,4 +11,12 @@
 
     <color name="emojicon_tab_selected">#D9D9D9</color>
     <color name="emojicon_tab_nomal">#ffffff</color>
+
+    <color name="base_color_text_white">#ffffff</color>
+    <color name="base_color_text_black">#3e3e39</color>
+    <color name="color_emote_divder">#ffa1a1a1</color>
+    <color name="color_line">#dadada</color>
+    <color name="color_msg_system_time_bg">#20000000</color>
+    <color name="color_1e1e1e">#1e1e1e</color>
+    <color name="color_chat_send_status">#818181</color>
 </resources>
