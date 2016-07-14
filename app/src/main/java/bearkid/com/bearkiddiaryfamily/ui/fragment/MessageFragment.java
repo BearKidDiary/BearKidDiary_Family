@@ -6,9 +6,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import bearkid.com.bearkiddiaryfamily.R;
+import bearkid.com.bearkiddiaryfamily.ui.activity.ChatActivity;
 import bearkid.com.bearkiddiaryfamily.ui.view.RefreshRecyclerView;
 
 /**
@@ -43,6 +45,13 @@ public class MessageFragment extends BaseFragment {
         public void onBindViewHolder(MyViewHolder holder, int position)
         {
             //holder.txt.setText("1");//mDatas.get(position)
+            holder.root.setTag(position);
+            holder.root.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ChatActivity.startActivity(mContext);//v.getTag()
+                }
+            });
         }
 
         @Override
@@ -53,10 +62,12 @@ public class MessageFragment extends BaseFragment {
 
         class MyViewHolder extends RecyclerView.ViewHolder
         {
+            LinearLayout root;
             TextView txt;
             public MyViewHolder(View view)
             {
                 super(view);
+                root = (LinearLayout) view.findViewById(R.id.item_message_root);
                 txt = (TextView) view.findViewById(R.id.item_message_txt);
             }
         }
