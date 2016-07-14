@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,6 +37,7 @@ import bearkid.com.bearkiddiaryfamily.ui.activity.MainActivity;
 import bearkid.com.bearkiddiaryfamily.ui.view.CircleImageview;
 import bearkid.com.bearkiddiaryfamily.ui.view.IconButton;
 
+@Deprecated
 public class FamilyFragment extends BaseFragment {
 
     private RecyclerView rv_family;
@@ -70,6 +72,7 @@ public class FamilyFragment extends BaseFragment {
         rv_family.setAdapter(mAdapter);
         rv_family.setLayoutManager(new LinearLayoutManager(getContext()));
         rv_family.addItemDecoration(new FamilyDecoration());
+        rv_family.addItemDecoration(new DividerDecoration());
 
         //家庭管理“+”菜单
         ib_menu = (IconButton) v.findViewById(R.id.ib_family_menu);
@@ -237,23 +240,12 @@ public class FamilyFragment extends BaseFragment {
     }
 
     /**
-     * 普通的列表分割线
+     * strikyheader
      */
     class FamilyDecoration extends RecyclerView.ItemDecoration {
 
-        final Paint paint = new Paint();
-        final Paint textPaint = new Paint();
-        final Paint backgroundPaint = new Paint();
-
-        {
-            paint.setColor(0xff000000);
-            paint.setStyle(Paint.Style.FILL_AND_STROKE);
-
-            textPaint.setTextSize(60);
-            textPaint.setColor(0xff000000);
-
-            backgroundPaint.setColor(0xffffff00);
-        }
+        SparseArray<Paint> paintList = new SparseArray<>();
+        Paint paint;
 
         @Override
         public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
@@ -262,31 +254,84 @@ public class FamilyFragment extends BaseFragment {
             final int left = parent.getPaddingLeft();
             final int right = parent.getWidth() - parent.getPaddingRight();
 
-            final int first = ((LinearLayoutManager) rv_family.getLayoutManager()).findFirstVisibleItemPosition();
-            final int last = ((LinearLayoutManager) rv_family.getLayoutManager()).findLastCompletelyVisibleItemPosition();
-//            final int childCount = parent.getChildCount();
-            for (int i = first; i <= last; i++) {
-                final View child = parent.getChildAt(i);
-                final int top = child.getBottom();
-                final int bottom = top + 1;
-                c.drawRect(left, top, right, bottom, paint);
+            final int childCount = parent.getChildCount();
+            for (int i = 0; i < childCount; i++) {
+                View child = parent.getChildAt(i);
+                int pos = parent.getChildAdapterPosition(child);
+                if (pos != RecyclerView.NO_POSITION) {
+                    paint = paintList.get(pos);
+                    if (paint == null) {
+                        paint = new Paint();
+                        paint.setColor((int) (0xff000000 + Math.random() * 0xffffff));
+                        paintList.put(pos, paint);
+                    }
+                    int top = child.getBottom();
+                    int bottom = top + 150;
+                    if (bottom >= 150)
+                        c.drawRect(left, top, right, bottom, paint);
+                }
+            }
 
-                if (i == kidList.size() - 1) {
-                    int b = top + 150;
-                    c.drawRect(left, top, right, b, backgroundPaint);
-                    c.drawText("我的家庭", left + 40, (b - top) / 2f + top, textPaint);
+            View first = parent.getChildAt(0);
+            int pos = parent.getChildAdapterPosition(first);
+            int top = first.getBottom();
+            if (top < 0) {
+                paint = paintList.get(pos);
+                if (paint == null) {
+                    paint = new Paint();
+                    paint.setColor((int) (0xff000000 + Math.random() * 0xffffff));
+                    paintList.put(pos, paint);
+                }
+                c.drawRect(left, 0, right, 150, paint);
+            } else if (top < 150) {
+                int lastPos = pos - 1;
+                if (0 <= lastPos && lastPos < childCount) {
+                    paint = paintList.get(lastPos);
+                    c.drawRect(left, top - 150, right, top, paint);
+                }
+            } else {
+                int lastPos = pos - 1;
+                if (0 <= lastPos && lastPos < childCount) {
+                    paint = paintList.get(lastPos);
+                    c.drawRect(left, 0, right, 150, paint);
                 }
             }
         }
 
         @Override
         public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-            outRect.set(0, 0, 0, 1);
+            outRect.set(0, 0, 0, 150);
+        }
+    }
 
-            int pos = parent.getChildLayoutPosition(view);
-            if (pos == kidList.size() - 1) {
-                outRect.set(0, 0, 0, 150);
+    /**
+     * 普通的item分割线
+     */
+    static class DividerDecoration extends RecyclerView.ItemDecoration {
+        Paint paint = new Paint();
+
+        {
+            paint.setColor(0xff000000);
+        }
+
+        @Override
+        public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
+            final int left = parent.getPaddingLeft();
+            final int right = parent.getWidth() - parent.getPaddingRight();
+
+            final int childCount = parent.getChildCount();
+            for (int i = 0; i < childCount; i++) {
+                View child = parent.getChildAt(i);
+                int top = child.getBottom();
+                int bottom = top + 1;
+                c.drawRect(left, top, right, bottom, paint);
             }
+        }
+
+        @Override
+        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+            super.getItemOffsets(outRect, view, parent, state);
+            outRect.set(0, 0, 0, 1);
         }
     }
 }

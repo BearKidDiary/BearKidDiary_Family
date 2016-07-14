@@ -1,6 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_weight="2">
+
+        <View
+            android:layout_width="4dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@color/colorPrimary" />
+
+        <ImageView
+            android:id="@+id/iv_timeline_icon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_centerInParent="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/timeline_study" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="9"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_timeline_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_margin="8dp"
+                android:text="标签名"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv_timeline_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="16dp"
+                android:text="——妈妈"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_timeline_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:inputType="textMultiLine"
+            android:maxLines="5"
+            android:text="发表的内容asdhisasdasdasdasdhafoejfwaehuihaDNIULFWEAHFOI"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="16dp">
+
+            <bearkid.com.bearkiddiaryfamily.ui.view.IconButton
+                android:id="@+id/ib_timeline_pic1"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:src="@drawable/image_default" />
+
+            <bearkid.com.bearkiddiaryfamily.ui.view.IconButton
+                android:id="@+id/ib_timeline_pic2"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:src="@drawable/image_default" />
+
+            <bearkid.com.bearkiddiaryfamily.ui.view.IconButton
+                android:id="@+id/ib_timeline_pic3"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:src="@drawable/image_default" />
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

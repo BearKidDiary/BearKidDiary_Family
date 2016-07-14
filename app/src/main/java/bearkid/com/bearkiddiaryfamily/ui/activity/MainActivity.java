@@ -15,6 +15,7 @@ import bearkid.com.bearkiddiaryfamily.ui.fragment.GalleryFragment;
 import bearkid.com.bearkiddiaryfamily.ui.fragment.MessageFragment;
 import bearkid.com.bearkiddiaryfamily.ui.fragment.MeFragment;
 import bearkid.com.bearkiddiaryfamily.ui.fragment.TestFragment;
+import bearkid.com.bearkiddiaryfamily.ui.fragment.TimeLineFragment;
 import bearkid.com.bearkiddiaryfamily.ui.fragment.TimeLineTypeFragment;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
@@ -77,7 +78,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     mFragments[0] = new MessageFragment();
                     break;
                 case 1:
-                    mFragments[1] = new FamilyFragment();
+                    mFragments[1] = new TimeLineFragment();
                     break;
                 case 2:
                     mFragments[2] = new TimeLineTypeFragment();
