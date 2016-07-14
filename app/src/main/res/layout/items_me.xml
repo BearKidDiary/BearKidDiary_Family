@@ -19,7 +19,7 @@
             android:layout_height="32dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="32dp"
-            android:src="@android:color/black" />
+            android:src="@drawable/ic_me_scan" />
 
         <TextView
             android:id="@+id/txt_me_scan"
@@ -51,7 +51,7 @@
             android:layout_height="32dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="32dp"
-            android:src="@android:color/black" />
+            android:src="@drawable/ic_me_qrcode" />
 
         <TextView
             android:id="@+id/txt_me_qr"
@@ -83,7 +83,7 @@
             android:layout_height="32dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="32dp"
-            android:src="@android:color/black" />
+            android:src="@drawable/ic_me_contacts" />
 
         <TextView
             android:id="@+id/txt_me_contacts"
@@ -115,7 +115,7 @@
             android:layout_height="32dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="32dp"
-            android:src="@android:color/black" />
+            android:src="@drawable/ic_me_setting" />
 
         <TextView
             android:id="@+id/txt_me_setting"
