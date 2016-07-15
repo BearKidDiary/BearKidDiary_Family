@@ -35,4 +35,7 @@
     <string name="location">位置</string>
     <string name="longclick_speak">长按说话</string>
     <string name="voice_short_tips">录音时间太短</string>
+
+    <!-- 孩子信息 -->
+    <string name="kid_info">孩子信息</string>
 </resources>
