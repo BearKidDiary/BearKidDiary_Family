@@ -20,7 +20,7 @@ import java.util.Objects;
 import bearkid.com.bearkiddiaryfamily.R;
 import bearkid.com.bearkiddiaryfamily.utils.Chart;
 
-public class DataAnalysisActivity extends AppCompatActivity {
+public class DataAnalysisActivity extends BaseActivity {
 
     private static final int HEIGHT = 0;
     private static final int WEIGHT = 1;
@@ -57,7 +57,6 @@ public class DataAnalysisActivity extends AppCompatActivity {
                 dpTopx(800)
         ));
     }
-
 
     /**
      * 获取要显示在图表上的数据
