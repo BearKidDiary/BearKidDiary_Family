@@ -39,7 +39,7 @@ import bearkid.com.bearkiddiaryfamily.ui.view.RefreshRecyclerView;
 public class TimeLineFragment extends BaseFragment {
 
     private List<String> childName = Arrays.asList("王小宝", "王小帅", "丫丫");
-    private String[] menuItems = new String[]{"查看详情", "添加孩子", "编辑家庭成员"};
+    private String[] menuItems = new String[]{"数据分析", "风采展示", "添加孩子", "编辑家庭成员"};
     private final float textSize = 20f;
     private float showButtonX, hideButtonX;
 
