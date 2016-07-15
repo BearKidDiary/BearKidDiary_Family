@@ -1,5 +1,7 @@
 package bearkid.com.bearkiddiaryfamily.ui.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -44,7 +46,9 @@ public class ContactsListActivity extends BaseActivity implements View.OnClickLi
 
     private ImageView backImg;
 
-    private List<ContactBean> SourceDateList;
+    private List<ContactBean> SourceDateList;//联系人列表
+
+    private int countChecked = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,18 +89,19 @@ public class ContactsListActivity extends BaseActivity implements View.OnClickLi
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //利用adapter.getItem(position)来获取当前position所对应的对象
-//                Toast.makeText(ContactsListActivity.this,((ContactBean)adapter.getItem(position)).getName(),Toast.LENGTH_SHORT).show();
-
+                //判断是选择联系人列表还是查看联系人列表
                 if (ListType == ContactsType.CHECK){
                     Toast.makeText(ContactsListActivity.this, ((ContactBean)adapter.getItem(position)).getName(),Toast.LENGTH_SHORT).show();
                 }else {
                     int ischecked = ((ContactBean)adapter.getItem(position)).getIschecked();
                     if (ischecked == ContactsType.CHECKED){
                         ((ContactBean)adapter.getItem(position)).setIschecked(ContactsType.NOCHECKED);
+                        countChecked --;
                     }else {
                         ((ContactBean)adapter.getItem(position)).setIschecked(ContactsType.CHECKED);
+                        countChecked ++;
                     }
-
+                    confirmBtn.setText("确定（" + countChecked + ")");
                     adapter.notifyDataSetChanged();
                 }
 
@@ -147,6 +152,10 @@ public class ContactsListActivity extends BaseActivity implements View.OnClickLi
         }
     }
 
+    /**
+     * 获取已被选中的联系人列表
+     * @return
+     */
     public List<ContactBean> getCheckedContacts(){
         List<ContactBean> checkedList = new ArrayList<>();
         for (ContactBean contactBean : SourceDateList){
@@ -209,5 +218,10 @@ public class ContactsListActivity extends BaseActivity implements View.OnClickLi
         adapter.updateListView(filterDateList);
     }
 
+    public static void startActivity(Context context,int ListType){
+        Intent intent = new Intent(context,ContactsListActivity.class);
+        intent.putExtra("ListType",ListType);
+        context.startActivity(intent);
+    }
 
 }

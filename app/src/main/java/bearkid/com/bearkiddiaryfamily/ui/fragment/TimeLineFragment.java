@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.PopupMenu;
@@ -26,6 +27,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import bearkid.com.bearkiddiaryfamily.R;
+import bearkid.com.bearkiddiaryfamily.ui.activity.ContactsListActivity;
+import bearkid.com.bearkiddiaryfamily.ui.activity.DataAnalysisActivity;
 import bearkid.com.bearkiddiaryfamily.ui.view.IconButton;
 import bearkid.com.bearkiddiaryfamily.ui.view.RefreshRecyclerView;
 
@@ -89,6 +92,9 @@ public class TimeLineFragment extends BaseFragment {
             popupMenu.getMenu().add(menuItems[i]);
         popupMenu.setOnMenuItemClickListener(item -> {
             //TODO:根据菜单item的title来跳转到其他页面
+            if (item.getTitle().toString().equals("查看详情")){
+                DataAnalysisActivity.startActivity(getContext());
+            }
             return true;
         });
 

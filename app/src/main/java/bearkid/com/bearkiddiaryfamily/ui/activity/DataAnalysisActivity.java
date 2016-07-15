@@ -42,6 +42,8 @@ public class DataAnalysisActivity extends BaseActivity {
 
         initView();
         initData();
+        getDataList(HEIGHT);
+        setHeigthChartView();
     }
 
     public void setHeigthChartView(){
@@ -56,6 +58,10 @@ public class DataAnalysisActivity extends BaseActivity {
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 dpTopx(800)
         ));
+        for (int i = 1; i < 13; i++){
+            heightChart.updataChart(i,chartDataList.get(i - 1));
+        }
+
     }
 
     /**
