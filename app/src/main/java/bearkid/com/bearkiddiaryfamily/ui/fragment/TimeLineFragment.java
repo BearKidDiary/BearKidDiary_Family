@@ -28,17 +28,18 @@ import java.util.List;
 import bearkid.com.bearkiddiaryfamily.R;
 import bearkid.com.bearkiddiaryfamily.ui.activity.DataAnalysisActivity;
 import bearkid.com.bearkiddiaryfamily.ui.activity.FamilyActivity;
+import bearkid.com.bearkiddiaryfamily.ui.activity.ContactsListActivity;
+import bearkid.com.bearkiddiaryfamily.ui.activity.DataAnalysisActivity;
 import bearkid.com.bearkiddiaryfamily.ui.view.IconButton;
 import bearkid.com.bearkiddiaryfamily.ui.view.RefreshRecyclerView;
 
 /**
- * @author 张宇
  * 时间轴界面
  */
 public class TimeLineFragment extends BaseFragment {
 
     private List<String> childName = Arrays.asList("王小宝", "王小帅", "丫丫");
-    private String[] menuItems = new String[]{"数据分析", "风采展示", "添加孩子", "编辑家庭成员"};
+    private String[] menuItems = new String[]{"查看详情", "添加孩子", "编辑家庭成员"};
     private final float textSize = 20f;
     private float showButtonX, hideButtonX;
 
@@ -78,6 +79,7 @@ public class TimeLineFragment extends BaseFragment {
                 TextView tv = new TextView(getContext());
                 tv.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                 tv.setText(childName.get(position));
+                Log.i("zy", "spinner" + childName.get(position) + " pos:" + position);
                 tv.setTextSize(textSize);
                 tv.setTextColor(0xffffffff);
                 return tv;
