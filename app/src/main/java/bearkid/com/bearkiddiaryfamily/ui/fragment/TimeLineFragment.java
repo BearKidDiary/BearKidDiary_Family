@@ -30,7 +30,7 @@ import bearkid.com.bearkiddiaryfamily.ui.view.IconButton;
 import bearkid.com.bearkiddiaryfamily.ui.view.RefreshRecyclerView;
 
 /**
- * Created by admin on 2016/7/13.
+ * 时间轴界面
  */
 public class TimeLineFragment extends BaseFragment {
 
@@ -41,7 +41,7 @@ public class TimeLineFragment extends BaseFragment {
 
     private final static int SHOW_FLOAT_BUTTON = 1;
     private final static int HIDE_FLOAT_BUTTON = 2;
-    private Handler handler = new Handler(new Handler.Callback() {
+    private Handler handler = new Handler(new Handler.Callback() {//处理当列表滑动时的浮动按钮的显示和隐藏
         @Override
         public boolean handleMessage(Message msg) {
             if (msg.what == SHOW_FLOAT_BUTTON) {

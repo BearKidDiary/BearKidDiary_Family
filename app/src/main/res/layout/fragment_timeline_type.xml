@@ -7,6 +7,20 @@
     android:orientation="vertical"
     tools:context=".ui.fragment.TimeLineTypeFragment">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="记录点滴"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -15,7 +29,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="2">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -24,6 +38,7 @@
             android:orientation="vertical">
 
             <bearkid.com.bearkiddiaryfamily.ui.view.IconButton
+                android:id="@+id/btn_timeline_camera"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_gravity="center"
@@ -46,6 +61,7 @@
             android:orientation="vertical">
 
             <bearkid.com.bearkiddiaryfamily.ui.view.IconButton
+                android:id="@+id/btn_timeline_body"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_gravity="center"
@@ -68,6 +84,7 @@
             android:orientation="vertical">
 
             <bearkid.com.bearkiddiaryfamily.ui.view.IconButton
+                android:id="@+id/btn_timeline_first_time"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_gravity="center"
@@ -87,7 +104,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="2">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -96,6 +113,7 @@
             android:orientation="vertical">
 
             <bearkid.com.bearkiddiaryfamily.ui.view.IconButton
+                android:id="@+id/btn_timeline_eat"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_gravity="center"
@@ -118,6 +136,7 @@
             android:orientation="vertical">
 
             <bearkid.com.bearkiddiaryfamily.ui.view.IconButton
+                android:id="@+id/btn_timeline_sport"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_gravity="center"
@@ -140,6 +159,7 @@
             android:orientation="vertical">
 
             <bearkid.com.bearkiddiaryfamily.ui.view.IconButton
+                android:id="@+id/btn_timeline_study"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_gravity="center"
@@ -159,7 +179,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="2">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -168,6 +188,7 @@
             android:orientation="vertical">
 
             <bearkid.com.bearkiddiaryfamily.ui.view.IconButton
+                android:id="@+id/btn_timeline_add"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_gravity="center"
