@@ -18,6 +18,7 @@ import bearkid.com.bearkiddiaryfamily.R;
 import bearkid.com.bearkiddiaryfamily.ui.activity.ContactsListActivity;
 import bearkid.com.bearkiddiaryfamily.ui.activity.PersonInfoActivity;
 import bearkid.com.bearkiddiaryfamily.ui.view.CircleImageview;
+import bearkid.com.bearkiddiaryfamily.utils.ContactsType;
 
 /**
  * Created by admin on 2016/7/7.
@@ -61,11 +62,15 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
                 addChild();
                 break;
             case R.id.rlayout_me_scan:
+                intent = new Intent(context, ContactsListActivity.class);
+                intent.putExtra("ListType", ContactsType.CHOOSE);
+                startActivity(intent);
                 break;
             case R.id.rlayout_me_qr:
                 break;
             case R.id.rlayout_me_contacts:
                 intent = new Intent(context, ContactsListActivity.class);
+                intent.putExtra("ListType", ContactsType.CHECK);
                 startActivity(intent);
                 break;
             case R.id.rlayout_me_setting:

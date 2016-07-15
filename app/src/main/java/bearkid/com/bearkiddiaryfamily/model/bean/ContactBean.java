@@ -1,11 +1,15 @@
 package bearkid.com.bearkiddiaryfamily.model.bean;
 
+import bearkid.com.bearkiddiaryfamily.utils.ContactsType;
+
 /**
  * 联系人列表的Bean
  */
 public class ContactBean implements Comparable {
+
     public String name;
     public String pingyin;
+    public int ischecked = ContactsType.NOCHECKED;
 
     public String getName() {
         return name;
@@ -23,6 +27,13 @@ public class ContactBean implements Comparable {
         this.pingyin = pingyin;
     }
 
+    public int getIschecked() {
+        return ischecked;
+    }
+
+    public void setIschecked(int ischecked) {
+        this.ischecked = ischecked;
+    }
 
     @Override
     public int compareTo(Object o) {
