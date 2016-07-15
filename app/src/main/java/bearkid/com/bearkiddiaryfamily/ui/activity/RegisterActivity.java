@@ -42,18 +42,10 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
         btn_sms = (Button) findViewById(R.id.btn_register_sms);
         tv_error = (TextView) findViewById(R.id.tv_register_wrong);
 
-        btn_register.setOnClickListener(new View.OnClickListener() {/*点击注册*/
-            @Override
-            public void onClick(View view) {
-                presenter.register();
-            }
-        });
-        btn_sms.setOnClickListener(new View.OnClickListener() {/*点击获取验证码*/
-            @Override
-            public void onClick(View view) {
-                presenter.requestSMSCode();
-            }
-        });
+        //点击注册
+        btn_register.setOnClickListener(view -> presenter.register());
+        //点击获取验证码
+        btn_sms.setOnClickListener(view -> presenter.requestSMSCode());
     }
 
     @Override

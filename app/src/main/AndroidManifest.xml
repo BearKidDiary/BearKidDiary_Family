@@ -39,7 +39,8 @@
         <activity android:name=".ui.activity.OldDataAnalysisActivity" />
         <activity android:name=".ui.activity.FamilyCreateActivity" />
         <activity android:name=".ui.activity.DataAnalysisActivity" />
-        <activity android:name=".ui.activity.KidInfoActivity"></activity>
+        <activity android:name=".ui.activity.KidInfoActivity" />
+        <activity android:name=".ui.activity.FamilyActivity"></activity>
     </application>
 
 </manifest>

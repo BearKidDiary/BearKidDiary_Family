@@ -2,6 +2,7 @@ package bearkid.com.bearkiddiaryfamily.global;
 
 import android.app.Activity;
 import android.app.Application;
+import android.util.Log;
 
 import java.util.Stack;
 
@@ -11,7 +12,7 @@ import cn.bmob.v3.Bmob;
 /**
  * Created by admin on 2016/7/4.
  */
-public class BaseApplication extends Application{
+public class BaseApplication extends Application {
 
     Stack<BaseActivity> activityStack;
 
@@ -41,19 +42,21 @@ public class BaseApplication extends Application{
      * 退出整个程序
      * 在这里写释放SDK资源等代码
      */
-    public void exit(){
+    public void exit() {
         //TODO: 释放SDK的资源
-        
-        while(activityStack.size()!=0){
+        while (activityStack.size() != 0) {
             activityStack.peek().finish();
         }
+        System.exit(0);
     }
 
-    public void pushActivity(BaseActivity activity){
+    public void pushActivity(BaseActivity activity) {
         activityStack.push(activity);
+        Log.i("zy", "Activity Stack push " + activityStack.size());
     }
 
-    public void popActivity(){
+    public void popActivity() {
         activityStack.pop();
+        Log.i("zy", "Activity Stack pop " + activityStack.size());
     }
 }

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginRight="16dp"
+    android:background="#ffffff">
+
+    <bearkid.com.bearkiddiaryfamily.ui.view.CircleImageview
+        android:id="@+id/civ_family_member_avatar"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_margin="8dp"
+        android:src="@drawable/avatar" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_family_member_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="王大锤"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_family_member_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="16dp"
+            android:text="15626222331"
+            android:textSize="14sp" />
+
+        <bearkid.com.bearkiddiaryfamily.ui.view.TagView
+            android:id="@+id/tv_family_member_relation"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_margin="16dp"
+            android:gravity="center|right"
+            android:maxLines="1"
+            android:paddingRight="8dp"
+            android:text="关 系 "
+            android:textColor="#000000"
+            android:textSize="14sp" />
+
+        <bearkid.com.bearkiddiaryfamily.ui.view.IconButton
+            android:id="@+id/ib_family_member_delete"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="16dp"
+            android:padding="8dp"
+            android:src="@drawable/family_delete" />
+    </RelativeLayout>
+</LinearLayout>

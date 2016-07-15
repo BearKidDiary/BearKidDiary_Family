@@ -8,4 +8,5 @@ import android.content.Context;
 public interface IBaseView {
     Context getContext();
     void showToast(String str);
+    void finish();
 }

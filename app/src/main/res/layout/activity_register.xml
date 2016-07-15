@@ -12,7 +12,7 @@
         android:layout_above="@+id/ll_register"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="32dp"
-        android:text="熊孩子校讯通"
+        android:text="熊孩子家校通"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="25sp" />
 

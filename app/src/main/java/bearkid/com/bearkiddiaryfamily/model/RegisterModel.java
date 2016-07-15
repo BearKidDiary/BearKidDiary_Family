@@ -17,11 +17,8 @@ public class RegisterModel {
      */
     public static Observable<String> register(final FamilyUser user, String code) {
         return SMSCodeModel.vertifySMSCode(user.getFUphone(), code)/*验证码验证*/
-                .flatMap(new Func1<Void, Observable<String>>() {
-                    @Override
-                    public Observable<String> call(Void aVoid) {/*如果验证码正确 上传用户信息*/
-                        return user.saveObservable();
-                    }
+                .flatMap(aVoid -> {/*如果验证码正确 上传用户信息*/
+                    return user.saveObservable();
                 });
     }
 }

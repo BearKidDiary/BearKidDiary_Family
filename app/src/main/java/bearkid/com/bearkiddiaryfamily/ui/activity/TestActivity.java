@@ -41,38 +41,35 @@ public class TestActivity extends BaseActivity{
         et = (EditText) findViewById(R.id.et_phoneNum);
         tv = (TextView) findViewById(R.id.tv_content);
         ok = (Button) findViewById(R.id.btn_ok);
-        ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String phoneNum = et.getText().toString();
+        ok.setOnClickListener(view -> {
+            String phoneNum = et.getText().toString();
 
-                BmobQuery<Teacher> query = new BmobQuery<Teacher>();
-                query.addWhereEqualTo("Tphone",phoneNum);
-                query.findObjects(new FindListener<Teacher>() {
-                    @Override
-                    public void done(List<Teacher> list, BmobException e) {
-                        if(list.size()>0)teacher = list.get(0);
-                    }
-                });
-                BmobQuery<Tea_Org> query1 = new BmobQuery<Tea_Org>();
-                query1.addWhereEqualTo("teacher",new BmobPointer(teacher));
-                query1.include("organization.Oname");
-                query1.findObjects(new FindListener<Tea_Org>() {
-                    @Override
-                    public void done(List<Tea_Org> list, BmobException e) {
+            BmobQuery<Teacher> query = new BmobQuery<Teacher>();
+            query.addWhereEqualTo("Tphone",phoneNum);
+            query.findObjects(new FindListener<Teacher>() {
+                @Override
+                public void done(List<Teacher> list, BmobException e) {
+                    if(list.size()>0)teacher = list.get(0);
+                }
+            });
+            BmobQuery<Tea_Org> query1 = new BmobQuery<Tea_Org>();
+            query1.addWhereEqualTo("teacher",new BmobPointer(teacher));
+            query1.include("organization.Oname");
+            query1.findObjects(new FindListener<Tea_Org>() {
+                @Override
+                public void done(List<Tea_Org> list, BmobException e) {
 //                        if(list.size()>0)
 //                            tea_org = list.get(0);
-                        //tv.setText(tea_org.toString()+"\n"+tea_org.getOrganization().toString());
-                        if (e != null){
-                            Log.e("exception" , e.toString());
-                        }if (list.isEmpty()){
-                            Log.d("teacher",list.size() + "");
-                            return;
-                        }
-                        Log.d("teacher",list.get(0).getOrganization().toString() + "");
+                    //tv.setText(tea_org.toString()+"\n"+tea_org.getOrganization().toString());
+                    if (e != null){
+                        Log.e("exception" , e.toString());
+                    }if (list.isEmpty()){
+                        Log.d("teacher",list.size() + "");
+                        return;
                     }
-                });
-            }
+                    Log.d("teacher",list.get(0).getOrganization().toString() + "");
+                }
+            });
         });
     }
 }

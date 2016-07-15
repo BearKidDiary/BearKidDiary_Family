@@ -10,6 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import bearkid.com.bearkiddiaryfamily.R;
+import bearkid.com.bearkiddiaryfamily.presenter.MainPresenter;
+import bearkid.com.bearkiddiaryfamily.ui.activity.iactivity.IMainView;
 import bearkid.com.bearkiddiaryfamily.ui.fragment.FamilyFragment;
 import bearkid.com.bearkiddiaryfamily.ui.fragment.GalleryFragment;
 import bearkid.com.bearkiddiaryfamily.ui.fragment.MessageFragment;
@@ -18,28 +20,29 @@ import bearkid.com.bearkiddiaryfamily.ui.fragment.TestFragment;
 import bearkid.com.bearkiddiaryfamily.ui.fragment.TimeLineFragment;
 import bearkid.com.bearkiddiaryfamily.ui.fragment.TimeLineTypeFragment;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener {
-    protected LinearLayout[] tab = new LinearLayout[5];
-    protected int selected;
-    protected static int[] tabIcon = {R.drawable.main_msg,
-            R.drawable.main_child,
-            R.drawable.main_add,
-            R.drawable.main_gallery,
-            R.drawable.main_setting};
-    protected static int[] selectedIcon = {R.drawable.main_selected_msg,
-            R.drawable.main_selected_child,
-            R.drawable.main_selected_add,
-            R.drawable.main_selected_gallery,
-            R.drawable.main_selected_setting};
-    protected Fragment[] mFragments = new Fragment[5];
+public class MainActivity extends BaseActivity implements IMainView, View.OnClickListener {
+    private LinearLayout[] tab = new LinearLayout[5];
+    private int selected;
+    private static int[] tabIcon = {R.drawable.main_msg, R.drawable.main_child,
+            R.drawable.main_add, R.drawable.main_gallery, R.drawable.main_setting};
+    private static int[] selectedIcon = {R.drawable.main_selected_msg, R.drawable.main_selected_child,
+            R.drawable.main_selected_add, R.drawable.main_selected_gallery, R.drawable.main_selected_setting};
+    private Fragment[] mFragments = new Fragment[5];
+    private MainPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        initPresenter();
+        initAccount();//判断是否登陆，跳转登陆界面
         initTabView();
-        initContain();
+        initContain();//设置导航栏图标
+    }
+
+    private void initPresenter() {
+        presenter = new MainPresenter(this);
     }
 
     private void initTabView() {
@@ -68,6 +71,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.activity_main_contain, mFragments[0]);
         transaction.commit();
+    }
+
+    private void initAccount() {
+        presenter.init();
     }
 
     private void changeTab(int tabNum) {
