@@ -20,7 +20,7 @@ import java.util.Objects;
 import bearkid.com.bearkiddiaryfamily.R;
 import bearkid.com.bearkiddiaryfamily.utils.Chart;
 
-public class DataAnalysisActivity extends AppCompatActivity {
+public class DataAnalysisActivity extends BaseActivity {
 
     private static final int HEIGHT = 0;
     private static final int WEIGHT = 1;
@@ -42,6 +42,8 @@ public class DataAnalysisActivity extends AppCompatActivity {
 
         initView();
         initData();
+        getDataList(HEIGHT);
+        setHeigthChartView();
     }
 
     public void setHeigthChartView(){
@@ -56,8 +58,11 @@ public class DataAnalysisActivity extends AppCompatActivity {
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 dpTopx(800)
         ));
-    }
+        for (int i = 1; i < 13; i++){
+            heightChart.updataChart(i,chartDataList.get(i - 1));
+        }
 
+    }
 
     /**
      * 获取要显示在图表上的数据

@@ -15,4 +15,8 @@ public interface ILoginView extends IBaseView {
     String getPhoneNum();
 
     String getPassword();
+
+    void setPhoneNum(String phoneNum);
+
+    void setPassword(String psw);
 }

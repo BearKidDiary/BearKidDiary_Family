@@ -17,11 +17,17 @@ public class SMSCodeModel {
     private SMSCodeModel() {
     }
 
+    /**
+     * 获取验证码到指定手机号码
+     */
     public static Observable<Integer> requestSMSCode(String number) {
         return BmobSMS.requestSMSCodeObservable(number, TEMPLE)
                 .subscribeOn(Schedulers.io());
     }
 
+    /**
+     * 验证指定验证码
+     */
     public static Observable<Void> vertifySMSCode(String phoneNum, String code) {
         return BmobSMS.verifySmsCodeObservable(phoneNum, code)
                 .subscribeOn(Schedulers.io());

@@ -16,6 +16,7 @@ import com.gc.materialdesign.views.CheckBox;
 import bearkid.com.bearkiddiaryfamily.R;
 import bearkid.com.bearkiddiaryfamily.ui.view.IconButton;
 
+@Deprecated
 public class FamilyCreateActivity extends BaseActivity {
 
     private ImageView iv_back;

@@ -29,14 +29,11 @@ public class LoginModel {
         return query.addWhereEqualTo(User.PHONE, phoneNum)
                 .findObjectsObservable(User.class)
                 .subscribeOn(Schedulers.io())
-                .map(new Func1<List<User>, Boolean>() {
-                    @Override
-                    public Boolean call(List<User> users) {
-                        if (users.size() > 0) {
-                            return psw.equals(users.get(0).getUpsw());
-                        }
-                        return false;
+                .map(users -> {
+                    if (users.size() > 0) {
+                        return psw.equals(users.get(0).getUpsw());
                     }
+                    return false;
                 });
     }
 
@@ -53,13 +50,10 @@ public class LoginModel {
         query.addWhereEqualTo(User.PHONE, phoneNum);
         return query.findObjectsObservable(User.class)
                 .subscribeOn(Schedulers.io())
-                .map(new Func1<List<User>, User>() {
-                    @Override
-                    public User call(List<User> users) {
-                        if (users.size() > 0)
-                            return users.get(0);
-                        return null;
-                    }
+                .map(users -> {
+                    if (users.size() > 0)
+                        return users.get(0);
+                    return null;
                 });
     }
 }

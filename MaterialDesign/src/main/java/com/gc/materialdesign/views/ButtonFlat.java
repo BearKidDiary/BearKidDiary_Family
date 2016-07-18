@@ -34,7 +34,7 @@ public class ButtonFlat extends Button {
     protected void setAttributes(AttributeSet attrs) {
         // Set text button
         String text = null;
-        float textSize = Utils.spToPx(18, getResources());
+        float textSize;
         int textResource = attrs.getAttributeResourceValue(ANDROIDXML, "text", -1);
         if (textResource != -1) {
             text = getResources().getString(textResource);
@@ -49,8 +49,12 @@ public class ButtonFlat extends Button {
         } else {
             size = attrs.getAttributeValue(ANDROIDXML, "textSize");
         }
-        size = size.substring(0, size.length() - 2);
-        textSize = Float.valueOf(size);
+        if (size != null) {
+            size = size.substring(0, size.length() - 2);
+            textSize = Float.valueOf(size);
+        } else {
+            textSize = 20;
+        }
         int dp8 = Utils.dpToPx(8, getResources());
 
         if (text != null) {

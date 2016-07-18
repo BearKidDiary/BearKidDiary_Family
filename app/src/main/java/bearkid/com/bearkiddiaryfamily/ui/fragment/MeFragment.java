@@ -1,8 +1,10 @@
 package bearkid.com.bearkiddiaryfamily.ui.fragment;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -15,10 +17,12 @@ import android.widget.RelativeLayout;
 
 
 import bearkid.com.bearkiddiaryfamily.R;
+import bearkid.com.bearkiddiaryfamily.model.QRCodeModel;
 import bearkid.com.bearkiddiaryfamily.ui.activity.ContactsListActivity;
 import bearkid.com.bearkiddiaryfamily.ui.activity.KidInfoActivity;
 import bearkid.com.bearkiddiaryfamily.ui.activity.PersonInfoActivity;
 import bearkid.com.bearkiddiaryfamily.ui.view.CircleImageview;
+import bearkid.com.bearkiddiaryfamily.utils.ContactsType;
 
 /**
  * Created by admin on 2016/7/7.
@@ -37,6 +41,8 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
     private ImageView addImg;
     private Intent intent;
 
+    private static final int requestCode = 200;//扫一扫二维码的请求码
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frament_me, container, false);
@@ -54,7 +60,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.img_me_avatar:
-                Log.d("avatarImg","点击");
+                Log.d("avatarImg", "点击");
                 intent = new Intent(context, PersonInfoActivity.class);
                 startActivity(intent);
                 break;
@@ -62,15 +68,29 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
                 addChild();
                 break;
             case R.id.rlayout_me_scan:
+                QRCodeModel.scanQRCode(this, requestCode);
                 break;
             case R.id.rlayout_me_qr:
                 break;
             case R.id.rlayout_me_contacts:
                 intent = new Intent(context, ContactsListActivity.class);
+                intent.putExtra("ListType", ContactsType.CHECK);
                 startActivity(intent);
                 break;
             case R.id.rlayout_me_setting:
                 break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int request, int result, Intent data) {
+        if (request == requestCode && result == Activity.RESULT_OK) {
+            //TODO:处理扫描后获得的内容
+            Bitmap QRcode = QRCodeModel.getBitmap(data);
+            String content = QRCodeModel.getContent(data);
+            Log.i("zy", "扫描成功：" + content);
+        } else {
+            super.onActivityResult(request, result, data);
         }
     }
 

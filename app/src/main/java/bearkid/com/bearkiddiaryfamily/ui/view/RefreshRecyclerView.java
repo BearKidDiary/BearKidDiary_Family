@@ -73,6 +73,14 @@ public class RefreshRecyclerView extends SwipeRefreshLayout implements SwipeRefr
         return recyclerView;
     }
 
+    public void addItemDecoration(RecyclerView.ItemDecoration decoration) {
+        recyclerView.addItemDecoration(decoration);
+    }
+
+    public void removeItemDecoration(RecyclerView.ItemDecoration decor) {
+        recyclerView.removeItemDecoration(decor);
+    }
+
     public int getLastVisiblePosition() {
         return layoutManager.findLastVisibleItemPosition();
     }
@@ -87,6 +95,14 @@ public class RefreshRecyclerView extends SwipeRefreshLayout implements SwipeRefr
 
     public void setItemAnimator(RecyclerView.ItemAnimator animator) {
         recyclerView.setItemAnimator(animator);
+    }
+
+    public void addOnScrollListener(RecyclerView.OnScrollListener listener) {
+        recyclerView.addOnScrollListener(listener);
+    }
+
+    public void removeOnScrollListener(RecyclerView.OnScrollListener listener) {
+        recyclerView.removeOnScrollListener(listener);
     }
 
     public void setOnRefreshListener(OnRefreshListener listener) {

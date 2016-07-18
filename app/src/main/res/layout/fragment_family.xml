@@ -33,7 +33,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="16dp"
-            android:src="@drawable/child_add" />
+            android:src="@drawable/family_add" />
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView

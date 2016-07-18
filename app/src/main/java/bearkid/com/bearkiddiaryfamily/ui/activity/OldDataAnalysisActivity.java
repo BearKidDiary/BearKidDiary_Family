@@ -29,6 +29,7 @@ import bearkid.com.bearkiddiaryfamily.ui.fragment.TimeLineFragment;
  * TimeLineFragment.java
  * FragmentsAdapter.java
  */
+@Deprecated
 public class OldDataAnalysisActivity extends BaseActivity implements ViewPager.OnPageChangeListener, View.OnClickListener {
 
     private TimeLineFragment timeLineFragment;

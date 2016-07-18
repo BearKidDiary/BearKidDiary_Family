@@ -3,6 +3,7 @@ package bearkid.com.bearkiddiaryfamily.ui.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import com.gc.materialdesign.views.ButtonFlat;
 
 import bearkid.com.bearkiddiaryfamily.R;
+import bearkid.com.bearkiddiaryfamily.global.BaseApplication;
 import bearkid.com.bearkiddiaryfamily.presenter.LoginPresenter;
 import bearkid.com.bearkiddiaryfamily.ui.activity.iactivity.ILoginView;
 
@@ -36,22 +38,29 @@ public class LoginActivity extends BaseActivity implements ILoginView {
 
     private final void initView() {
         btn_login = (ButtonFlat) findViewById(R.id.btn_login_ok);
-        btn_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                presenter.login();
-            }
-        });
         btn_register = (ButtonFlat) findViewById(R.id.btn_login_register);
-        btn_register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                RegisterActivity.startActivity(getContext());
-            }
-        });
         et_phone = (EditText) findViewById(R.id.et_login_phoneNum);
         et_password = (EditText) findViewById(R.id.et_login_password);
         tv_error = (TextView) findViewById(R.id.tv_login_error);
+
+        //点击登陆按钮
+        btn_login.setOnClickListener(view -> presenter.login());
+        //点击注册按钮
+        btn_register.setOnClickListener(view -> RegisterActivity.startActivity(getContext()));
+
+        presenter.init();
+    }
+
+    /**
+     * 监听返回键：在登陆界面点返回键直接退出程序
+     */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            ((BaseApplication) getApplication()).exit();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override
@@ -81,13 +90,28 @@ public class LoginActivity extends BaseActivity implements ILoginView {
 
     @Override
     public String getPhoneNum() {
-        return et_phone.getText().toString();
+        if (et_phone != null) return et_phone.getText().toString();
+        return "";
+    }
+
+    @Override
+    public void setPhoneNum(String phoneNum) {
+        if (et_phone != null)
+            et_phone.setText(phoneNum);
     }
 
     @Override
     public String getPassword() {
-        return et_password.getText().toString();
+        if (et_password != null) return et_password.getText().toString();
+        return "";
     }
+
+    @Override
+    public void setPassword(String psw) {
+        if (et_password != null)
+            et_password.setText(psw);
+    }
+
 
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, LoginActivity.class));

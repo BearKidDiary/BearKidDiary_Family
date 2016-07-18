@@ -5,47 +5,55 @@ import android.util.Log;
 import bearkid.com.bearkiddiaryfamily.model.LoginModel;
 import bearkid.com.bearkiddiaryfamily.ui.activity.LoginActivity;
 import bearkid.com.bearkiddiaryfamily.ui.activity.iactivity.ILoginView;
+import bearkid.com.bearkiddiaryfamily.utils.LocalDB;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 
 /**
- * Created by admin on 2016/7/6.
+ * @author 张宇
+ * 登陆界面的控制器
  */
 public class LoginPresenter {
     private ILoginView view;
+    private LocalDB db;
 
     public LoginPresenter(LoginActivity view) {
         this.view = view;
+        this.db = new LocalDB(view.getContext());
+    }
+
+    /**
+     * 把上一次登陆的手机号码显示在登陆界面上
+     */
+    public void init(){
+        String phone = db.getPhoneNum();
+        view.setPhoneNum(phone);
     }
 
     public void login() {
         view.hideError();
         view.loginUnClickable();
 
-        String phoneNum = view.getPhoneNum();
-        String psw = view.getPassword();
+        final String phoneNum = view.getPhoneNum();
+        final String psw = view.getPassword();
 
         LoginModel.login(phoneNum, psw)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<Boolean>() {
-                    @Override
-                    public void call(Boolean success) {/*成功查找到对应的用户并对比密码是否一致*/
-                        if (success) {
-                            view.loginClickable();
-                            Log.i("zy", "LoginPresenter login sucess");
-                        } else {
-                            view.showError("用户名或密码错误");
-                            view.loginClickable();
-                            Log.e("zy", "LoginPresenter login error");
-                        }
-                    }
-                }, new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {/*查找不成功*/
-                        view.showError("用户名不存在");
+                .subscribe(success -> {/*成功查找到对应的用户并对比密码是否一致*/
+                    if (success) {
+                        db.putPhoneNum(phoneNum);
                         view.loginClickable();
-                        Log.e("zy", "LoginPresenter login error " + throwable.toString());
+                        view.finish();
+                        Log.i("zy", "LoginPresenter login sucess");
+                    } else {
+                        view.showError("用户名或密码错误");
+                        view.loginClickable();
+                        Log.e("zy", "LoginPresenter login error");
                     }
+                }, throwable -> {/*查找不成功*/
+                    view.showError("用户名不存在");
+                    view.loginClickable();
+                    Log.e("zy", "LoginPresenter login error " + throwable.toString());
                 });
     }
 }

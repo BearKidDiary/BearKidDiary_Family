@@ -1,15 +1,21 @@
 package bearkid.com.bearkiddiaryfamily.ui.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.gc.materialdesign.views.ButtonFlat;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,6 +26,7 @@ import bearkid.com.bearkiddiaryfamily.model.bean.ContactBean;
 import bearkid.com.bearkiddiaryfamily.ui.view.ClearEditText;
 import bearkid.com.bearkiddiaryfamily.ui.view.SideBar;
 import bearkid.com.bearkiddiaryfamily.adapter.ContactsAdapter;
+import bearkid.com.bearkiddiaryfamily.utils.ContactsType;
 import bearkid.com.bearkiddiaryfamily.utils.PinyinUtils;
 
 
@@ -28,20 +35,27 @@ import bearkid.com.bearkiddiaryfamily.utils.PinyinUtils;
  */
 public class ContactsListActivity extends BaseActivity implements View.OnClickListener {
 
-    private ClearEditText mClearEditText;
-    private SideBar sideBar;
-    private ListView sortListView;
+    private int ListType;//该列表是 查看联系人列表  还是  选择联系人列表
+
+    private ClearEditText mClearEditText;//搜索框
+    private SideBar sideBar;//联系人的字母标识栏
+    private ListView sortListView;//显示联系人listView
     private ContactsAdapter adapter;
     private TextView dialog;
+    private ButtonFlat confirmBtn;
 
     private ImageView backImg;
 
-    private List<ContactBean> SourceDateList;
+    private List<ContactBean> SourceDateList;//联系人列表
+
+    private int countChecked = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts_list);
+
+        ListType = getIntent().getIntExtra("ListType", 0);
 
         initView();
     }
@@ -52,6 +66,9 @@ public class ContactsListActivity extends BaseActivity implements View.OnClickLi
         sortListView = (ListView) findViewById(R.id.list_contacts);
         mClearEditText = (ClearEditText) findViewById(R.id.filter_edit);
         dialog = (TextView) findViewById(R.id.dialog);
+
+        confirmBtn = (ButtonFlat) findViewById(R.id.btn_contacts_choose_confirm);
+        confirmBtn.setOnClickListener(this);
 
         backImg = (ImageView) findViewById(R.id.img_title_back_contacts);
         backImg.setOnClickListener(this);
@@ -67,11 +84,26 @@ public class ContactsListActivity extends BaseActivity implements View.OnClickLi
             }
         });
 
+        //联系人列表的Item监听
         sortListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //利用adapter.getItem(position)来获取当前position所对应的对象
-                Toast.makeText(ContactsListActivity.this,((ContactBean)adapter.getItem(position)).getName(),Toast.LENGTH_SHORT).show();
+                //判断是选择联系人列表还是查看联系人列表
+                if (ListType == ContactsType.CHECK){
+                    Toast.makeText(ContactsListActivity.this, ((ContactBean)adapter.getItem(position)).getName(),Toast.LENGTH_SHORT).show();
+                }else {
+                    int ischecked = ((ContactBean)adapter.getItem(position)).getIschecked();
+                    if (ischecked == ContactsType.CHECKED){
+                        ((ContactBean)adapter.getItem(position)).setIschecked(ContactsType.NOCHECKED);
+                        countChecked --;
+                    }else {
+                        ((ContactBean)adapter.getItem(position)).setIschecked(ContactsType.CHECKED);
+                        countChecked ++;
+                    }
+                    confirmBtn.setText("确定（" + countChecked + ")");
+                    adapter.notifyDataSetChanged();
+                }
 
             }
         });
@@ -80,7 +112,7 @@ public class ContactsListActivity extends BaseActivity implements View.OnClickLi
         SourceDateList = filledData(getResources().getStringArray(R.array.names));
         // 根据a-z进行排序源数据
         Collections.sort(SourceDateList);
-        adapter = new ContactsAdapter(this, SourceDateList);
+        adapter = new ContactsAdapter(this, SourceDateList, ListType);
         sortListView.setAdapter(adapter);
 
         //根据输入框输入值的改变来过滤搜索
@@ -102,6 +134,10 @@ public class ContactsListActivity extends BaseActivity implements View.OnClickLi
             public void afterTextChanged(Editable s) {
             }
         });
+
+        if (ListType == ContactsType.CHOOSE){
+            confirmBtn.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -110,7 +146,24 @@ public class ContactsListActivity extends BaseActivity implements View.OnClickLi
             case R.id.img_title_back_contacts:
                 finish();
                 break;
+            case R.id.btn_contacts_choose_confirm:
+                Log.d("contactslist : " , getCheckedContacts().size() + "");
+                break;
         }
+    }
+
+    /**
+     * 获取已被选中的联系人列表
+     * @return
+     */
+    public List<ContactBean> getCheckedContacts(){
+        List<ContactBean> checkedList = new ArrayList<>();
+        for (ContactBean contactBean : SourceDateList){
+            if (contactBean.getIschecked() == ContactsType.CHECKED){
+                checkedList.add(contactBean);
+            }
+        }
+        return checkedList;
     }
 
     /**
@@ -165,5 +218,10 @@ public class ContactsListActivity extends BaseActivity implements View.OnClickLi
         adapter.updateListView(filterDateList);
     }
 
+    public static void startActivity(Context context,int ListType){
+        Intent intent = new Intent(context,ContactsListActivity.class);
+        intent.putExtra("ListType",ListType);
+        context.startActivity(intent);
+    }
 
 }

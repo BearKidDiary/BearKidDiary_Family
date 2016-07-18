@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
 
@@ -12,6 +14,8 @@ import java.util.List;
 
 import bearkid.com.bearkiddiaryfamily.R;
 import bearkid.com.bearkiddiaryfamily.model.bean.ContactBean;
+import bearkid.com.bearkiddiaryfamily.ui.view.CircleImageview;
+import bearkid.com.bearkiddiaryfamily.utils.ContactsType;
 
 /**
  * Created by admin on 2016/7/12.
@@ -20,10 +24,12 @@ public class ContactsAdapter extends BaseAdapter implements SectionIndexer{
 
     private List<ContactBean> list = null;
     private Context mContext;
+    private int ListType;
 
-    public ContactsAdapter(Context mContext, List<ContactBean> list) {
+    public ContactsAdapter(Context mContext, List<ContactBean> list, int ListType) {
         this.mContext = mContext;
         this.list = list;
+        this.ListType = ListType;
     }
 
     /**
@@ -53,11 +59,18 @@ public class ContactsAdapter extends BaseAdapter implements SectionIndexer{
         if (view == null) {
             viewHolder = new ViewHolder();
             view = LayoutInflater.from(mContext).inflate(R.layout.item_contacts, null);
-            viewHolder.tvTitle = (TextView) view.findViewById(R.id.title);
-            viewHolder.tvLetter = (TextView) view.findViewById(R.id.catalog);
+            viewHolder.nameTxt = (TextView) view.findViewById(R.id.txt_contacts_item_name);
+            viewHolder.letterTxt = (TextView) view.findViewById(R.id.txt_contacts_item_letter_title);
+            viewHolder.avatarImg = (CircleImageview) view.findViewById(R.id.img_contacts_avatar);
+            viewHolder.checkCb = (CheckBox) view.findViewById(R.id.cb_contacts_check);
             view.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) view.getTag();
+        }
+
+        //如果是选择联系人列表，则显示checkBox
+        if (ListType == ContactsType.CHOOSE){
+            viewHolder.checkCb.setVisibility(View.VISIBLE);
         }
 
         //根据position获取分类的首字母的Char ascii值
@@ -65,13 +78,23 @@ public class ContactsAdapter extends BaseAdapter implements SectionIndexer{
 
         //如果当前位置等于该分类首字母的Char的位置 ，则认为是第一次出现
         if(position == getPositionForSection(section)){
-            viewHolder.tvLetter.setVisibility(View.VISIBLE);
-            viewHolder.tvLetter.setText(mContent.getPingyin());
+            viewHolder.letterTxt.setVisibility(View.VISIBLE);
+            viewHolder.letterTxt.setText(mContent.getPingyin());
         }else{
-            viewHolder.tvLetter.setVisibility(View.GONE);
+            viewHolder.letterTxt.setVisibility(View.GONE);
         }
 
-        viewHolder.tvTitle.setText(this.list.get(position).getName());
+        viewHolder.nameTxt.setText(this.list.get(position).getName());
+        viewHolder.avatarImg.setImageResource(R.drawable.avatar);
+        if (list.get(position).getIschecked() == ContactsType.CHECKED){
+            viewHolder.checkCb.setChecked(true);
+            viewHolder.nameTxt.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
+//            view.setBackgroundColor(mContext.getResources().getColor(R.color.bg_gray_Me_lv));
+        }else {
+            viewHolder.checkCb.setChecked(false);
+            viewHolder.nameTxt.setTextColor(mContext.getResources().getColor(R.color.base_color_text_black));
+//            view.setBackgroundColor(mContext.getResources().getColor(R.color.base_color_text_white));
+        }
 
         return view;
 
@@ -80,8 +103,10 @@ public class ContactsAdapter extends BaseAdapter implements SectionIndexer{
 
 
     final static class ViewHolder {
-        TextView tvLetter;
-        TextView tvTitle;
+        TextView letterTxt;
+        TextView nameTxt;
+        CircleImageview avatarImg;
+        CheckBox checkCb;
     }
 
 
