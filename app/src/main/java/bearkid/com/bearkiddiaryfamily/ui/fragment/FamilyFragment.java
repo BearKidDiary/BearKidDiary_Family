@@ -28,7 +28,7 @@ import java.util.List;
 import bearkid.com.bearkiddiaryfamily.R;
 import bearkid.com.bearkiddiaryfamily.model.bean.Course;
 import bearkid.com.bearkiddiaryfamily.model.bean.FamilyKidMsg;
-import bearkid.com.bearkiddiaryfamily.model.bean.FamilyUser;
+import bearkid.com.bearkiddiaryfamily.model.bean.User;
 import bearkid.com.bearkiddiaryfamily.presenter.FamilyPresenter;
 import bearkid.com.bearkiddiaryfamily.ui.activity.CourseActivity;
 import bearkid.com.bearkiddiaryfamily.ui.activity.DataAnalysisActivity;
@@ -54,7 +54,7 @@ public class FamilyFragment extends BaseFragment {
     /**
      * 对应家庭成员的数据
      */
-    private List<FamilyUser> relativeList = new ArrayList<>();
+    private List<User> relativeList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -115,7 +115,7 @@ public class FamilyFragment extends BaseFragment {
     /**
      * 更新整个亲戚列表
      */
-    public void updateRelativeList(List<FamilyUser> list) {
+    public void updateRelativeList(List<User> list) {
         relativeList = list;
     }
 
@@ -191,9 +191,9 @@ public class FamilyFragment extends BaseFragment {
         private final void onBindRelativeViewHolder(RelativeViewHolder v, int position) {
             //TODO：处理显示家庭其他成员的数据
             int pos = position - kidList.size();
-            FamilyUser member = relativeList.get(pos);
+            User member = relativeList.get(pos);
 
-            v.tv_name.setText(member.getFUname());
+            v.tv_name.setText(member.getUname());
             v.tv_relation.setText("妈妈");
         }
 

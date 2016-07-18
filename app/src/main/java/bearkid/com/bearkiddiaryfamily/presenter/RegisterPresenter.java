@@ -8,7 +8,7 @@ import java.util.TimerTask;
 import bearkid.com.bearkiddiaryfamily.model.FormatCheckModel;
 import bearkid.com.bearkiddiaryfamily.model.RegisterModel;
 import bearkid.com.bearkiddiaryfamily.model.SMSCodeModel;
-import bearkid.com.bearkiddiaryfamily.model.bean.FamilyUser;
+import bearkid.com.bearkiddiaryfamily.model.bean.User;
 import bearkid.com.bearkiddiaryfamily.ui.activity.RegisterActivity;
 import bearkid.com.bearkiddiaryfamily.ui.activity.iactivity.IRegisterView;
 import rx.android.schedulers.AndroidSchedulers;
@@ -32,7 +32,6 @@ public class RegisterPresenter {
     public void register() {
         view.registerUnClickable();
         view.hideError();
-
         //1.检查手机号码
         final String phone = view.getPhoneNum();
         if (!FormatCheckModel.isPhoneNumber(phone)) {
@@ -41,9 +40,9 @@ public class RegisterPresenter {
         }
 
         //2.封装成FamilyUser账号信息
-        FamilyUser user = new FamilyUser();
-        user.setFUphone(view.getPhoneNum());
-        user.setFUpsw(view.getPassword());
+        User user = new User();
+        user.setUphone(view.getPhoneNum());
+        user.setUpsw(view.getPassword());
 
         //3.注册
         RegisterModel.register(user, view.getSMSCode())

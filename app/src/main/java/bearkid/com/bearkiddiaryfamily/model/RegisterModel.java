@@ -1,6 +1,6 @@
 package bearkid.com.bearkiddiaryfamily.model;
 
-import bearkid.com.bearkiddiaryfamily.model.bean.FamilyUser;
+import bearkid.com.bearkiddiaryfamily.model.bean.User;
 import rx.Observable;
 import rx.functions.Func1;
 
@@ -15,8 +15,8 @@ public class RegisterModel {
      * @param user 新用户的信息
      * @param code 短信验证码
      */
-    public static Observable<String> register(final FamilyUser user, String code) {
-        return SMSCodeModel.vertifySMSCode(user.getFUphone(), code)/*验证码验证*/
+    public static Observable<String> register(final User user, String code) {
+        return SMSCodeModel.vertifySMSCode(user.getUphone(), code)/*验证码验证*/
                 .flatMap(aVoid -> {/*如果验证码正确 上传用户信息*/
                     return user.saveObservable();
                 });

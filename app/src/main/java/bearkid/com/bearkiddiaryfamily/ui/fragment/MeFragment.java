@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import bearkid.com.bearkiddiaryfamily.R;
 import bearkid.com.bearkiddiaryfamily.model.QRCodeModel;
 import bearkid.com.bearkiddiaryfamily.ui.activity.ContactsListActivity;
+import bearkid.com.bearkiddiaryfamily.ui.activity.KidInfoActivity;
 import bearkid.com.bearkiddiaryfamily.ui.activity.PersonInfoActivity;
 import bearkid.com.bearkiddiaryfamily.ui.view.CircleImageview;
 import bearkid.com.bearkiddiaryfamily.utils.ContactsType;
@@ -103,6 +104,12 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
         float density = getDensity();
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams((int) (64 * density), (int) (64 * density));
         params.leftMargin = 8;
+        imageview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                KidInfoActivity.startActivity(getContext());
+            }
+        });
         mychildrenLlayout.addView(imageview, 1, params);
     }
 

@@ -31,4 +31,13 @@ public class LocalDB {
     public String getPhoneNum() {
         return sharedPreferences.getString("phoneNum", "");
     }
+
+    public void putBmobId(String id) {
+        editor.putString("bmobId", id);
+        editor.commit();
+    }
+
+    public String getBmobId() {
+        return sharedPreferences.getString("bmobId", null);
+    }
 }
