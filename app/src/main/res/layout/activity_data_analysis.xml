@@ -29,6 +29,19 @@
             android:textSize="20sp"
             android:textColor="@color/txt_title"
             android:text="@string/txt_title_data_analysis"/>
+        
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/spinner_data_analysis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:backgroundTint="#00FF82AB"
+            android:backgroundTintMode="add"
+            android:spinnerMode="dropdown">
+
+        </android.support.v7.widget.AppCompatSpinner>
     </RelativeLayout>
 
     <ScrollView
@@ -47,6 +60,11 @@
 
             <RelativeLayout
                 android:id="@+id/rlayout_kid_weight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlayout_kid_vision"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></RelativeLayout>
         </LinearLayout>
