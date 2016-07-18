@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bearkid.com.bearkiddiaryfamily.model.FadeModel;
-import bearkid.com.bearkiddiaryfamily.model.bean.Family;
 import bearkid.com.bearkiddiaryfamily.model.bean.FamilyKidMsg;
-import bearkid.com.bearkiddiaryfamily.model.bean.FamilyUser;
+import bearkid.com.bearkiddiaryfamily.model.bean.User;
 import bearkid.com.bearkiddiaryfamily.ui.fragment.FamilyFragment;
 
 /**
@@ -27,10 +26,10 @@ public class FamilyPresenter {
         }
         view.updateKidList(list);
 
-        List<FamilyUser> members = new ArrayList<>();
+        List<User> members = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            FamilyUser member = new FamilyUser();
-            member.setFUname("王大" + i);
+            User member = new User();
+            member.setUname("王大" + i);
             members.add(member);
         }
         view.updateRelativeList(members);
