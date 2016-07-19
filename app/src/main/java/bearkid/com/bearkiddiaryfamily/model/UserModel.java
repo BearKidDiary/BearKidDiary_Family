@@ -39,7 +39,7 @@ public class UserModel {
                 });
     }
 
-    public static Observable<Void> updateUserInfomation(Context context, User user) {
-        return user.updateObservable(new LocalDB(context).getBmobId()).subscribeOn(Schedulers.io());
+    public static void updateUserInfomation(Context context, User user, UpdateListener updateListener) {
+        user.update("e827e9dafc", updateListener);//new LocalDB(context).getBmobId()
     }
 }

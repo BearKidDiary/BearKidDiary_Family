@@ -40,4 +40,32 @@ public class LocalDB {
     public String getBmobId() {
         return sharedPreferences.getString("bmobId", null);
     }
+
+    public void putUserName(String userName) {
+        editor.putString("userName", userName);
+        editor.commit();
+    }
+
+    public String getUserName() {
+        return sharedPreferences.getString("userName", "");
+    }
+
+    public void putUserAddress(String userAddress) {
+        editor.putString("userAddress", userAddress);
+        editor.commit();
+    }
+
+    public String getUserAddress() {
+        return sharedPreferences.getString("userAddress", "");
+    }
+
+    public void putUserEmail(String userEmail) {
+        editor.putString("userEmail", userEmail);
+        editor.commit();
+    }
+
+    public String getUserEmail() {
+        return sharedPreferences.getString("userEmail", "");
+    }
+
 }
