@@ -1,6 +1,6 @@
 package bearkid.com.bearkiddiaryfamily.presenter;
 
-import android.util.Log;
+import android.widget.Toast;
 
 import bearkid.com.bearkiddiaryfamily.model.UserModel;
 import bearkid.com.bearkiddiaryfamily.model.bean.User;
@@ -44,9 +44,12 @@ public class PersonInfoPresenter {
                 UserModel.updateUserInfomation(view.getViewContext(), user, new UpdateListener() {
                     @Override
                     public void done(BmobException e) {
-                        Log.e("personInfo", e.getErrorCode()+"");
-                        db.putUserName(name);
-                        init();
+                        if (e == null){
+                            db.putUserName(name);
+                            init();
+                        } else {
+                            Toast.makeText(view.getViewContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
                 break;
@@ -57,9 +60,12 @@ public class PersonInfoPresenter {
                 UserModel.updateUserInfomation(view.getViewContext(), user, new UpdateListener() {
                     @Override
                     public void done(BmobException e) {
-                        Log.e("personInfo", e.getErrorCode()+"");
-                        db.putUserAddress(address);
-                        init();
+                        if (e == null){
+                            db.putUserAddress(address);
+                            init();
+                        } else {
+                            Toast.makeText(view.getViewContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
                 break;
@@ -70,9 +76,12 @@ public class PersonInfoPresenter {
                 UserModel.updateUserInfomation(view.getViewContext(), user, new UpdateListener() {
                     @Override
                     public void done(BmobException e) {
-                        Log.e("personInfo", e.getErrorCode()+"");
-                        db.putUserEmail(email);
-                        init();
+                        if (e == null){
+                            db.putUserEmail(email);
+                            init();
+                        } else {
+                            Toast.makeText(view.getViewContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
                 break;

@@ -37,7 +37,6 @@ public class GalleryFragment extends BaseFragment implements OnScrollListener {
 
     protected boolean mIsGridViewIdle = true;
     protected int mImageWidth = 0;
-    protected boolean mIsWifi = false;
     protected boolean mCanGetBitmapFromNetWork = false;
 
     @Override
@@ -88,10 +87,7 @@ public class GalleryFragment extends BaseFragment implements OnScrollListener {
         int screenWidth = getScreenMetrics(mContext).widthPixels;
         int space = (int) dp2px(mContext, 20f);
         mImageWidth = (screenWidth - space) / 3;
-        mIsWifi = isWifi(mContext);
-        if (mIsWifi) {
-            mCanGetBitmapFromNetWork = true;
-        }
+        mCanGetBitmapFromNetWork = true;
     }
 
     private void initView() {

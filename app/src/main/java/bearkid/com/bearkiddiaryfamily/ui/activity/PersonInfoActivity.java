@@ -5,11 +5,10 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -48,6 +47,7 @@ public class PersonInfoActivity extends BaseActivity implements IPersonInfoView,
     private ImageView backImg;
 
     private PersonInfoPresenter presenter;
+    private InputMethodManager imm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -183,6 +183,7 @@ public class PersonInfoActivity extends BaseActivity implements IPersonInfoView,
     }
 
     private void expandView(LinearLayout ll) {
+        hideSoftInputView();
         if (ll.getLayoutParams().height == 0) {
             ValueAnimator animator = ValueAnimator.ofInt(0, 200).setDuration(300);
             animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -191,6 +192,19 @@ public class PersonInfoActivity extends BaseActivity implements IPersonInfoView,
                     ViewGroup.LayoutParams lp = ll.getLayoutParams();
                     lp.height = (int) valueAnimator.getAnimatedValue();
                     ll.setLayoutParams(lp);
+                }
+            });
+            animator.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    EditText et = (EditText) ll.getChildAt(1);
+                    et.requestFocus();
+                    imm = (InputMethodManager) et.getContext().getSystemService(INPUT_METHOD_SERVICE);
+                    imm.toggleSoftInput(0, InputMethodManager.SHOW_FORCED);
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animation) {
                 }
             });
             animator.start();
