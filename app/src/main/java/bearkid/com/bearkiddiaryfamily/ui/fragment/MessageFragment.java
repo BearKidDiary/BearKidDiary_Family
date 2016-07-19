@@ -57,7 +57,7 @@ public class MessageFragment extends BaseFragment {
         @Override
         public int getItemCount()
         {
-            return 16;//mDatas.size()
+            return 5;//mDatas.size()
         }
 
         class MyViewHolder extends RecyclerView.ViewHolder
