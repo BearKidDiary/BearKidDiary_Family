@@ -40,6 +40,6 @@ public class UserModel {
     }
 
     public static void updateUserInfomation(Context context, User user, UpdateListener updateListener) {
-        user.update("e827e9dafc", updateListener);//new LocalDB(context).getBmobId()
+        user.update(new LocalDB(context).getBmobId(), updateListener);
     }
 }

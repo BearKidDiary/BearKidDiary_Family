@@ -10,8 +10,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import bearkid.com.bearkiddiaryfamily.R;
+import bearkid.com.bearkiddiaryfamily.ui.activity.iactivity.IKidInfoView;
+import bearkid.com.bearkiddiaryfamily.ui.view.KidInfoView;
 
-public class KidInfoActivity extends BaseActivity implements View.OnClickListener{
+public class KidInfoActivity extends BaseActivity implements IKidInfoView, View.OnClickListener{
     ImageView back;
     TextView edit;
 
@@ -71,6 +73,7 @@ public class KidInfoActivity extends BaseActivity implements View.OnClickListene
         list_1_add.setVisibility(View.GONE);
         list_2_add.setVisibility(View.GONE);
         list_3_add.setVisibility(View.GONE);
+
     }
 
     @Override
@@ -140,5 +143,29 @@ public class KidInfoActivity extends BaseActivity implements View.OnClickListene
 
     public static void startActivity(Context context){
         context.startActivity(new Intent(context, KidInfoActivity.class));
+    }
+
+    @Override
+    public void showHeightAndWeight(int height, int weight, String date) {
+        new KidInfoView(KidInfoActivity.this)
+                .init(KidInfoView.HEIGHTANDWEIGHT)
+                .setHWValue(height, weight, date)
+                .done(ll_1);
+    }
+
+    @Override
+    public void showVision(double left, double right, String date) {
+        new KidInfoView(KidInfoActivity.this)
+                .init(KidInfoView.VISION)
+                .setVValue(left, right, date)
+                .done(ll_2);
+    }
+
+    @Override
+    public void showExhort(int count, String exhort) {
+        new KidInfoView(KidInfoActivity.this)
+                .init(KidInfoView.EXHORT)
+                .setExhort(count, exhort)
+                .done(ll_3);
     }
 }
