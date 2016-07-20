@@ -88,7 +88,12 @@ public class RegisterPresenter {
                 .subscribe(smsId -> {/* 发送验证码成功 smsId是验证码编号（用于跟踪详情）而不是验证码 */
                     Log.i("zy", "RegisterPresenter request smsCode: " + smsId);
                 }, throwable -> {
-                    view.showError("获取验证码失败");
+                    final String e = throwable.toString();
+                    if (e.startsWith("errorCode:10010")) {
+                        view.showError("手机号码发送短信受限");
+                    } else {
+                        view.showError("获取验证码失败");
+                    }
                     task.cancel();
                     view.smscodeClickable();
                     Log.e("zy", "RegisterPresenter request smsCode Error:" + throwable);
