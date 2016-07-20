@@ -8,7 +8,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -27,6 +30,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import bearkid.com.bearkiddiaryfamily.R;
 import bearkid.com.bearkiddiaryfamily.presenter.PersonInfoPresenter;
@@ -34,8 +38,8 @@ import bearkid.com.bearkiddiaryfamily.ui.activity.iactivity.IPersonInfoView;
 
 public class PersonInfoActivity extends BaseActivity implements IPersonInfoView, View.OnClickListener {
 
-    private static final int REQUEST_CODE = 732;
-    private ArrayList<String> mResults = new ArrayList<>();
+    private static final int REQUEST_CODE_AVATAR = 732;
+    private ArrayList<String> mResults;
 
     private RelativeLayout avatarRlayout;
     private RelativeLayout nameRlayout;
@@ -65,6 +69,8 @@ public class PersonInfoActivity extends BaseActivity implements IPersonInfoView,
     private PersonInfoPresenter presenter;
     private InputMethodManager imm;
 
+    private Handler handler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,14 +91,16 @@ public class PersonInfoActivity extends BaseActivity implements IPersonInfoView,
                 finish();
                 break;
             case R.id.rlayout_personinfo_avatar:
+                mResults = new ArrayList<>();
                 Intent intent = new Intent(PersonInfoActivity.this, ImagesSelectorActivity.class);
                 //选择5张图片
                 intent.putExtra(SelectorSettings.SELECTOR_MAX_IMAGE_NUMBER, 1);
                 intent.putExtra(SelectorSettings.SELECTOR_MIN_IMAGE_SIZE, 100000);
                 intent.putExtra(SelectorSettings.SELECTOR_SHOW_CAMERA, true);
                 intent.putStringArrayListExtra(SelectorSettings.SELECTOR_INITIAL_SELECTED_LIST, mResults);
-                intent.putExtra("SelectorType",ImagesSelectorActivity.SELECTOR_TYPE_MORE);
-                startActivityForResult(intent, REQUEST_CODE);
+                //判断跳转到相册是 换头像（单张）  还是  发图片（多张）
+                intent.putExtra("SelectorType",ImagesSelectorActivity.SELECTOR_TYPE_ONE);
+                startActivityForResult(intent, REQUEST_CODE_AVATAR);
                 break;
             case R.id.rlayout_personinfo_name:
                 expandView(nameLlayout);
@@ -263,31 +271,23 @@ public class PersonInfoActivity extends BaseActivity implements IPersonInfoView,
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == REQUEST_CODE) {
+        if(requestCode == REQUEST_CODE_AVATAR) {
             if(resultCode == RESULT_OK) {
                 mResults = data.getStringArrayListExtra(SelectorSettings.SELECTOR_RESULTS);
                 assert mResults != null;
                 StringBuilder sb = new StringBuilder();
-                sb.append(String.format("Totally %d images selected:", mResults.size())).append("\n");
+//                sb.append(String.format("Totally %d images selected:", mResults.size())).append("\n");
                 for(String result : mResults) {
-                    sb.append(result).append("\n");
+                    sb.append(result);
                 }
                 Toast.makeText(PersonInfoActivity.this, sb.toString(), Toast.LENGTH_SHORT).show();
-
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Bitmap bitmap = BitmapFactory.decodeFile(sb.toString());
-
-                            avatarImg.setImageBitmap(bitmap);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }).start();
+                Bitmap bitmap = BitmapFactory.decodeFile(sb.toString());
+                Drawable drawable = new BitmapDrawable(bitmap);
+                avatarImg.setImageDrawable(drawable);
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+
 }

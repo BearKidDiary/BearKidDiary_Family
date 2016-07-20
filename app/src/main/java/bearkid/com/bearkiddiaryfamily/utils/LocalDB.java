@@ -67,5 +67,4 @@ public class LocalDB {
     public String getUserEmail() {
         return sharedPreferences.getString("userEmail", "");
     }
-
 }

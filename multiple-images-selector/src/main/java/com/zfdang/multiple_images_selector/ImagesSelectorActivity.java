@@ -121,6 +121,7 @@ public class ImagesSelectorActivity extends AppCompatActivity
         //获取类型
         type = getSelectorType();
 
+        //从上一个Activity跳转过来的存储路径的List
         ArrayList<String> selected = intent.getStringArrayListExtra(SelectorSettings.SELECTOR_INITIAL_SELECTED_LIST);
         ImageListContent.SELECTED_IMAGES.clear();
         if (selected != null && selected.size() > 0) {
@@ -435,7 +436,6 @@ public class ImagesSelectorActivity extends AppCompatActivity
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
         // after capturing image, return the image path as selected result
         if (requestCode == CAMERA_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
@@ -469,6 +469,11 @@ public class ImagesSelectorActivity extends AppCompatActivity
             setResult(Activity.RESULT_CANCELED);
             finish();
         } else if (v == mButtonConfirm) {
+            if (type == ImagesSelectorActivity.SELECTOR_TYPE_ONE){
+
+            }else if (type == ImagesSelectorActivity.SELECTOR_TYPE_MORE){
+
+            }
             Intent data = new Intent();
             data.putStringArrayListExtra(SelectorSettings.SELECTOR_RESULTS, ImageListContent.SELECTED_IMAGES);
             setResult(Activity.RESULT_OK, data);
