@@ -66,39 +66,54 @@
             android:layout_marginTop="8dp"
             android:inputType="textMultiLine"
             android:maxLines="5"
+            android:ellipsize="end"
             android:text="发表的内容asdhisasdasdasdasdhafoejfwaehuihaDNIULFWEAHFOI"
             android:textSize="14sp" />
 
         <LinearLayout
+            android:id="@+id/ll_timeline_pic_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginRight="16dp">
+            android:layout_marginRight="16dp"
+            android:visibility="visible">
 
             <bearkid.com.bearkiddiaryfamily.ui.view.IconButton
                 android:id="@+id/ib_timeline_pic1"
-                android:layout_width="72dp"
-                android:layout_height="72dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_weight="1"
                 android:scaleType="fitCenter"
                 android:src="@drawable/image_default" />
 
             <bearkid.com.bearkiddiaryfamily.ui.view.IconButton
                 android:id="@+id/ib_timeline_pic2"
-                android:layout_width="72dp"
-                android:layout_height="72dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_weight="1"
                 android:scaleType="fitCenter"
                 android:src="@drawable/image_default" />
 
             <bearkid.com.bearkiddiaryfamily.ui.view.IconButton
                 android:id="@+id/ib_timeline_pic3"
-                android:layout_width="72dp"
-                android:layout_height="72dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_weight="1"
                 android:scaleType="fitCenter"
                 android:src="@drawable/image_default" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_timeline_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:paddingBottom="8dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="16dp"
+            android:paddingTop="8dp"
+            android:text="——2016年12月2日"
+            android:textSize="12sp" />
     </LinearLayout>
 </LinearLayout>

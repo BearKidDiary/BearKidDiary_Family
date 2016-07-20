@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Application;
 import android.util.Log;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+
 import java.util.Stack;
 
 import bearkid.com.bearkiddiaryfamily.ui.activity.BaseActivity;
@@ -36,6 +38,9 @@ public class BaseApplication extends Application {
         //.setFileExpiration(2500)
         //.build();
         //Bmob.initialize(config);
+
+        //图片选择器需要
+        Fresco.initialize(getApplicationContext());
     }
 
     /**

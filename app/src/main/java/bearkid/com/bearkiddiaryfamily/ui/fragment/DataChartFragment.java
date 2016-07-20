@@ -56,9 +56,9 @@ public class DataChartFragment extends BaseFragment {
     }
 
     private void setHeightChartView(){
-        heightChart.setMultipleSeriesDataset("身高");
+//        heightChart.setMultipleSeriesDataset(new String[]{"身高"});
         //Color.argb(255, 255, 64, 129)
-        heightChart.setMultipleSeriesRenderer(180, "厘米（cm）", "月", "身高", Color.BLACK, Color.BLACK, Color.BLACK, Color.WHITE);
+        heightChart.setMultipleSeriesRenderer(180, 12, "厘米（cm）", "月", "身高", Color.BLACK, Color.BLACK, Color.BLACK, new int[]{});
         heightGraphcalView = heightChart.getmGraphcalView();
 
         for(int i = 1; i < 13; i++){
