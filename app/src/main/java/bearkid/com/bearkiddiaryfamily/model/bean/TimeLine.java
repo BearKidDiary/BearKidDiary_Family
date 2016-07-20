@@ -1,5 +1,6 @@
 package bearkid.com.bearkiddiaryfamily.model.bean;
 
+import bearkid.com.bearkiddiaryfamily.R;
 import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.datatype.BmobDate;
 import cn.bmob.v3.datatype.BmobFile;
@@ -97,5 +98,47 @@ public class TimeLine extends BmobObject {
 
     public void setTypelogo(Integer typelogo) {
         this.typelogo = typelogo;
+    }
+
+    public static class Type {
+        public static final int EAT = 1;
+        public static final int FIRSTTIME = 2;
+        public static final int BODY = 3;
+        public static final int SPORT = 4;
+        public static final int STUDY = 5;
+        public static final int CAMERA = 6;
+        public static final int BATH = 7;
+        public static final int TREE = 8;
+        public static final int ALCOHOL = 9;
+        public static final int FISH = 10;
+        public static final int FOOTPRINT = 11;
+
+        public static int getLogoResource(int type) {
+            switch (type) {
+                case EAT:
+                    return R.drawable.timeline_type_eat;
+                case FIRSTTIME:
+                    return R.drawable.timeline_type_first_time;
+                case BODY:
+                    return R.drawable.timeline_type_body;
+                case SPORT:
+                    return R.drawable.timeline_type_sport;
+                case STUDY:
+                    return R.drawable.timeline_type_study;
+                case CAMERA:
+                    return R.drawable.timeline_type_camera;
+                case BATH:
+                    return R.drawable.timeline_type_bath;
+                case TREE:
+                    return R.drawable.timeline_type_tree;
+                case ALCOHOL:
+                    return R.drawable.timeline_type_alcohol;
+                case FISH:
+                    return R.drawable.timeline_type_fish;
+                case FOOTPRINT:
+                    return R.drawable.timeline_type_footprint;
+            }
+            return -1;
+        }
     }
 }
