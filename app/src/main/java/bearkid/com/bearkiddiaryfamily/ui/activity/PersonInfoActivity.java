@@ -278,8 +278,8 @@ public class PersonInfoActivity extends BaseActivity implements IPersonInfoView,
                     @Override
                     public void run() {
                         try {
-                            BitmapFactory.Options o2 = new BitmapFactory.Options();
-                            Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(sb.toString()), null, o2);
+                            Bitmap bitmap = BitmapFactory.decodeFile(sb.toString());
+
                             avatarImg.setImageBitmap(bitmap);
                         } catch (Exception e) {
                             e.printStackTrace();
