@@ -3,6 +3,7 @@ package bearkid.com.bearkiddiaryfamily.model;
 import android.content.Context;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import bearkid.com.bearkiddiaryfamily.model.bean.User;
 import bearkid.com.bearkiddiaryfamily.utils.LocalDB;
@@ -22,16 +23,21 @@ public class LoginModel {
      * @param phoneNum 用户的手机号码
      * @param psw      用户的密码
      */
-    public static Observable<Boolean> login(String phoneNum, final String psw) {
+    public static Observable<Boolean> login(Context context, String phoneNum, final String psw) {
         BmobQuery<User> query = new BmobQuery<>();
         query.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK); // 先从缓存获取数据，如果没有，再从网络获取
-        //query.setMaxCacheAge(TimeUnit.DAYS.toMillis(10));
+        query.setMaxCacheAge(TimeUnit.DAYS.toMillis(10));
         return query.addWhereEqualTo(User.PHONE, phoneNum)
                 .findObjectsObservable(User.class)
                 .subscribeOn(Schedulers.io())
                 .map(users -> {
                     if (users.size() > 0) {
-                        return psw.equals(users.get(0).getUpsw());
+                        User user = users.get(0);
+                        if (psw.equals(user.getUpsw())) {
+                            //把ObjectId更新到本地
+                            new LocalDB(context).putBmobId(user.getObjectId());
+                            return true;
+                        }
                     }
                     return false;
                 });
@@ -51,8 +57,9 @@ public class LoginModel {
         return query.findObjectsObservable(User.class)
                 .subscribeOn(Schedulers.io())
                 .map(users -> {
-                    if (users.size() > 0)
+                    if (users.size() > 0) {
                         return users.get(0);
+                    }
                     return null;
                 });
     }

@@ -32,6 +32,7 @@ public class RegisterPresenter {
     public void register() {
         view.registerUnClickable();
         view.hideError();
+
         //1.检查手机号码
         final String phone = view.getPhoneNum();
         if (!FormatCheckModel.isPhoneNumber(phone)) {
@@ -49,14 +50,15 @@ public class RegisterPresenter {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s -> {/* 成功注册 s是ObjectId */
                     view.registerClickable();
+                    view.finish();
                     Log.i("zy", "RegisterPresenter register success" + s);
                 }, throwable -> {/*验证码不正确 或者 注册用户信息失败 */
                     Log.e("zy", "RegisterPresenter register error: " + throwable.toString());
 
-                    if(throwable.toString().startsWith("errorCode:401")){//401主键重复
+                    if (throwable.toString().startsWith("errorCode:401")) {//401主键重复
                         view.registerClickable();
                         view.showError("手机号码已注册");
-                    }else {
+                    } else {
                         view.registerClickable();
                         view.showError("注册失败，请检查网络或验证码");
                     }
