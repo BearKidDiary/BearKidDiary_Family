@@ -41,20 +41,24 @@ public class Chart {
     //获取数据集，及xy坐标的集合
 
 
-    public void setMultipleSeriesDataset(String[] curveTitle) {//设置每个图底下的点与线的样板
+    public void setMultipleSeriesDataset(String[] curveTitle, List<List<Double>> ylists) {//设置每个图底下的点与线的样板
         multipleSeriesDataset = new XYMultipleSeriesDataset();
-        for (int i = 0; i < curveTitle.length;i++){
-            series = new XYSeries(curveTitle[i]);
+        for (int i = 0; i < curveTitle.length; i++){
+            XYSeries series = new XYSeries(curveTitle[i]);
+            List<Double> ylist = ylists.get(i);
+            for(int j = 0;j < ylist.size(); j++){
+                series.add(j + 1, ylist.get(j));
+            }
             multipleSeriesDataset.addSeries(series);
         }
     }
 
 
-    public void setMultipleSeriesDataset(String curveTitle) {//设置每个图底下的点与线的样板
-        multipleSeriesDataset = new XYMultipleSeriesDataset();
-        series = new XYSeries(curveTitle);
-        multipleSeriesDataset.addSeries(series);
-    }
+//    public void setMultipleSeriesDataset(String curveTitle) {//设置每个图底下的点与线的样板
+//        multipleSeriesDataset = new XYMultipleSeriesDataset();
+//        series = new XYSeries(curveTitle);
+//        multipleSeriesDataset.addSeries(series);
+//    }
 
     /*
     * maxX      x轴的最大
@@ -68,8 +72,8 @@ public class Chart {
     * gridColor  网格颜色
     * */
 
-    public void setMultipleSeriesRenderer(int yMax , String chartTitle, String xTitle, String yTitle, int axeColor,
-                                          int labelColor,int xyTitleColor, int curveColor) {
+    public void setMultipleSeriesRenderer(double yMax , double xMax, String chartTitle, String xTitle, String yTitle, int axeColor,
+                                          int labelColor,int xyTitleColor, int[] curveColor) {
         multipleSeriesRenderer = new XYMultipleSeriesRenderer();
         if (chartTitle != null){
             multipleSeriesRenderer.setChartTitle(chartTitle);
@@ -77,6 +81,8 @@ public class Chart {
 
         multipleSeriesRenderer.setXTitle(xTitle);
         multipleSeriesRenderer.setYTitle(yTitle);
+        multipleSeriesRenderer.setXAxisMin(1);
+        multipleSeriesRenderer.setXAxisMax(xMax);
         multipleSeriesRenderer.setYAxisMin(0);
         multipleSeriesRenderer.setYAxisMax(yMax);
         multipleSeriesRenderer.setXLabelsColor(labelColor);//设置X坐标轴上坐标点的颜色
@@ -103,17 +109,31 @@ public class Chart {
         multipleSeriesRenderer.setMarginsColor(Color.WHITE);
 //        multipleSeriesRenderer.setMarginsColor(Color.argb(150,255,130,188));// 边距背景色，默认背景色为黑色，这里修改为白色
 
-        seriesRenderer = new XYSeriesRenderer();
-        seriesRenderer.setColor(curveColor);//曲线颜色
-        seriesRenderer.setFillPoints(false);
-        seriesRenderer.setDisplayChartValues(true);//设置显示曲线点上的数值
-        seriesRenderer.setChartValuesSpacing(15);//数值与点的距离
-        seriesRenderer.setChartValuesTextSize(30);//数值的大小
-        seriesRenderer.setPointStyle(PointStyle.CIRCLE);//曲线点的形状
-        seriesRenderer.setLineWidth(3f);
-        seriesRenderer.setFillBelowLine(false);//是否曲线下涂色
-        multipleSeriesRenderer.addSeriesRenderer(seriesRenderer);
+        for (int i = 0; i < curveColor.length; i++){
+            seriesRenderer = new XYSeriesRenderer();
+            seriesRenderer.setColor(curveColor[i]);//曲线颜色
+            seriesRenderer.setFillPoints(false);
+            seriesRenderer.setDisplayChartValues(true);//设置显示曲线点上的数值
+            seriesRenderer.setChartValuesSpacing(15);//数值与点的距离
+            seriesRenderer.setChartValuesTextSize(30);//数值的大小
+            seriesRenderer.setPointStyle(PointStyle.CIRCLE);//曲线点的形状
+            seriesRenderer.setLineWidth(3f);
+            seriesRenderer.setFillBelowLine(false);//是否曲线下涂色
+            multipleSeriesRenderer.addSeriesRenderer(seriesRenderer);
+        }
+
     }
+
+    public void setSeriesRenderer(XYSeriesRenderer seriesRenderer) {
+        this.seriesRenderer = seriesRenderer;
+    }
+
+    /**
+     *
+     * @param x
+     * @param y
+     */
+
 
     //更新曲线，只能在主线程上运行
     public void updataChart(double x,double y){

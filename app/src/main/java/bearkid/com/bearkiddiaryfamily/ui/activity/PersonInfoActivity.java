@@ -4,7 +4,10 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +18,24 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.zfdang.multiple_images_selector.ImagesSelectorActivity;
+import com.zfdang.multiple_images_selector.SelectorSettings;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 import bearkid.com.bearkiddiaryfamily.R;
 import bearkid.com.bearkiddiaryfamily.presenter.PersonInfoPresenter;
 import bearkid.com.bearkiddiaryfamily.ui.activity.iactivity.IPersonInfoView;
 
 public class PersonInfoActivity extends BaseActivity implements IPersonInfoView, View.OnClickListener {
+
+    private static final int REQUEST_CODE = 732;
+    private ArrayList<String> mResults = new ArrayList<>();
 
     private RelativeLayout avatarRlayout;
     private RelativeLayout nameRlayout;
@@ -42,6 +57,7 @@ public class PersonInfoActivity extends BaseActivity implements IPersonInfoView,
     private EditText nameEt;
     private EditText addressEt;
     private EditText emailEt;
+    private ImageView avatarImg;
 
     //返回按钮
     private ImageView backImg;
@@ -67,6 +83,16 @@ public class PersonInfoActivity extends BaseActivity implements IPersonInfoView,
         switch (v.getId()){
             case R.id.img_title_back_personinfo:
                 finish();
+                break;
+            case R.id.rlayout_personinfo_avatar:
+                Intent intent = new Intent(PersonInfoActivity.this, ImagesSelectorActivity.class);
+                //选择5张图片
+                intent.putExtra(SelectorSettings.SELECTOR_MAX_IMAGE_NUMBER, 1);
+                intent.putExtra(SelectorSettings.SELECTOR_MIN_IMAGE_SIZE, 100000);
+                intent.putExtra(SelectorSettings.SELECTOR_SHOW_CAMERA, true);
+                intent.putStringArrayListExtra(SelectorSettings.SELECTOR_INITIAL_SELECTED_LIST, mResults);
+                intent.putExtra("SelectorType",ImagesSelectorActivity.SELECTOR_TYPE_MORE);
+                startActivityForResult(intent, REQUEST_CODE);
                 break;
             case R.id.rlayout_personinfo_name:
                 expandView(nameLlayout);
@@ -168,6 +194,7 @@ public class PersonInfoActivity extends BaseActivity implements IPersonInfoView,
         nameEt = (EditText) findViewById(R.id.et_personinfo_name);
         addressEt = (EditText) findViewById(R.id.et_personinfo_address);
         emailEt = (EditText) findViewById(R.id.et_personinfo_email);
+        avatarImg = (ImageView) findViewById(R.id.img_personinfo_avatar);
 
         avatarRlayout.setOnClickListener(this);
         nameRlayout.setOnClickListener(this);
@@ -232,5 +259,35 @@ public class PersonInfoActivity extends BaseActivity implements IPersonInfoView,
             });
             animator.start();
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == REQUEST_CODE) {
+            if(resultCode == RESULT_OK) {
+                mResults = data.getStringArrayListExtra(SelectorSettings.SELECTOR_RESULTS);
+                assert mResults != null;
+                StringBuilder sb = new StringBuilder();
+                sb.append(String.format("Totally %d images selected:", mResults.size())).append("\n");
+                for(String result : mResults) {
+                    sb.append(result).append("\n");
+                }
+                Toast.makeText(PersonInfoActivity.this, sb.toString(), Toast.LENGTH_SHORT).show();
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            BitmapFactory.Options o2 = new BitmapFactory.Options();
+                            Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(sb.toString()), null, o2);
+                            avatarImg.setImageBitmap(bitmap);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
