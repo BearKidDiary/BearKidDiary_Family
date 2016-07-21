@@ -412,7 +412,6 @@ public class ImagesSelectorActivity extends AppCompatActivity
         updateDoneButton();
     }
 
-
     public void launchCamera() {
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (cameraIntent.resolveActivity(getPackageManager()) != null) {
@@ -431,7 +430,6 @@ public class ImagesSelectorActivity extends AppCompatActivity
         } else {
             Toast.makeText(this, R.string.msg_no_camera, Toast.LENGTH_SHORT).show();
         }
-
     }
 
     @Override
@@ -442,13 +440,20 @@ public class ImagesSelectorActivity extends AppCompatActivity
                 if (mTempImageFile != null) {
                     // notify system
                     sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(mTempImageFile)));
+//                    Intent resultIntent = new Intent();
+//                    ImageListContent.clear();
+//                    ImageListContent.SELECTED_IMAGES.add(mTempImageFile.getAbsolutePath());
+//                    resultIntent.putStringArrayListExtra(SelectorSettings.SELECTOR_RESULTS, ImageListContent.SELECTED_IMAGES);
+//                    setResult(RESULT_OK, resultIntent);
+//                    finish();
 
+                    //拍摄完之后直接跳转到裁剪界面
                     Intent resultIntent = new Intent();
+                    resultIntent.setClass(ImagesSelectorActivity.this, CropActivity.class);
                     ImageListContent.clear();
                     ImageListContent.SELECTED_IMAGES.add(mTempImageFile.getAbsolutePath());
-                    resultIntent.putStringArrayListExtra(SelectorSettings.SELECTOR_RESULTS, ImageListContent.SELECTED_IMAGES);
-                    setResult(RESULT_OK, resultIntent);
-                    finish();
+                    resultIntent.putExtra(SelectorSettings.SELECTOR_RESULTS, ImageListContent.SELECTED_IMAGES);
+                    startActivityForResult(resultIntent, SELECTOR_RESULT_AVATAR);
                 }
             } else {
                 // if user click cancel, delete the temp file
@@ -460,24 +465,37 @@ public class ImagesSelectorActivity extends AppCompatActivity
                 }
             }
         }
+
+        //从CropActivity中裁剪出来的照片的路径返回给PersonInfoActivity
+        if (requestCode == SELECTOR_RESULT_AVATAR){
+            if (resultCode == Activity.RESULT_OK){
+                String image = data.getStringExtra("imageName");
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("imageName", image);
+                setResult(Activity.RESULT_OK, resultIntent);
+                finish();
+            }
+        }
     }
 
 
+    public static final int SELECTOR_RESULT_AVATAR = 800;
     @Override
     public void onClick(View v) {
         if (v == mButtonBack) {
             setResult(Activity.RESULT_CANCELED);
             finish();
         } else if (v == mButtonConfirm) {
-            if (type == ImagesSelectorActivity.SELECTOR_TYPE_ONE){
-
-            }else if (type == ImagesSelectorActivity.SELECTOR_TYPE_MORE){
-
-            }
             Intent data = new Intent();
-            data.putStringArrayListExtra(SelectorSettings.SELECTOR_RESULTS, ImageListContent.SELECTED_IMAGES);
-            setResult(Activity.RESULT_OK, data);
-            finish();
+            if (type == ImagesSelectorActivity.SELECTOR_TYPE_ONE){
+                data.setClass(ImagesSelectorActivity.this,CropActivity.class);
+                data.putExtra(SelectorSettings.SELECTOR_RESULTS, ImageListContent.SELECTED_IMAGES);
+                startActivityForResult(data, SELECTOR_RESULT_AVATAR);
+            }else if (type == ImagesSelectorActivity.SELECTOR_TYPE_MORE){
+                data.putStringArrayListExtra(SelectorSettings.SELECTOR_RESULTS, ImageListContent.SELECTED_IMAGES);
+                setResult(Activity.RESULT_OK, data);
+                finish();
+            }
         }
     }
 

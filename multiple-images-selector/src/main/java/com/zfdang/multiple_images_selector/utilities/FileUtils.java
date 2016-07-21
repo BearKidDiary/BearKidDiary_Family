@@ -7,7 +7,10 @@ import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import static android.os.Environment.MEDIA_MOUNTED;
@@ -17,6 +20,8 @@ public class FileUtils {
     private static final String JPEG_FILE_PREFIX = "IMG";
     private static final String JPEG_FILE_SUFFIX = ".jpg";
     private static final String TAG = "FileUtils";
+
+    private static final String PATH_AVATAR = "/BearKidDiary";
 
     public static File createTmpFile(Context context) throws IOException{
         File dir;
@@ -131,5 +136,82 @@ public class FileUtils {
         return new Uri.Builder().scheme("res").path(String.valueOf(resId)).build();
     }
 
+    /**
+     * 获取压缩后的图片存放位置
+     * @return
+     */
+    public static String getPathAvatar(){
+        String path = Environment.getExternalStorageDirectory().getAbsolutePath() + PATH_AVATAR;
+        return path;
+    }
+
+    /**
+     * @Title: getFile
+     * @Description: 根据名称创建文件夹和文件
+     * @param @param fileName
+     * @param @return
+     * @return File
+     * @throws
+     */
+    public static File createImgFile(String imgName) {
+        // path表示你所创建文件的路�?
+        String path = getPathAvatar();
+        File f = new File(path);
+        if (!f.exists()) {
+            f.mkdirs();
+        }
+        File file = new File(f, imgName + ".jpg");
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return file;
+    }
+
+    /***
+     * @Title: savaBitmap
+     * @Description: 将Bitmap转化为file保存到本地
+     * @param @param bitmap
+     * @param @param imgName
+     * @return void
+     * @throws
+     */
+    public static File savaBitmap(ByteArrayOutputStream bos, String imgName) {
+        File file = FileUtils.createImgFile(imgName);
+        FileOutputStream fOut = null;
+        try {
+            fOut = new FileOutputStream(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            fOut.write(bos.toByteArray());
+            fOut.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (fOut != null) {
+                    fOut.close();
+                    fOut=null;
+                }
+                if (bos != null) {
+                    bos.close();
+                    bos=null;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if (file != null) {
+            if (file.exists() && file.length() > 0) {
+                return file;
+            }
+        }
+        return null;
+    }
 
 }

@@ -115,28 +115,28 @@ public class TimeLine extends BmobObject {
 
         public static int getLogoResource(int type) {
             switch (type) {
-                case EAT:
-                    return R.drawable.timeline_type_eat;
-                case FIRSTTIME:
-                    return R.drawable.timeline_type_first_time;
-                case BODY:
-                    return R.drawable.timeline_type_body;
-                case SPORT:
-                    return R.drawable.timeline_type_sport;
-                case STUDY:
-                    return R.drawable.timeline_type_study;
-                case CAMERA:
-                    return R.drawable.timeline_type_camera;
-                case BATH:
-                    return R.drawable.timeline_type_bath;
-                case TREE:
-                    return R.drawable.timeline_type_tree;
-                case ALCOHOL:
-                    return R.drawable.timeline_type_alcohol;
-                case FISH:
-                    return R.drawable.timeline_type_fish;
-                case FOOTPRINT:
-                    return R.drawable.timeline_type_footprint;
+//                case EAT:
+//                    return R.drawable.timeline_type_eat;
+//                case FIRSTTIME:
+//                    return R.drawable.timeline_type_first_time;
+//                case BODY:
+//                    return R.drawable.timeline_type_body;
+//                case SPORT:
+//                    return R.drawable.timeline_type_sport;
+//                case STUDY:
+//                    return R.drawable.timeline_type_study;
+//                case CAMERA:
+//                    return R.drawable.timeline_type_camera;
+//                case BATH:
+//                    return R.drawable.timeline_type_bath;
+//                case TREE:
+//                    return R.drawable.timeline_type_tree;
+//                case ALCOHOL:
+//                    return R.drawable.timeline_type_alcohol;
+//                case FISH:
+//                    return R.drawable.timeline_type_fish;
+//                case FOOTPRINT:
+//                    return R.drawable.timeline_type_footprint;
             }
             return -1;
         }

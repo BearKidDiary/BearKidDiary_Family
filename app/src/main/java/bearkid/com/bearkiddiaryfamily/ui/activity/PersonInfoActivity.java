@@ -12,6 +12,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -273,21 +274,22 @@ public class PersonInfoActivity extends BaseActivity implements IPersonInfoView,
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == REQUEST_CODE_AVATAR) {
             if(resultCode == RESULT_OK) {
-                mResults = data.getStringArrayListExtra(SelectorSettings.SELECTOR_RESULTS);
-                assert mResults != null;
-                StringBuilder sb = new StringBuilder();
-//                sb.append(String.format("Totally %d images selected:", mResults.size())).append("\n");
-                for(String result : mResults) {
-                    sb.append(result);
-                }
-                Toast.makeText(PersonInfoActivity.this, sb.toString(), Toast.LENGTH_SHORT).show();
-                Bitmap bitmap = BitmapFactory.decodeFile(sb.toString());
+//                mResults = data.getStringArrayListExtra(SelectorSettings.SELECTOR_RESULTS);
+//                assert mResults != null;
+//                StringBuilder sb = new StringBuilder();
+//                for(String result : mResults) {
+//                    sb.append(result);
+//                }
+//                Toast.makeText(PersonInfoActivity.this, sb.toString(), Toast.LENGTH_SHORT).show();
+//                Log.d("fileImage", sb.toString());
+                String image = data.getStringExtra("imageName");
+                Log.d("fileImage", image);
+
+                Bitmap bitmap = BitmapFactory.decodeFile(image);
                 Drawable drawable = new BitmapDrawable(bitmap);
                 avatarImg.setImageDrawable(drawable);
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
-
-
 }
