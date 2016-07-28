@@ -1,4 +1,3 @@
-import com.sun.org.apache.xalan.internal.xsltc.cmdline.Compile
 
 buildscript {
     repositories {
@@ -18,10 +17,6 @@ allprojects {
         //Bmob的maven仓库地址
         maven { url "https://raw.github.com/bmob/bmob-android-sdk/master" }
     }
-}
-
-tasks.withType(Compile) {
-    options.encoding = "UTF-8"
 }
 
 task clean(type: Delete) {

@@ -139,12 +139,7 @@ public class GalleryFragment extends BaseFragment implements OnScrollListener {
                 imageView.setTag(uri);
                 mImageLoader.bindBitmap(uri, imageView, mImageWidth, mImageWidth);
             }
-            imageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    ShowBigImageActivity.startActivity(mContext, uri);
-                }
-            });
+            imageView.setOnClickListener(view -> ShowBigImageActivity.startActivity(mContext, uri));
             return convertView;
         }
 
