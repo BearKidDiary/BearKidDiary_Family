@@ -6,8 +6,11 @@ import bearkid.com.bearkiddiaryfamily.model.LoginModel;
 import bearkid.com.bearkiddiaryfamily.ui.activity.LoginActivity;
 import bearkid.com.bearkiddiaryfamily.ui.activity.iactivity.ILoginView;
 import bearkid.com.bearkiddiaryfamily.utils.LocalDB;
+import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
 import rx.functions.Action1;
+import rx.internal.util.ObserverSubscriber;
 
 /**
  * @author 张宇
@@ -40,7 +43,7 @@ public class LoginPresenter {
         LoginModel.login(view.getContext(), phoneNum, psw)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(success -> {/*成功查找到对应的用户并对比密码是否一致*/
-                    if (success.equals("true")) {
+                    if (success) {
                         db.putPhoneNum(phoneNum);
                         view.loginClickable();
                         view.finish();
