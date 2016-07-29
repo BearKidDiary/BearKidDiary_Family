@@ -11,6 +11,7 @@ import bearkid.com.bearkiddiaryfamily.model.SMSCodeModel;
 import bearkid.com.bearkiddiaryfamily.model.bean.User;
 import bearkid.com.bearkiddiaryfamily.ui.activity.RegisterActivity;
 import bearkid.com.bearkiddiaryfamily.ui.activity.iactivity.IRegisterView;
+import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 
@@ -49,8 +50,13 @@ public class RegisterPresenter {
         RegisterModel.register(user, view.getSMSCode())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s -> {/* 成功注册 s是ObjectId */
-                    view.registerClickable();
-                    view.finish();
+                    if (s.equals("true")){
+                        Log.d("注册", "注册成功！");
+                        view.registerClickable();
+                        view.finish();
+                    }else {
+                        Log.d("注册", "注册失败！");
+                    }
                     Log.i("zy", "RegisterPresenter register success" + s);
                 }, throwable -> {/*验证码不正确 或者 注册用户信息失败 */
                     Log.e("zy", "RegisterPresenter register error: " + throwable.toString());

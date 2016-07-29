@@ -24,7 +24,7 @@ public class BaseApplication extends Application {
         activityStack = new Stack<>();
 
         //第一：默认初始化
-        Bmob.initialize(this, "c5470e90b9e42cb978bd22fa1309c7b4");
+        Bmob.initialize(getApplicationContext(), "c5470e90b9e42cb978bd22fa1309c7b4");
 
         //第二：自v3.4.7版本开始,设置BmobConfig,允许设置请求超时时间、文件分片上传时每片的大小、文件的过期时间(单位为秒)，
         //BmobConfig config =new BmobConfig.Builder(this)

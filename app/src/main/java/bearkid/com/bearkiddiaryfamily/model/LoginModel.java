@@ -7,7 +7,14 @@ import java.util.concurrent.TimeUnit;
 
 import bearkid.com.bearkiddiaryfamily.model.bean.User;
 import bearkid.com.bearkiddiaryfamily.utils.LocalDB;
+import bearkid.com.bearkiddiaryfamily.utils.Urls;
 import cn.bmob.v3.BmobQuery;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Body;
+import retrofit2.http.POST;
+import retrofit2.http.Query;
 import rx.Observable;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
@@ -23,25 +30,47 @@ public class LoginModel {
      * @param phoneNum 用户的手机号码
      * @param psw      用户的密码
      */
-    public static Observable<Boolean> login(Context context, String phoneNum, final String psw) {
-        BmobQuery<User> query = new BmobQuery<>();
-        query.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK); // 先从缓存获取数据，如果没有，再从网络获取
-        query.setMaxCacheAge(TimeUnit.DAYS.toMillis(10));
-        return query.addWhereEqualTo(User.PHONE, phoneNum)
-                .findObjectsObservable(User.class)
-                .subscribeOn(Schedulers.io())
-                .map(users -> {
-                    if (users.size() > 0) {
-                        User user = users.get(0);
-                        if (psw.equals(user.getUpsw())) {
-                            //把ObjectId更新到本地
-                            new LocalDB(context).putBmobId(user.getObjectId());
-                            return true;
-                        }
-                    }
-                    return false;
-                });
+    public static Observable<String> login(Context context, String phoneNum, final String psw) {
+//        BmobQuery<User> query = new BmobQuery<>();
+//        query.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK); // 先从缓存获取数据，如果没有，再从网络获取
+//        query.setMaxCacheAge(TimeUnit.DAYS.toMillis(10));
+//        return query.addWhereEqualTo(User.PHONE, phoneNum)
+//                .findObjectsObservable(User.class)
+//                .subscribeOn(Schedulers.io())
+//                .map(users -> {
+//                    if (users.size() > 0) {
+//                        User user = users.get(0);
+//                        if (psw.equals(user.getUpsw())) {
+//                            //把ObjectId更新到本地
+//                            new LocalDB(context).putBmobId(user.getObjectId());
+//                            return true;
+//                        }
+//                    }
+//                    return false;
+//                });
+        return Login(phoneNum, psw);
     }
+
+    /**
+     * 登录
+     */
+    public interface LoginService {
+        @POST("login.jsp")
+        Observable<String> Login(@Query("Uphone") String Uphone,@Query("Upsw") String Upsw);
+    }
+
+    public static Observable<String> Login(String Uphone, String Upsw){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Urls.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+
+        LoginService loginService = retrofit.create(LoginService.class);
+        return loginService.Login(Uphone, Upsw)
+                .subscribeOn(Schedulers.newThread());
+    }
+
 
     /**
      * 获取当前登录的用户信息
