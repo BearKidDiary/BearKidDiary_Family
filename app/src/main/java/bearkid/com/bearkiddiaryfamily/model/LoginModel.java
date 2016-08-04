@@ -1,18 +1,28 @@
 package bearkid.com.bearkiddiaryfamily.model;
 
 import android.content.Context;
+import android.util.Log;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
+import bearkid.com.bearkiddiaryfamily.R;
+import bearkid.com.bearkiddiaryfamily.model.bean.Result;
 import bearkid.com.bearkiddiaryfamily.model.bean.User;
 import bearkid.com.bearkiddiaryfamily.utils.LocalDB;
 import bearkid.com.bearkiddiaryfamily.utils.Urls;
 import cn.bmob.v3.BmobQuery;
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 import rx.Observable;
@@ -23,6 +33,8 @@ import rx.schedulers.Schedulers;
  * 登陆功能
  */
 public class LoginModel {
+
+    private static User user;
     private LoginModel() {
     }
 
@@ -30,7 +42,7 @@ public class LoginModel {
      * @param phoneNum 用户的手机号码
      * @param psw      用户的密码
      */
-    public static Observable<String> login(Context context, String phoneNum, final String psw) {
+    public static Observable<Result<User>> login(Context context, String phoneNum, final String psw) {
 //        BmobQuery<User> query = new BmobQuery<>();
 //        query.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK); // 先从缓存获取数据，如果没有，再从网络获取
 //        query.setMaxCacheAge(TimeUnit.DAYS.toMillis(10));
@@ -55,11 +67,15 @@ public class LoginModel {
      * 登录
      */
     public interface LoginService {
-        @POST("login.jsp")
-        Observable<String> Login(@Query("Uphone") String Uphone,@Query("Upsw") String Upsw);
+        @FormUrlEncoded
+        @POST(Urls.URL_LOGIN)
+//        Observable<Result<User>> Login(@Query("Uphone") String Uphone, @Query("Upsw") String Upsw);
+        Observable<Result<User>> Login(@Field("Uphone") String Uphone, @Field("Upsw") String Upsw);
+//        Observable<Result<User>> Login(@Body User user);
     }
 
-    public static Observable<String> Login(String Uphone, String Upsw){
+    public static Observable<Result<User>> Login(String Uphone, String Upsw){;
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Urls.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())

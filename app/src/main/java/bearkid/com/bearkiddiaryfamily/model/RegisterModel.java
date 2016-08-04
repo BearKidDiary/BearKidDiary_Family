@@ -52,7 +52,7 @@ public class RegisterModel {
      * 注册
      */
     public interface RegisterService{
-        @POST("regist.jsp")
+        @POST(Urls.URL_REGIST)
         Observable<String> Register(@Query("Uphone") String Uphone, @Query("Upsw") String Upsw);
     }
 

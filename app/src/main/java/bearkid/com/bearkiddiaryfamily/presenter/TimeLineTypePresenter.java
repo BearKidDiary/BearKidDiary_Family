@@ -46,7 +46,7 @@ public class TimeLineTypePresenter {
         timeLine.setReleasetime(new BmobDate(new Date()));
         /*3.设置发布的作者为自己*/
         User author = new User();
-        author.setObjectId(new LocalDB(view.getContext()).getBmobId());
+//        author.setObjectId(new LocalDB(view.getContext()).getBmobId());
         timeLine.setAuthor(author);
         /*4.设置孩子为当前孩子*/
         timeLine.setKid(currentKid);

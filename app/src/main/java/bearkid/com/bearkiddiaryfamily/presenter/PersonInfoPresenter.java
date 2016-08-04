@@ -1,5 +1,7 @@
 package bearkid.com.bearkiddiaryfamily.presenter;
 
+import android.util.AndroidException;
+import android.util.Log;
 import android.widget.Toast;
 
 import bearkid.com.bearkiddiaryfamily.model.UserModel;
@@ -9,6 +11,8 @@ import bearkid.com.bearkiddiaryfamily.ui.activity.iactivity.IPersonInfoView;
 import bearkid.com.bearkiddiaryfamily.utils.LocalDB;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.UpdateListener;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by admin on 2016/7/18.
@@ -22,6 +26,8 @@ public class PersonInfoPresenter {
     private IPersonInfoView view;
     private LocalDB db;
 
+    private String Uphone;
+
     public PersonInfoPresenter(PersonInfoActivity view) {
         this.view = view;
         this.db = new LocalDB(view.getContext());
@@ -32,58 +38,89 @@ public class PersonInfoPresenter {
         view.setPhone(db.getPhoneNum());
         view.setAddress(db.getUserAddress());
         view.setEmail(db.getUserEmail());
+
+        Uphone = db.getPhoneNum();
     }
 
     public void update(int type) {
         User user;
         switch (type) {
             case UPDATE_NAME:
-                user = new User();
-                String name = view.getEditName();
-                user.setUname(name);
-                UserModel.updateUserInfomation(view.getViewContext(), user, new UpdateListener() {
-                    @Override
-                    public void done(BmobException e) {
-                        if (e == null){
-                            db.putUserName(name);
-                            init();
-                        } else {
-                            Toast.makeText(view.getViewContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                String Uname = view.getEditName();
+                UserModel.updateUserInfomation(Uphone, new String[]{"Uname"},new String[]{Uname})
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(userResult -> {
+                            if (userResult.getResultCode() == 0){
+                                Log.d("修改", "修改成功！");
+                            }else {
+                                Log.d("修改", "修改失败！");
+                            }
+                        }, Throwable -> {
+                            Log.d("修改", "异常！");
+                        });
+//                UserModel.updateUserInfomation(view.getViewContext(), user, new UpdateListener() {
+//                    @Override
+//                    public void done(BmobException e) {
+//                        if (e == null){
+//                            db.putUserName(name);
+//                            init();
+//                        } else {
+//                            Toast.makeText(view.getViewContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                });
                 break;
             case UPDATE_ADDRESS:
-                user = new User();
                 String address = view.getEditAddress();
-                user.setUarea(address);
-                UserModel.updateUserInfomation(view.getViewContext(), user, new UpdateListener() {
-                    @Override
-                    public void done(BmobException e) {
-                        if (e == null){
-                            db.putUserAddress(address);
-                            init();
-                        } else {
-                            Toast.makeText(view.getViewContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                UserModel.updateUserInfomation(Uphone, new String[]{User.AREA}, new String[]{address})
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(userResult -> {
+                            if (userResult.getResultCode() == 0){
+                                Log.d("修改", "修改成功！");
+                            }else {
+                                Log.d("修改", "修改失败！");
+                            }
+                        }, Throwable -> {
+                            Log.d("修改", "异常！");
+                        });
+//                user.setUarea(address);
+//                UserModel.updateUserInfomation(view.getViewContext(), user, new UpdateListener() {
+//                    @Override
+//                    public void done(BmobException e) {
+//                        if (e == null){
+//                            db.putUserAddress(address);
+//                            init();
+//                        } else {
+//                            Toast.makeText(view.getViewContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                });
                 break;
             case UPDATE_EMAIL:
-                user = new User();
                 String email = view.getEditEmail();
-                user.setUemail(email);
-                UserModel.updateUserInfomation(view.getViewContext(), user, new UpdateListener() {
-                    @Override
-                    public void done(BmobException e) {
-                        if (e == null){
-                            db.putUserEmail(email);
-                            init();
-                        } else {
-                            Toast.makeText(view.getViewContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                UserModel.updateUserInfomation(Uphone,new String[]{User.EMAIL}, new String[]{email})
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(userResult -> {
+                            if (userResult.getResultCode() == 0){
+                                Log.d("修改", "修改成功！");
+                            }else {
+                                Log.d("修改", "修改失败！");
+                            }
+                        }, Throwable -> {
+                            Log.d("修改", "异常！");
+                        });
+//                user.setUemail(email);
+//                UserModel.updateUserInfomation(view.getViewContext(), user, new UpdateListener() {
+//                    @Override
+//                    public void done(BmobException e) {
+//                        if (e == null){
+//                            db.putUserEmail(email);
+//                            init();
+//                        } else {
+//                            Toast.makeText(view.getViewContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                });
                 break;
             default:
                 break;

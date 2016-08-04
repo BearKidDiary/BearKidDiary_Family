@@ -70,8 +70,6 @@ public class PersonInfoActivity extends BaseActivity implements IPersonInfoView,
     private PersonInfoPresenter presenter;
     private InputMethodManager imm;
 
-    private Handler handler;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
