@@ -51,24 +51,17 @@ public class PersonInfoPresenter {
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(userResult -> {
                             if (userResult.getResultCode() == 0){
+                                db.putUserName(Uname);
+                                view.setName(Uname);
                                 Log.d("修改", "修改成功！");
+                                Toast.makeText(view.getViewContext(), "修改成功！", Toast.LENGTH_SHORT).show();
                             }else {
                                 Log.d("修改", "修改失败！");
+                                Toast.makeText(view.getViewContext(), "修改失败！", Toast.LENGTH_SHORT).show();
                             }
                         }, Throwable -> {
                             Log.d("修改", "异常！");
                         });
-//                UserModel.updateUserInfomation(view.getViewContext(), user, new UpdateListener() {
-//                    @Override
-//                    public void done(BmobException e) {
-//                        if (e == null){
-//                            db.putUserName(name);
-//                            init();
-//                        } else {
-//                            Toast.makeText(view.getViewContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
                 break;
             case UPDATE_ADDRESS:
                 String address = view.getEditAddress();
@@ -76,25 +69,17 @@ public class PersonInfoPresenter {
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(userResult -> {
                             if (userResult.getResultCode() == 0){
+                                db.putUserAddress(address);
+                                view.setAddress(address);
                                 Log.d("修改", "修改成功！");
+                                Toast.makeText(view.getViewContext(), "修改成功！", Toast.LENGTH_SHORT).show();
                             }else {
                                 Log.d("修改", "修改失败！");
+                                Toast.makeText(view.getViewContext(), "修改失败！", Toast.LENGTH_SHORT).show();
                             }
                         }, Throwable -> {
                             Log.d("修改", "异常！");
                         });
-//                user.setUarea(address);
-//                UserModel.updateUserInfomation(view.getViewContext(), user, new UpdateListener() {
-//                    @Override
-//                    public void done(BmobException e) {
-//                        if (e == null){
-//                            db.putUserAddress(address);
-//                            init();
-//                        } else {
-//                            Toast.makeText(view.getViewContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
                 break;
             case UPDATE_EMAIL:
                 String email = view.getEditEmail();
@@ -102,25 +87,17 @@ public class PersonInfoPresenter {
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(userResult -> {
                             if (userResult.getResultCode() == 0){
+                                db.putUserEmail(email);
+                                view.setEmail(email);
                                 Log.d("修改", "修改成功！");
+                                Toast.makeText(view.getViewContext(), "修改成功！", Toast.LENGTH_SHORT).show();
                             }else {
                                 Log.d("修改", "修改失败！");
+                                Toast.makeText(view.getViewContext(), "修改失败！", Toast.LENGTH_SHORT).show();
                             }
                         }, Throwable -> {
                             Log.d("修改", "异常！");
                         });
-//                user.setUemail(email);
-//                UserModel.updateUserInfomation(view.getViewContext(), user, new UpdateListener() {
-//                    @Override
-//                    public void done(BmobException e) {
-//                        if (e == null){
-//                            db.putUserEmail(email);
-//                            init();
-//                        } else {
-//                            Toast.makeText(view.getViewContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
                 break;
             default:
                 break;

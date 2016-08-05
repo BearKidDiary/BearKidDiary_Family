@@ -29,7 +29,6 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
             R.drawable.main_selected_add, R.drawable.main_selected_gallery, R.drawable.main_selected_setting};
     private Fragment[] mFragments = new Fragment[5];
     private MainPresenter presenter;
-
     private Fragment tempFragment;
 
 
