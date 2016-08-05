@@ -47,59 +47,52 @@ public class PersonInfoPresenter {
         switch (type) {
             case UPDATE_NAME:
                 String Uname = view.getEditName();
-                UserModel.updateUserInfomation(Uphone, new String[]{"Uname"},new String[]{Uname})
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(userResult -> {
-                            if (userResult.getResultCode() == 0){
-                                db.putUserName(Uname);
-                                view.setName(Uname);
-                                Log.d("修改", "修改成功！");
-                                Toast.makeText(view.getViewContext(), "修改成功！", Toast.LENGTH_SHORT).show();
-                            }else {
-                                Log.d("修改", "修改失败！");
-                                Toast.makeText(view.getViewContext(), "修改失败！", Toast.LENGTH_SHORT).show();
-                            }
-                        }, Throwable -> {
-                            Log.d("修改", "异常！");
-                        });
+               doUpdateUser(UPDATE_NAME, new String[]{"Uname"},new String[]{Uname});
                 break;
             case UPDATE_ADDRESS:
                 String address = view.getEditAddress();
-                UserModel.updateUserInfomation(Uphone, new String[]{User.AREA}, new String[]{address})
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(userResult -> {
-                            if (userResult.getResultCode() == 0){
-                                db.putUserAddress(address);
-                                view.setAddress(address);
-                                Log.d("修改", "修改成功！");
-                                Toast.makeText(view.getViewContext(), "修改成功！", Toast.LENGTH_SHORT).show();
-                            }else {
-                                Log.d("修改", "修改失败！");
-                                Toast.makeText(view.getViewContext(), "修改失败！", Toast.LENGTH_SHORT).show();
-                            }
-                        }, Throwable -> {
-                            Log.d("修改", "异常！");
-                        });
+                doUpdateUser(UPDATE_EMAIL, new String[]{User.AREA}, new String[]{address});
                 break;
             case UPDATE_EMAIL:
                 String email = view.getEditEmail();
-                UserModel.updateUserInfomation(Uphone,new String[]{User.EMAIL}, new String[]{email})
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(userResult -> {
-                            if (userResult.getResultCode() == 0){
-                                db.putUserEmail(email);
-                                view.setEmail(email);
-                                Log.d("修改", "修改成功！");
-                                Toast.makeText(view.getViewContext(), "修改成功！", Toast.LENGTH_SHORT).show();
-                            }else {
-                                Log.d("修改", "修改失败！");
-                                Toast.makeText(view.getViewContext(), "修改失败！", Toast.LENGTH_SHORT).show();
-                            }
-                        }, Throwable -> {
-                            Log.d("修改", "异常！");
-                        });
+                doUpdateUser(UPDATE_EMAIL, new String[]{User.EMAIL}, new String[]{email});
                 break;
             default:
+                break;
+        }
+    }
+
+    private void doUpdateUser(int type, String[] parameter, String[] value){
+        UserModel.updateUserInfomation(Uphone, parameter, value)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(userResult -> {
+                    if (userResult.getResultCode() == 0){
+                        SaveAndShow(type, value[0]);
+                        Log.d("修改", "修改成功！");
+                        Toast.makeText(view.getViewContext(), "修改成功！", Toast.LENGTH_SHORT).show();
+                    }else {
+
+                        Log.d("修改", "修改失败！");
+                        Toast.makeText(view.getViewContext(), "修改失败！", Toast.LENGTH_SHORT).show();
+                    }
+                }, Throwable -> {
+                    Log.d("修改", "异常！");
+                });
+    }
+
+    private void SaveAndShow(int type, String value){
+        switch (type){
+            case UPDATE_NAME:
+                db.putUserName(value);
+                view.setName(value);
+                break;
+            case UPDATE_EMAIL:
+                db.putUserEmail(value);
+                view.setEmail(value);
+                break;
+            case UPDATE_ADDRESS:
+                db.putUserAddress(value);
+                view.setAddress(value);
                 break;
         }
     }
