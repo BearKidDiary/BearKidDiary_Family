@@ -29,6 +29,8 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
             R.drawable.main_selected_add, R.drawable.main_selected_gallery, R.drawable.main_selected_setting};
     private Fragment[] mFragments = new Fragment[5];
     private MainPresenter presenter;
+    private Fragment tempFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,9 +70,15 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
         ((TextView) tab[selected].getChildAt(1)).setTextColor(getResources().getColor(R.color.colorPrimaryDark));
 
         mFragments[0] = new MessageFragment();
+        mFragments[1] = new TimeLineFragment();
+        mFragments[2] = new TimeLineTypeFragment();
+        mFragments[3] = new GalleryFragment();
+        mFragments[4] = new MeFragment();
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.activity_main_contain, mFragments[0]);
+        transaction.add(R.id.activity_main_contain, mFragments[0]);
         transaction.commit();
+        tempFragment = mFragments[0];
     }
 
     private void initAccount() {
@@ -79,30 +87,28 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
 
     private void changeTab(int tabNum) {
         onTabSelected(tabNum);
-        if (mFragments[tabNum] == null) {
-            switch (tabNum) {
-                case 0:
-                    mFragments[0] = new MessageFragment();
-                    break;
-                case 1:
-                    mFragments[1] = new TimeLineFragment();
-                    break;
-                case 2:
-                    mFragments[2] = new TimeLineTypeFragment();
-                    break;
-                case 3:
-                    mFragments[3] = new GalleryFragment();
-                    break;
-                case 4:
-                    mFragments[4] = new MeFragment();
-                    break;
-                default:
-                    break;
+        changeFragment(mFragments[tabNum]);
+    }
+
+    /**
+     * 切换Fragment
+     * @param fragment
+     */
+    private void changeFragment(Fragment fragment) {
+        if (fragment != tempFragment) {
+            if (fragment.isAdded()) {
+                getSupportFragmentManager().beginTransaction()
+                        .hide(tempFragment)
+                        .show(fragment)
+                        .commit();
+            } else {
+                getSupportFragmentManager().beginTransaction()
+                        .hide(tempFragment)
+                        .add(R.id.activity_main_contain,fragment)
+                        .commit();
             }
+            tempFragment = fragment;
         }
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.activity_main_contain, mFragments[tabNum]);
-        transaction.commit();
     }
 
     private void onTabSelected(int tabNum) {

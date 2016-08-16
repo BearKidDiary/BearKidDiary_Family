@@ -21,9 +21,9 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
 
-    <!--图片选择器所需要的权限-->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <!-- 图片选择器所需要的权限 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".global.BaseApplication"
@@ -50,11 +50,13 @@
         <activity android:name=".ui.activity.FamilyCreateActivity" />
         <activity android:name=".ui.activity.DataAnalysisActivity" />
         <activity android:name=".ui.activity.KidInfoActivity" />
-        <activity android:name=".ui.activity.FamilyActivity"></activity>
-
-        <activity android:name="com.zfdang.multiple_images_selector.ImagesSelectorActivity"
-            android:configChanges="orientation|screenSize"></activity>
-        <activity android:name="com.zfdang.multiple_images_selector.CropActivity"></activity>
+        <activity android:name=".ui.activity.FamilyActivity" />
+        <activity android:name=".ui.activity.TestActivity" />
+        <activity
+            android:name="com.zfdang.multiple_images_selector.ImagesSelectorActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity android:name="com.zfdang.multiple_images_selector.CropActivity" />
+        <activity android:name=".ui.activity.SettingActivity"></activity>
     </application>
 
 </manifest>

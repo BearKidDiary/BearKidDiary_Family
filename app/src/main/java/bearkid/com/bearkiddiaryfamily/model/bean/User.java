@@ -5,7 +5,8 @@ import cn.bmob.v3.BmobObject;
 /**
  * 家庭版用户
  */
-public class User extends BmobObject {
+
+public class User {
     public static final String NAME = "Uname";
     public static final String SEX = "Usex";
     public static final String PHONE = "Uphone";
@@ -17,13 +18,14 @@ public class User extends BmobObject {
     public static final String EDUEXPERIENCE = "Ueduexperience";
     public static final String EMAIL = "Uemail";
 
-    private String Uname;
-    private String Usex;
+
+    private String Uname = null;
+    private String Usex = null;
     private String Uphone;
-    private String Uarea;
+    private String Uarea = null;
     private String Upsw;
     //private String Uavatar;
-    private String Uemail;
+    private String Uemail = null;
 
     public String getUname() {
         return Uname;
@@ -71,5 +73,11 @@ public class User extends BmobObject {
 
     public void setUpsw(String Upsw) {
         this.Upsw = Upsw;
+    }
+
+    @Override
+    public String toString() {
+        return "Uphone = " + Uphone
+                + "Uname" + Uname;
     }
 }

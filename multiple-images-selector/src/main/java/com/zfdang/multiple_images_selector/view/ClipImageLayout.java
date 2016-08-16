@@ -11,7 +11,7 @@ import android.widget.RelativeLayout;
 public class ClipImageLayout extends RelativeLayout {
 	private ClipZoomImageView mZoomImageView;
 	private ClipImageBorderView mClipImageView;
-	private int mHorizontalPadding = 0;// 这里测试，直接写死了大小，真正使用过程中，可以提取为自定义属性
+	private int mHorizontalPadding = 50;// 这里测试，直接写死了大小，真正使用过程中，可以提取为自定义属性
 
 	public ClipImageLayout(Context context, AttributeSet attrs) {
 		super(context, attrs);
