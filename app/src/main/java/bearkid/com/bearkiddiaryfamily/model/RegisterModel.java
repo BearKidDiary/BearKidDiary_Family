@@ -10,6 +10,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import bearkid.com.bearkiddiaryfamily.model.bean.Result;
 import bearkid.com.bearkiddiaryfamily.model.bean.User;
 import bearkid.com.bearkiddiaryfamily.utils.Urls;
 import retrofit2.Retrofit;
@@ -35,7 +36,7 @@ public class RegisterModel {
      * @param user 新用户的信息
      * @param code 短信验证码
      */
-    public static Observable<String> register(final User user, String code) {
+    public static Observable<Result<User>> register(final User user, String code) {
 //        return SMSCodeModel.vertifySMSCode(user.getUphone(), code)/*验证码验证*/
 //                .flatMap(new Func1<Void, Observable<String>>() {
 //                    @Override
@@ -53,11 +54,11 @@ public class RegisterModel {
      */
     public interface RegisterService{
         @POST(Urls.URL_REGIST)
-        Observable<String> Register(@Query("Uphone") String Uphone, @Query("Upsw") String Upsw);
+        Observable<Result<User>> Register(@Query("Uphone") String Uphone, @Query("Upsw") String Upsw);
     }
 
     //使用Retrofit2+RxJava
-    public static Observable<String> Register(String Uphone, String Upsw){;
+    public static Observable<Result<User>> Register(String Uphone, String Upsw){;
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Urls.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())

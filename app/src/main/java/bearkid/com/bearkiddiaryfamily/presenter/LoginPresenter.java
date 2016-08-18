@@ -48,7 +48,6 @@ public class LoginPresenter {
         LoginModel.login(view.getContext(), phoneNum, psw)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(success -> {/*成功查找到对应的用户并对比密码是否一致*/
-                    Log.d("登录", success.toString());
                     if (success.getResultCode() == 0) { //获取返回码，0为成功登录
                         db.putPhoneNum(phoneNum);
                         view.loginClickable();

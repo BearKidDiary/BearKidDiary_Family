@@ -43,11 +43,10 @@ public class PersonInfoPresenter {
     }
 
     public void update(int type) {
-        User user;
         switch (type) {
             case UPDATE_NAME:
                 String Uname = view.getEditName();
-               doUpdateUser(UPDATE_NAME, new String[]{"Uname"},new String[]{Uname});
+               doUpdateUser(UPDATE_NAME, new String[]{User.NAME},new String[]{Uname});
                 break;
             case UPDATE_ADDRESS:
                 String address = view.getEditAddress();

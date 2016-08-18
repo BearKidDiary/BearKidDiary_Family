@@ -50,7 +50,7 @@ public class RegisterPresenter {
         RegisterModel.register(user, view.getSMSCode())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s -> {/* 成功注册 s是ObjectId */
-                    if (s.equals("true")){
+                    if (s.getResultCode() == 0){
                         Log.d("注册", "注册成功！");
                         view.registerClickable();
                         view.finish();

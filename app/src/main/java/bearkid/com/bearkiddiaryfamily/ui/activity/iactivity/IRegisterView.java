@@ -1,7 +1,7 @@
 package bearkid.com.bearkiddiaryfamily.ui.activity.iactivity;
 
 /**
- * Created by admin on 2016/7/6.
+ * Created by Hung_Xum on 2016/8/18.
  */
 public interface IRegisterView extends IBaseView {
     void showError(String e);
@@ -25,4 +25,5 @@ public interface IRegisterView extends IBaseView {
     void smscodeClickable();
 
     void postRunnable(Runnable runnable);
+
 }
