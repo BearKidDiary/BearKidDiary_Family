@@ -42,7 +42,8 @@
         <activity android:name=".ui.activity.LoginActivity" />
         <activity android:name=".ui.activity.RegisterActivity" />
         <activity android:name=".ui.activity.ShowBigImageActivity" />
-        <activity android:name=".ui.activity.PersonInfoActivity" />
+        <activity android:name=".ui.activity.PersonalInfoActivity" />
+        <activity android:name=".ui.activity.PersonalInfoEditActivity" />
         <activity android:name=".ui.activity.ChatActivity" />
         <activity android:name=".ui.activity.CourseActivity" />
         <activity android:name=".ui.activity.ContactsListActivity" />
@@ -56,7 +57,7 @@
             android:name="com.zfdang.multiple_images_selector.ImagesSelectorActivity"
             android:configChanges="orientation|screenSize" />
         <activity android:name="com.zfdang.multiple_images_selector.CropActivity" />
-        <activity android:name=".ui.activity.SettingActivity"></activity>
+        <activity android:name=".ui.activity.SettingActivity" />
     </application>
 
 </manifest>

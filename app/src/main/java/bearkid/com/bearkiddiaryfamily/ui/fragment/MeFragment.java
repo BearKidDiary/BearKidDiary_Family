@@ -20,8 +20,7 @@ import bearkid.com.bearkiddiaryfamily.R;
 import bearkid.com.bearkiddiaryfamily.model.QRCodeModel;
 import bearkid.com.bearkiddiaryfamily.ui.activity.ContactsListActivity;
 import bearkid.com.bearkiddiaryfamily.ui.activity.KidInfoActivity;
-import bearkid.com.bearkiddiaryfamily.ui.activity.PersonInfoActivity;
-import bearkid.com.bearkiddiaryfamily.ui.activity.TestActivity;
+import bearkid.com.bearkiddiaryfamily.ui.activity.PersonalInfoActivity;
 import bearkid.com.bearkiddiaryfamily.ui.view.CircleImageview;
 import bearkid.com.bearkiddiaryfamily.utils.ContactsType;
 
@@ -62,7 +61,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.img_me_avatar:
                 Log.d("avatarImg", "点击");
-                intent = new Intent(context, PersonInfoActivity.class);
+                intent = new Intent(context, PersonalInfoActivity.class);
                 startActivity(intent);
                 break;
             case R.id.img_me_add:

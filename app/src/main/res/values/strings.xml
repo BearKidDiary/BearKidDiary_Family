@@ -12,13 +12,23 @@
     <string name="txt_item_contacts">联系人</string>
     <string name="txt_item_setting">设置</string>
 
-    <string name="txt_title_personinfo">个人信息</string>
-    <string name="txt_item_avatar">头像</string>
-    <string name="txt_item_name">姓名</string>
-    <string name="txt_item_phone">电话号码</string>
-    <string name="txt_item_address">地址</string>
-    <string name="txt_item_email">邮箱</string>
-    <string name="txt_title_setting">设置</string>
+    <string name="personal_info_title">个人信息</string>
+    <string name="personal_info_avatar">头像</string>
+    <string name="personal_info_name">姓名</string>
+    <string name="personal_info_gender">性别</string>
+    <string name="personal_info_phone">电话号码</string>
+    <string name="personal_info_address">地址</string>
+    <string name="personal_info_email">邮箱</string>
+    <string name="personal_info_setting">设置</string>
+    <string name="confirm">确认</string>
+
+    <string name="personal_info_edit_name">修改用户名信息</string>
+    <string name="personal_info_edit_gender">修改性别信息</string>
+    <string name="personal_info_edit_address">修改地址信息"</string>
+    <string name="personal_info_edit_email">修改邮箱信息</string>
+
+    <string name="male">男</string>
+    <string name="female">女</string>
 
 
     <!--  -->

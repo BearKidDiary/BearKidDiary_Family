@@ -3,9 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_gray"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context="bearkid.com.bearkiddiaryfamily.ui.activity.SettingActivity">
+    tools:context=".ui.activity.PersonalInfoEditActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -13,27 +14,40 @@
         android:background="@color/colorPrimary">
 
         <ImageView
-            android:id="@+id/img_title_back_personinfo"
             android:layout_width="32dp"
             android:layout_height="40dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
+            android:onClick="back"
             android:paddingLeft="4dp"
             android:paddingRight="4dp"
-            android:src="@drawable/selector_title_back"/>
+            android:src="@drawable/selector_title_back" />
+
         <TextView
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textSize="20sp"
             android:textColor="@color/txt_title"
-            android:text="@string/personal_info_setting"/>
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_personal_info_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:clickable="true"
+            android:gravity="center"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:background="@drawable/selector_translucent"
+            android:text="@string/confirm"
+            android:textColor="@color/txt_title"
+            android:textSize="16sp" />
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </RelativeLayout>
+    <include
+        layout="@layout/item_personal_info" />
 
 </LinearLayout>
