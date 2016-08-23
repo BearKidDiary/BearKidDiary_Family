@@ -1,5 +1,6 @@
 package bearkid.com.bearkiddiaryfamily.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 import bearkid.com.bearkiddiaryfamily.R;
 import bearkid.com.bearkiddiaryfamily.presenter.PersonInfoPresenter;
 import bearkid.com.bearkiddiaryfamily.ui.activity.iactivity.IPersonalInfoView;
+import retrofit2.http.PUT;
 
 public class PersonalInfoActivity extends BaseActivity implements IPersonalInfoView, View.OnClickListener {
 
@@ -174,5 +176,9 @@ public class PersonalInfoActivity extends BaseActivity implements IPersonalInfoV
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public static void startActivity(Context context) {
+        context.startActivity(new Intent(context, PersonalInfoActivity.class));
     }
 }

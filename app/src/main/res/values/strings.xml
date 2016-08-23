@@ -50,4 +50,5 @@
 
     <!-- 孩子信息 -->
     <string name="kid_info">孩子信息</string>
+    <string name="qrcode_title">我的二维码</string>
 </resources>

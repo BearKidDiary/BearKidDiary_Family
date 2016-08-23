@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,9 +19,12 @@ import bearkid.com.bearkiddiaryfamily.R;
 import bearkid.com.bearkiddiaryfamily.model.QRCodeModel;
 import bearkid.com.bearkiddiaryfamily.ui.activity.ContactsListActivity;
 import bearkid.com.bearkiddiaryfamily.ui.activity.KidInfoActivity;
+import bearkid.com.bearkiddiaryfamily.ui.activity.MainActivity;
+import bearkid.com.bearkiddiaryfamily.ui.activity.MyQRCodeActivity;
 import bearkid.com.bearkiddiaryfamily.ui.activity.PersonalInfoActivity;
 import bearkid.com.bearkiddiaryfamily.ui.view.CircleImageview;
 import bearkid.com.bearkiddiaryfamily.utils.ContactsType;
+import bearkid.com.bearkiddiaryfamily.utils.ScreenMetricsUtils;
 
 /**
  * Created by admin on 2016/7/7.
@@ -61,8 +63,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.img_me_avatar:
                 Log.d("avatarImg", "点击");
-                intent = new Intent(context, PersonalInfoActivity.class);
-                startActivity(intent);
+                PersonalInfoActivity.startActivity(getContext());
                 break;
             case R.id.img_me_add:
                 addChild();
@@ -71,11 +72,10 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
                 QRCodeModel.scanQRCode(this, requestCode);
                 break;
             case R.id.rlayout_me_qr:
+                MyQRCodeActivity.startActivity(getContext());
                 break;
             case R.id.rlayout_me_contacts:
-                intent = new Intent(context, ContactsListActivity.class);
-                intent.putExtra("ListType", ContactsType.CHECK);
-                startActivity(intent);
+                ContactsListActivity.startActivity(getContext(), ContactsType.CHECK);
                 break;
             case R.id.rlayout_me_setting:
                 break;
@@ -101,7 +101,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
     private void addChild() {
         CircleImageview imageview = new CircleImageview(context);
         imageview.setImageResource(R.drawable.avatar);
-        float density = getDensity();
+        float density = ScreenMetricsUtils.getDensity((MainActivity)getActivity());
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams((int) (64 * density), (int) (64 * density));
         params.leftMargin = 8;
         imageview.setOnClickListener(new View.OnClickListener() {
@@ -111,19 +111,6 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
             }
         });
         mychildrenLlayout.addView(imageview, 1, params);
-    }
-
-    /**
-     * 获取屏幕密度
-     *
-     * @return
-     */
-    private float getDensity() {
-        float density;
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        density = displayMetrics.density;
-        return density;
     }
 
     private void initView(View view) {
