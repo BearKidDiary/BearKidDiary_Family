@@ -51,4 +51,8 @@
     <!-- 孩子信息 -->
     <string name="kid_info">孩子信息</string>
     <string name="qrcode_title">我的二维码</string>
+    <string name="edit">编辑</string>
+    <string name="height_and_weight">身高、体重</string>
+    <string name="vision">视力</string>
+    <string name="exhort">家长叮嘱</string>
 </resources>

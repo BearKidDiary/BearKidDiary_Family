@@ -18,10 +18,10 @@
             android:layout_height="40dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
+            android:onClick="back"
             android:paddingLeft="4dp"
             android:paddingRight="4dp"
-            android:src="@drawable/selector_title_back"
-            android:clickable="true" />
+            android:src="@drawable/selector_title_back" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -37,9 +37,9 @@
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="16dp"
-            android:gravity="center_vertical"
-            android:text="编辑"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="@string/edit"
             android:textColor="#ffffff"
             android:textSize="16sp"
             android:clickable="true" />
@@ -110,23 +110,25 @@
                 android:id="@+id/rl_kid_info_list_1"
                 android:clickable="true"
                 android:layout_width="match_parent"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
                 android:layout_height="wrap_content">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="4dp"
-                    android:text="身高、体重"
+                    android:layout_centerVertical="true"
+                    android:text="@string/height_and_weight"
                     android:textSize="18sp"/>
                 <ImageView
                     android:id="@+id/iv_kid_info_list_1"
                     android:layout_width="24dp"
                     android:layout_height="12dp"
                     android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     android:background="@drawable/arrow_up"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="16dp"/>
+                    android:layout_centerVertical="true"/>
             </RelativeLayout>
 
             <LinearLayout
@@ -156,23 +158,25 @@
                 android:id="@+id/rl_kid_info_list_2"
                 android:clickable="true"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="4dp"
-                    android:text="视力"
+                    android:layout_centerVertical="true"
+                    android:text="@string/vision"
                     android:textSize="18sp"/>
                 <ImageView
                     android:id="@+id/iv_kid_info_list_2"
                     android:layout_width="24dp"
                     android:layout_height="12dp"
                     android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     android:background="@drawable/arrow_up"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="16dp"/>
+                    android:layout_centerVertical="true" />
             </RelativeLayout>
 
             <LinearLayout
@@ -203,23 +207,25 @@
                 android:id="@+id/rl_kid_info_list_3"
                 android:clickable="true"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="4dp"
-                    android:text="家长叮嘱"
+                    android:layout_centerVertical="true"
+                    android:text="@string/exhort"
                     android:textSize="18sp"/>
                 <ImageView
                     android:id="@+id/iv_kid_info_list_3"
                     android:layout_width="24dp"
                     android:layout_height="12dp"
                     android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     android:background="@drawable/arrow_up"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="16dp"/>
+                    android:layout_centerVertical="true"/>
             </RelativeLayout>
 
             <LinearLayout

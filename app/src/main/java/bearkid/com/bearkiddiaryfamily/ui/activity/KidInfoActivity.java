@@ -14,7 +14,6 @@ import bearkid.com.bearkiddiaryfamily.ui.activity.iactivity.IKidInfoView;
 import bearkid.com.bearkiddiaryfamily.ui.view.KidInfoView;
 
 public class KidInfoActivity extends BaseActivity implements IKidInfoView, View.OnClickListener{
-    ImageView back;
     TextView edit;
 
     ImageView avatar;
@@ -38,7 +37,6 @@ public class KidInfoActivity extends BaseActivity implements IKidInfoView, View.
     }
 
     private void initView() {
-        back = (ImageView) findViewById(R.id.iv_kid_info_back);
         edit = (TextView) findViewById(R.id.tv_kid_info_edit);
         avatar = (ImageView) findViewById(R.id.iv_kid_info_avatar);
         name = (TextView) findViewById(R.id.tv_kid_info_name);
@@ -57,7 +55,6 @@ public class KidInfoActivity extends BaseActivity implements IKidInfoView, View.
         ll_2 = (LinearLayout) findViewById(R.id.ll_kid_info_list_2);
         ll_3 = (LinearLayout) findViewById(R.id.ll_kid_info_list_3);
 
-        back.setOnClickListener(this);
         edit.setOnClickListener(this);
         list_1.setOnClickListener(this);
         list_2.setOnClickListener(this);
@@ -79,9 +76,6 @@ public class KidInfoActivity extends BaseActivity implements IKidInfoView, View.
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.iv_kid_info_back:
-                finish();
-                break;
             case R.id.tv_kid_info_edit:
                 if (isEdit) {
                     edit.setText("编辑");
