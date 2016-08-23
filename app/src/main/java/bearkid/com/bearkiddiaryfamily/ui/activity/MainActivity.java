@@ -38,7 +38,7 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
         setContentView(R.layout.activity_main);
 
         initPresenter();
-//        initAccount();//判断是否登陆，跳转登陆界面
+        initAccount();//判断是否登陆，跳转登陆界面
         initTabView();
         initContain();//设置导航栏图标
     }

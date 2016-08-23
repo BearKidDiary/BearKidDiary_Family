@@ -55,4 +55,6 @@
     <string name="height_and_weight">身高、体重</string>
     <string name="vision">视力</string>
     <string name="exhort">家长叮嘱</string>
+    <string name="add_kid_title">添加孩子</string>
+    <string name="birthday">生日</string>
 </resources>

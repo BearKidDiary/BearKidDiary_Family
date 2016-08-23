@@ -71,11 +71,12 @@ public class UserModel {
         updateInfoService updateInfoService = retrofit.create(UserModel.updateInfoService.class);
         Map<String, String> userMap = new HashMap<>();
         for(int i = 0; i < parameter.length; i++){
-            try {
-                userMap.put(parameter[i], URLEncoder.encode(value[i],"UTF-8"));
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                userMap.put(parameter[i], URLEncoder.encode(value[i],"UTF-8"));
+//            } catch (UnsupportedEncodingException e) {
+//                e.printStackTrace();
+//            }
+            userMap.put(parameter[i], value[i]);
         }
 
         return updateInfoService.updateUserInfo(Uphone, userMap)

@@ -17,6 +17,7 @@ import android.widget.RelativeLayout;
 
 import bearkid.com.bearkiddiaryfamily.R;
 import bearkid.com.bearkiddiaryfamily.model.QRCodeModel;
+import bearkid.com.bearkiddiaryfamily.ui.activity.AddKidActivity;
 import bearkid.com.bearkiddiaryfamily.ui.activity.ContactsListActivity;
 import bearkid.com.bearkiddiaryfamily.ui.activity.KidInfoActivity;
 import bearkid.com.bearkiddiaryfamily.ui.activity.MainActivity;
@@ -63,19 +64,20 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.img_me_avatar:
                 Log.d("avatarImg", "点击");
-                PersonalInfoActivity.startActivity(getContext());
+                PersonalInfoActivity.startActivity(context);
                 break;
             case R.id.img_me_add:
-                addChild();
+                AddKidActivity.startActivity(context);
+//                addChild();
                 break;
             case R.id.rlayout_me_scan:
                 QRCodeModel.scanQRCode(this, requestCode);
                 break;
             case R.id.rlayout_me_qr:
-                MyQRCodeActivity.startActivity(getContext());
+                MyQRCodeActivity.startActivity(context);
                 break;
             case R.id.rlayout_me_contacts:
-                ContactsListActivity.startActivity(getContext(), ContactsType.CHECK);
+                ContactsListActivity.startActivity(context, ContactsType.CHECK);
                 break;
             case R.id.rlayout_me_setting:
                 break;

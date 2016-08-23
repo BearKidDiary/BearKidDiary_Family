@@ -1,5 +1,6 @@
 package bearkid.com.bearkiddiaryfamily.presenter;
 
+import bearkid.com.bearkiddiaryfamily.model.FormatCheckModel;
 import bearkid.com.bearkiddiaryfamily.model.UserModel;
 import bearkid.com.bearkiddiaryfamily.model.bean.User;
 import bearkid.com.bearkiddiaryfamily.ui.activity.PersonalInfoEditActivity;
@@ -34,7 +35,12 @@ public class PersonInfoEditPresenter {
                 doUpdateUser(PersonalInfoEditActivity.TYPE_ADDRESS, new String[]{User.AREA}, new String[]{editContent});
                 break;
             case PersonalInfoEditActivity.TYPE_EMAIL:
-                doUpdateUser(PersonalInfoEditActivity.TYPE_EMAIL, new String[]{User.EMAIL}, new String[]{editContent});
+                if (FormatCheckModel.isEmail(editContent)) {
+                    doUpdateUser(PersonalInfoEditActivity.TYPE_EMAIL, new String[]{User.EMAIL}, new String[]{editContent});
+                } else{
+                    view.showResult("您输入的邮箱地址不正确");
+                    view.hideProgressDialog();
+                }
                 break;
             default:
                 break;

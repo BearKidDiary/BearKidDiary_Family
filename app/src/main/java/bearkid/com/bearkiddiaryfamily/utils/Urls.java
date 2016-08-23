@@ -9,4 +9,6 @@ public class Urls {
     public static final String URL_LOGIN = "user/login";
     public static final String URL_REGIST = "user/regist";
     public static final String URL_UPDATEUERINFO = "user/updateinfo";
+    public static final String URL_ADDKID = "kid/add";
+    public static final String URL_KID = "kid";
 }
