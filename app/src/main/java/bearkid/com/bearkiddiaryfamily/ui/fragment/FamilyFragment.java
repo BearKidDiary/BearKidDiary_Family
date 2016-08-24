@@ -22,7 +22,9 @@ import android.widget.LinearLayout;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import bearkid.com.bearkiddiaryfamily.R;
@@ -174,7 +176,7 @@ public class FamilyFragment extends BaseFragment {
                 for (Course course : courses) {
                     View courseView = LayoutInflater.from(FamilyFragment.this.getContext()).inflate(R.layout.item_family_kid_course, v.ll_root, true);
                     ((TextView) courseView.findViewById(R.id.tv_family_kid_course_name)).setText(course.getCname());
-                    ((TextView) courseView.findViewById(R.id.tv_family_kid_course_time)).setText(course.getCclasstime().getDate());
+                    ((TextView) courseView.findViewById(R.id.tv_family_kid_course_time)).setText(new SimpleDateFormat("YYYY-MM-dd").format(new Date(course.getCclasstime())));
                     ((TextView) courseView.findViewById(R.id.tv_family_kid_course_org)).setText("春田花花");
                     courseView.setOnClickListener(view -> CourseActivity.startActivity(FamilyFragment.this.getContext()));
                 }

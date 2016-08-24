@@ -2,17 +2,10 @@ package bearkid.com.bearkiddiaryfamily.model.bean;
 
 import com.google.gson.annotations.Expose;
 
-import cn.bmob.v3.BmobObject;
-
 /**
- * Created by admin on 2016/7/20.
- * 身高
+ * Created by admin on 2016/8/23.
  */
-public class Height extends BmobObject {
-    public static final String ID = "Kid";
-    public static final String HEIGHT = "Kheight";
-    public static final String DATE = "Htime";
-
+public class Weight {
     @Expose
     private Long Hid;
 

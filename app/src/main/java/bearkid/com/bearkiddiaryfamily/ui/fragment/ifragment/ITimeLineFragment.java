@@ -15,4 +15,8 @@ public interface ITimeLineFragment extends IBaseFragment {
     void setTimeLines(List<TimeLine> timeLines);
 
     void notifyChanged();
+
+    void setChidrenName(List<String> name);
+
+    String getCurrentChildName();
 }

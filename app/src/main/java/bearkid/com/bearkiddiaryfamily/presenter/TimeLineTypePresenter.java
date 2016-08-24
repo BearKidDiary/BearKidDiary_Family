@@ -35,15 +35,14 @@ public class TimeLineTypePresenter {
 
     public void init() {
         currentKid = new Kid();
-        currentKid.setObjectId("KRlg888G");
     }
 
     public void uploadTimeLine(String content, String type, int typeLogo, @Nullable File pic1, @Nullable File pic2, @Nullable File pic3) {
         TimeLine timeLine = new TimeLine();
         /*1.设置发布的内容*/
-        timeLine.setReleasecontent(content);
+        timeLine.setTreleasecontent(content);
         /*2.设置发布时间*/
-        timeLine.setReleasetime(new BmobDate(new Date()));
+        timeLine.setTreleasetime(new Date().getTime());
         /*3.设置发布的作者为自己*/
         User author = new User();
 //        author.setObjectId(new LocalDB(view.getContext()).getBmobId());
@@ -51,13 +50,10 @@ public class TimeLineTypePresenter {
         /*4.设置孩子为当前孩子*/
         timeLine.setKid(currentKid);
         /*5.设置类型*/
-        timeLine.setType(type);
+        timeLine.setTtype(type);
         /*6.设置图标*/
-        timeLine.setTypelogo(typeLogo);
+        timeLine.setTtypelogo(typeLogo);
         /*7.设置图片*/
-        if (pic1 != null) timeLine.setImage1(new BmobFile(pic1));
-        if (pic2 != null) timeLine.setImage2(new BmobFile(pic2));
-        if (pic3 != null) timeLine.setImage3(new BmobFile(pic3));
 
         TimeLineModel.postTimeLine(timeLine)
                 .observeOn(AndroidSchedulers.mainThread())

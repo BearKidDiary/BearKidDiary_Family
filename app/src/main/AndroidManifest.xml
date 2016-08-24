@@ -49,7 +49,6 @@
         <activity android:name=".ui.activity.DataAnalysisActivity" />
         <activity android:name=".ui.activity.KidInfoActivity" />
         <activity android:name=".ui.activity.FamilyActivity" />
-        <activity android:name=".ui.activity.TestActivity" />
         <activity
             android:name="com.zfdang.multiple_images_selector.ImagesSelectorActivity"
             android:configChanges="orientation|screenSize" />

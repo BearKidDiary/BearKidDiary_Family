@@ -15,8 +15,8 @@ public class FadeModel {
     public static FamilyKidMsg getFamilyKidMsg() {
         Course course = new Course();
         course.setCname("语文课");
-        course.setCclasstime(new BmobDate(new Date()));
-        course.setCendtime(new BmobDate(new Date()));
+        course.setCclasstime(new Date().getTime());
+        course.setCendtime(new Date().getTime());
         List<Course> list = new ArrayList<>();
         list.add(course);
         FamilyKidMsg fkm = new FamilyKidMsg();
