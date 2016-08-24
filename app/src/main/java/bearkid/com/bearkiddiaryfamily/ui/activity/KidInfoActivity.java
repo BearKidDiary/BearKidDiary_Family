@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import bearkid.com.bearkiddiaryfamily.R;
@@ -31,7 +32,6 @@ public class KidInfoActivity extends BaseActivity implements IKidInfoView, View.
 
     protected boolean list_1_expand, list_2_expand, list_3_expand;
     protected boolean isEdit;
-
     private Kid kid;
 
     @Override
@@ -78,6 +78,21 @@ public class KidInfoActivity extends BaseActivity implements IKidInfoView, View.
         list_3_add.setVisibility(View.GONE);
 
         name.setText(kid.getKname());
+
+        if (kid.getKbirthday() != null) {
+            Date birthday = new Date(kid.getKbirthday());
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            birth.setText(simpleDateFormat.format(birthday));
+        }
+
+        if (kid.getKsex() != null) {
+            if (kid.getKsex().equals("男")) {
+                sex.setImageResource(R.drawable.male);
+            } else {
+                sex.setImageResource(R.drawable.female);
+            }
+        }
+
     }
 
     @Override

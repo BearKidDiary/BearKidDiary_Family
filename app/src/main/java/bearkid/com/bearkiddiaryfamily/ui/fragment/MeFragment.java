@@ -7,13 +7,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -55,7 +52,8 @@ public class MeFragment extends BaseFragment implements IMeFragment, View.OnClic
     private List<Kid> myKids = new ArrayList<>();
     protected MePresenter presenter;
 
-    private static final int requestCode = 200;//扫一扫二维码的请求码
+    private static final int REQUEST_QR_CODE = 200;//扫一扫二维码的请求码
+    private static final int REQUEST_ADD_KID = 201;//添加孩子
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -83,7 +81,7 @@ public class MeFragment extends BaseFragment implements IMeFragment, View.OnClic
                 PersonalInfoActivity.startActivity(context);
                 break;
             case R.id.rlayout_me_scan:
-                QRCodeModel.scanQRCode(this, requestCode);
+                QRCodeModel.scanQRCode(this, REQUEST_QR_CODE);
                 break;
             case R.id.rlayout_me_qr:
                 MyQRCodeActivity.startActivity(context);
@@ -98,13 +96,23 @@ public class MeFragment extends BaseFragment implements IMeFragment, View.OnClic
 
     @Override
     public void onActivityResult(int request, int result, Intent data) {
-        if (request == requestCode && result == Activity.RESULT_OK) {
-            //TODO:处理扫描后获得的内容
-            Bitmap QRcode = QRCodeModel.getBitmap(data);
-            String content = QRCodeModel.getContent(data);
-            Log.i("zy", "扫描成功：" + content);
-        } else {
-            super.onActivityResult(request, result, data);
+        super.onActivityResult(request, result, data);
+        switch (request) {
+            case REQUEST_QR_CODE:
+                if (result == Activity.RESULT_OK) {
+                    //TODO:处理扫描后获得的内容
+                    Bitmap QRcode = QRCodeModel.getBitmap(data);
+                    String content = QRCodeModel.getContent(data);
+                    Log.i("zy", "扫描成功：" + content);
+                }
+                break;
+            case REQUEST_ADD_KID:
+                if (result == Activity.RESULT_OK) {
+                    presenter.loadKidsInfo();
+                }
+                break;
+            default:
+                break;
         }
     }
 
@@ -128,7 +136,7 @@ public class MeFragment extends BaseFragment implements IMeFragment, View.OnClic
 
     private void resetGridView() {
         int size = myKids.size() + 1;
-        int length = 100;
+        int length = 80;
         float density = ScreenMetricsUtils.getDensity((MainActivity) getActivity());
         int gridviewWidth = (int) (size * (length + 4) * density);
         int itemWidth = (int) (length * density);
@@ -176,7 +184,7 @@ public class MeFragment extends BaseFragment implements IMeFragment, View.OnClic
                 holder.avatar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        AddKidActivity.startActivity(context);
+                        AddKidActivity.startActivity(MeFragment.this, REQUEST_ADD_KID);
                     }
                 });
             } else {

@@ -66,7 +66,7 @@
                     android:id="@+id/iv_kid_info_avatar"
                     android:layout_width="72dp"
                     android:layout_height="72dp"
-                    android:background="@drawable/avatar"/>
+                    android:src="@drawable/avatar"/>
                 <RelativeLayout
                     android:padding="3dp"
                     android:layout_width="wrap_content"
@@ -77,7 +77,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
-                        android:text="王小锤"
                         android:textSize="24sp"
                         android:textStyle="bold"/>
                     <TextView
@@ -86,7 +85,6 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
                         android:singleLine="true"
-                        android:text="2009.08.01"
                         android:textStyle="italic"
                         android:textSize="16sp"/>
 
@@ -100,8 +98,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
-                        android:background="@drawable/male"/>
+                        android:layout_alignParentRight="true"/>
                 </RelativeLayout>
 
             </LinearLayout>
