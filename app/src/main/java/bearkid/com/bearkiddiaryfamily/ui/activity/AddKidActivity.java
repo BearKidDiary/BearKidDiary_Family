@@ -1,8 +1,10 @@
 package bearkid.com.bearkiddiaryfamily.ui.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +16,7 @@ import com.gc.materialdesign.widgets.ProgressDialog;
 import bearkid.com.bearkiddiaryfamily.R;
 import bearkid.com.bearkiddiaryfamily.presenter.AddKidPresenter;
 import bearkid.com.bearkiddiaryfamily.ui.activity.iactivity.IAddKidView;
+import bearkid.com.bearkiddiaryfamily.ui.fragment.BaseFragment;
 import bearkid.com.bearkiddiaryfamily.utils.DateTimePickerUtil;
 
 public class AddKidActivity extends BaseActivity implements IAddKidView, View.OnClickListener{
@@ -59,8 +62,8 @@ public class AddKidActivity extends BaseActivity implements IAddKidView, View.On
         male.callOnClick();
     }
 
-    public static void startActivity(Context context) {
-        context.startActivity(new Intent(context, AddKidActivity.class));
+    public static void startActivity(Fragment fragment, int requestCode) {
+        fragment.startActivityForResult(new Intent(fragment.getContext(), AddKidActivity.class), requestCode);
     }
 
     @Override
@@ -130,6 +133,7 @@ public class AddKidActivity extends BaseActivity implements IAddKidView, View.On
 
     @Override
     public void exit() {
-        finish();
+        AddKidActivity.this.setResult(Activity.RESULT_OK);
+        this.finish();
     }
 }
