@@ -59,14 +59,14 @@ public class KidInfoModel {
     public interface SearchKidService {
         @FormUrlEncoded
         @POST(URL_KID)
-        Observable<Result<Kid>> searchKid(@Field("Uphone") String Uphone, @FieldMap Map<String, String> map);
+        Observable<Result<List<Kid>>> searchKid(@Field("Uphone") String Uphone);
 
         @FormUrlEncoded
         @POST(URL_KID)
         Observable<Result<List<Kid>>> getKidInfo(@Field("Kid") Long Kid, @Field("Uphone") String Uphone, @Field("Fid") Long Fid, @Field("Cid") Long Cid);
     }
 
-    public static Observable<Result<Kid>> searchKid(String Uphone, String[] parameter, String[] value) {
+    public static Observable<Result<List<Kid>>> searchKid(String Uphone) {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Urls.BASE_URL)
@@ -74,18 +74,18 @@ public class KidInfoModel {
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
         SearchKidService searchKidService = retrofit.create(SearchKidService.class);
-        Map<String, String> kidInfoMap = new HashMap<>();
-        for (int i = 0; i < parameter.length; i++) {
-//            try {
-//                kidInfoMap.put(parameter[i], URLEncoder.encode(value[i],"UTF-8"));
-//            } catch (UnsupportedEncodingException e) {
-//                e.printStackTrace();
-//            }
+//        Map<String, String> kidInfoMap = new HashMap<>();
+//        for (int i = 0; i < parameter.length; i++) {
+////            try {
+////                kidInfoMap.put(parameter[i], URLEncoder.encode(value[i],"UTF-8"));
+////            } catch (UnsupportedEncodingException e) {
+////                e.printStackTrace();
+////            }
+//
+//            kidInfoMap.put(parameter[i], value[i]);
+//        }
 
-            kidInfoMap.put(parameter[i], value[i]);
-        }
-
-        return searchKidService.searchKid(Uphone, kidInfoMap)
+        return searchKidService.searchKid(Uphone)
                 .subscribeOn(Schedulers.io());
     }
 

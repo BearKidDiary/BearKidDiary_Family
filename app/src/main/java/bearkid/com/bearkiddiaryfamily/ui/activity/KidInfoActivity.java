@@ -9,7 +9,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.Date;
+
 import bearkid.com.bearkiddiaryfamily.R;
+import bearkid.com.bearkiddiaryfamily.model.bean.Kid;
 import bearkid.com.bearkiddiaryfamily.ui.activity.iactivity.IKidInfoView;
 import bearkid.com.bearkiddiaryfamily.ui.view.KidInfoView;
 
@@ -29,10 +32,13 @@ public class KidInfoActivity extends BaseActivity implements IKidInfoView, View.
     protected boolean list_1_expand, list_2_expand, list_3_expand;
     protected boolean isEdit;
 
+    private Kid kid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kid_info);
+        kid = (Kid) getIntent().getSerializableExtra("kid");
         initView();
     }
 
@@ -71,6 +77,7 @@ public class KidInfoActivity extends BaseActivity implements IKidInfoView, View.
         list_2_add.setVisibility(View.GONE);
         list_3_add.setVisibility(View.GONE);
 
+        name.setText(kid.getKname());
     }
 
     @Override
@@ -135,8 +142,10 @@ public class KidInfoActivity extends BaseActivity implements IKidInfoView, View.
         }
     }
 
-    public static void startActivity(Context context){
-        context.startActivity(new Intent(context, KidInfoActivity.class));
+    public static void startActivity(Context context, Kid kid){
+        Intent intent = new Intent(context, KidInfoActivity.class);
+        intent.putExtra("kid", kid);
+        context.startActivity(intent);
     }
 
     @Override

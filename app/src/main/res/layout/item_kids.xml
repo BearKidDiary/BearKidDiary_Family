@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bearkid.com.bearkiddiaryfamily.ui.view.CircleImageview xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/civ_kid"
+    android:layout_width="64dp"
+    android:layout_height="64dp"
+    android:src="@drawable/avatar" />

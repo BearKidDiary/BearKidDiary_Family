@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/bg_gray_Me_lv">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/bg_gray_Me_lv"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
-
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -35,35 +34,27 @@
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:scrollbars="none"
             android:background="@android:color/white">
             <LinearLayout
-                android:id="@+id/llayout_me_mychildren"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="80dp"
                 android:background="@android:color/white"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="8dp">
 
-                <bearkid.com.bearkiddiaryfamily.ui.view.CircleImageview
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:layout_marginLeft="16dp"
-                    android:src="@drawable/avatar" />
-
-
-                <ImageView
-                    android:id="@+id/img_me_add"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_marginLeft="16dp"
-                    android:src="@drawable/ic_me_add"/>
+                <GridView
+                    android:id="@+id/gv_kids"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
             </LinearLayout>
         </HorizontalScrollView>
 
-
         <include
-            layout="@layout/items_me"></include>
+            layout="@layout/items_me" />
 
    </LinearLayout>
 </ScrollView>
