@@ -1,5 +1,9 @@
 package bearkid.com.bearkiddiaryfamily.model.bean;
 
+import com.google.gson.annotations.Expose;
+
+import java.io.Serializable;
+
 import bearkid.com.bearkiddiaryfamily.R;
 import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.datatype.BmobDate;
@@ -8,9 +12,9 @@ import cn.bmob.v3.datatype.BmobFile;
 /**
  * 时间轴事件
  *
- * @author 张宇
+ * @author zy
  */
-public class TimeLine extends BmobObject {
+public class TimeLine implements Serializable {
     public static final String KID = "kid";
     public static final String RELEASETIME = "releasetime";
     public static final String RELEASECONTENT = "releasecontent";
@@ -20,13 +24,93 @@ public class TimeLine extends BmobObject {
     public static final String TYPE = "type";
     public static final String TYPELOGO = "typelogo";
     public static final String AUTHOR = "author";
-    private BmobDate releasetime;
-    private String releasecontent;
-    private BmobFile image1, image2, image3;
-    private String type;
-    private Integer typelogo;
-    private Kid kid;
+
+    @Expose
+    private Long Tid;
+
+    @Expose
+    private Long Treleasetime;
+
+    @Expose
+    private String Treleasecontent;
+
+    @Expose
+    private String Timage1, Timage2, Timage3;
+
+    @Expose
+    private String Ttype;
+
+    @Expose
+    private Integer Ttypelogo;
+
+    @Expose
     private User author;
+
+    private Kid kid;
+
+    public Long getTid() {
+        return Tid;
+    }
+
+    public void setTid(Long tid) {
+        Tid = tid;
+    }
+
+    public Long getTreleasetime() {
+        return Treleasetime;
+    }
+
+    public void setTreleasetime(Long treleasetime) {
+        Treleasetime = treleasetime;
+    }
+
+    public String getTreleasecontent() {
+        return Treleasecontent;
+    }
+
+    public void setTreleasecontent(String treleasecontent) {
+        Treleasecontent = treleasecontent;
+    }
+
+    public String getTimage1() {
+        return Timage1;
+    }
+
+    public void setTimage1(String timage1) {
+        Timage1 = timage1;
+    }
+
+    public String getTimage2() {
+        return Timage2;
+    }
+
+    public void setTimage2(String timage2) {
+        Timage2 = timage2;
+    }
+
+    public String getTimage3() {
+        return Timage3;
+    }
+
+    public void setTimage3(String timage3) {
+        Timage3 = timage3;
+    }
+
+    public String getTtype() {
+        return Ttype;
+    }
+
+    public void setTtype(String ttype) {
+        Ttype = ttype;
+    }
+
+    public Integer getTtypelogo() {
+        return Ttypelogo;
+    }
+
+    public void setTtypelogo(Integer ttypelogo) {
+        Ttypelogo = ttypelogo;
+    }
 
     public User getAuthor() {
         return author;
@@ -44,62 +128,6 @@ public class TimeLine extends BmobObject {
         this.kid = kid;
     }
 
-    public BmobDate getReleasetime() {
-        return releasetime;
-    }
-
-    public void setReleasetime(BmobDate releasetime) {
-        this.releasetime = releasetime;
-    }
-
-    public String getReleasecontent() {
-        return releasecontent;
-    }
-
-    public void setReleasecontent(String releasecontent) {
-        this.releasecontent = releasecontent;
-    }
-
-    public BmobFile getImage1() {
-        return image1;
-    }
-
-    public void setImage1(BmobFile image1) {
-        this.image1 = image1;
-    }
-
-    public BmobFile getImage2() {
-        return image2;
-    }
-
-    public void setImage2(BmobFile image2) {
-        this.image2 = image2;
-    }
-
-    public BmobFile getImage3() {
-        return image3;
-    }
-
-    public void setImage3(BmobFile image3) {
-        this.image3 = image3;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public Integer getTypelogo() {
-        return typelogo;
-    }
-
-    public void setTypelogo(Integer typelogo) {
-        this.typelogo = typelogo;
-    }
-
     public static class Type {
         public static final int EAT = 1;
         public static final int FIRSTTIME = 2;
@@ -115,28 +143,28 @@ public class TimeLine extends BmobObject {
 
         public static int getLogoResource(int type) {
             switch (type) {
-//                case EAT:
-//                    return R.drawable.timeline_type_eat;
-//                case FIRSTTIME:
-//                    return R.drawable.timeline_type_first_time;
-//                case BODY:
-//                    return R.drawable.timeline_type_body;
-//                case SPORT:
-//                    return R.drawable.timeline_type_sport;
-//                case STUDY:
-//                    return R.drawable.timeline_type_study;
-//                case CAMERA:
-//                    return R.drawable.timeline_type_camera;
-//                case BATH:
-//                    return R.drawable.timeline_type_bath;
-//                case TREE:
-//                    return R.drawable.timeline_type_tree;
-//                case ALCOHOL:
-//                    return R.drawable.timeline_type_alcohol;
-//                case FISH:
-//                    return R.drawable.timeline_type_fish;
-//                case FOOTPRINT:
-//                    return R.drawable.timeline_type_footprint;
+                case EAT:
+                    return R.drawable.timeline_type_eat;
+                case FIRSTTIME:
+                    return R.drawable.timeline_type_first_time;
+                case BODY:
+                    return R.drawable.timeline_type_body;
+                case SPORT:
+                    return R.drawable.timeline_type_sport;
+                case STUDY:
+                    return R.drawable.timeline_type_study;
+                case CAMERA:
+                    return R.drawable.timeline_type_camera;
+                case BATH:
+                    return R.drawable.timeline_type_bath;
+                case TREE:
+                    return R.drawable.timeline_type_tree;
+                case ALCOHOL:
+                    return R.drawable.timeline_type_alcohol;
+                case FISH:
+                    return R.drawable.timeline_type_fish;
+                case FOOTPRINT:
+                    return R.drawable.timeline_type_footprint;
             }
             return -1;
         }

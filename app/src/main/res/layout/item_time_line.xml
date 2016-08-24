@@ -77,7 +77,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="16dp"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <bearkid.com.bearkiddiaryfamily.ui.view.IconButton
                 android:id="@+id/ib_timeline_pic1"
@@ -85,6 +85,7 @@
                 android:layout_height="80dp"
                 android:layout_weight="1"
                 android:scaleType="fitCenter"
+                android:visibility="invisible"
                 android:src="@drawable/image_default" />
 
             <bearkid.com.bearkiddiaryfamily.ui.view.IconButton
@@ -93,6 +94,7 @@
                 android:layout_height="80dp"
                 android:layout_weight="1"
                 android:scaleType="fitCenter"
+                android:visibility="invisible"
                 android:src="@drawable/image_default" />
 
             <bearkid.com.bearkiddiaryfamily.ui.view.IconButton
@@ -100,6 +102,7 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_weight="1"
+                android:visibility="invisible"
                 android:scaleType="fitCenter"
                 android:src="@drawable/image_default" />
         </LinearLayout>

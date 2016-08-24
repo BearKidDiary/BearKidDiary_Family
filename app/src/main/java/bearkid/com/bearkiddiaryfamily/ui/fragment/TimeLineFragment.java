@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -26,8 +27,10 @@ import com.gc.materialdesign.views.ButtonFloat;
 import com.nineoldandroids.animation.ObjectAnimator;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import bearkid.com.bearkiddiaryfamily.R;
@@ -48,11 +51,12 @@ import cn.bmob.v3.listener.DownloadFileListener;
  */
 public class TimeLineFragment extends BaseFragment implements ITimeLineFragment {
 
-    private List<String> childName = Arrays.asList("王小宝", "王小帅", "丫丫");//孩子列表
+    private List<String> childName = new ArrayList<>();//孩子列表
     private String[] menuItems = new String[]{"数据分析", "风采展示", "添加孩子", "编辑家庭成员"};//标题栏菜单项
     private final float textSize = 20f;//标题栏孩子名字的字体大小
     private float showButtonX, hideButtonX;//浮动按钮的动画位移位置
     private List<TimeLine> list = new ArrayList<>();//显示的时间轴数据
+    private ArrayAdapter<String> mNameAdapter;
     private TimeLineAdapter mAdpater;
     private TimeLinePresenter presenter;
 
@@ -91,17 +95,36 @@ public class TimeLineFragment extends BaseFragment implements ITimeLineFragment 
         rrv_timeline = (RefreshRecyclerView) v.findViewById(R.id.rv_timeline);
 
         //点击名字时的下拉列表，可选择当前用户的不同孩子
-        spinner_name.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, childName) {
+        childName.add("正在获取");
+        spinner_name.setAdapter(mNameAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, childName) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 TextView tv = new TextView(getContext());
                 tv.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                 tv.setText(childName.get(position));
-                Log.i("zy", "spinner" + childName.get(position) + " pos:" + position);
                 tv.setTextSize(textSize);
                 tv.setGravity(Gravity.CENTER);
                 tv.setTextColor(0xffffffff);
                 return tv;
+            }
+            @Override
+            public String getItem(int position) {
+                return childName.get(position);
+            }
+            @Override
+            public int getCount() {
+                return childName.size();
+            }
+        });
+        //选择其他孩子时，刷新当前时间轴事件
+        spinner_name.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                presenter.refresh();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
             }
         });
 
@@ -188,20 +211,21 @@ public class TimeLineFragment extends BaseFragment implements ITimeLineFragment 
         mAdpater.notifyDataSetChanged();
     }
 
+    @Override
+    public void setChidrenName(List<String> name) {
+        childName = name;
+        mNameAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public String getCurrentChildName() {
+        Object obj = spinner_name.getSelectedItem();
+        if (obj != null)
+            return obj.toString();
+        return "";
+    }
+
     class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.TimeLineViewHolder> {
-
-        private final LruCache<String, Bitmap> bitmapCache;
-
-        public TimeLineAdapter() {
-            int maxMemory = (int) Runtime.getRuntime().maxMemory();
-            int mCacheSize = maxMemory / 8;
-            bitmapCache = new LruCache<String, Bitmap>(mCacheSize) {
-                @Override
-                protected int sizeOf(String key, Bitmap value) {
-                    return value.getByteCount();
-                }
-            };
-        }
 
         @Override
         public TimeLineViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -214,107 +238,29 @@ public class TimeLineFragment extends BaseFragment implements ITimeLineFragment 
             TimeLine timeLine = list.get(position);
 
             /*1.发布的内容*/
-            final String content = timeLine.getReleasecontent();
+            final String content = timeLine.getTreleasecontent();
             holder.tv_content.setText(content);
 
             /*2.发布的类型*/
-            final String type = timeLine.getType();
+            final String type = timeLine.getTtype();
             holder.tv_tag.setText(type);
 
             /*3.发布的类型的图标*/
             //TODO: 发布类型的图标
-            Integer logoType = timeLine.getTypelogo();
+            Integer logoType = timeLine.getTtypelogo();
 
             /*4.发布的人*/
             String userName = timeLine.getAuthor().getUname();
+            if (userName == null) userName = timeLine.getAuthor().getUphone();//未设置用户名时由手机代替
             holder.tv_author.setText(userName);
 
             /*5.发布时间*/
-            String date = timeLine.getReleasetime().getDate();
-            holder.tv_time.setText(date);
-
+            Long time = timeLine.getTreleasetime();
+            if (time != null) {
+                String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date(time));
+                holder.tv_time.setText(date);
+            }
             /*6.发布的图片 先显示缓存中存在的图片*/
-            if (timeLine.getImage1() != null) {//如果有图片
-                holder.ll_picGroup.setVisibility(View.VISIBLE);
-                holder.pic1.setOnClickListener(v -> {
-                    final String url = timeLine.getImage1().getUrl();
-                    presenter.showBigImage(bitmapCache.get(url), url);
-                });
-                showPicture(timeLine.getImage1(), holder.pic1, R.drawable.image_default);
-            } else {
-                holder.ll_picGroup.setVisibility(View.GONE);
-            }
-
-            if (timeLine.getImage2() != null) {
-                holder.pic2.setOnClickListener(v -> {
-                    final String url = timeLine.getImage2().getUrl();
-                    presenter.showBigImage(bitmapCache.get(url), url);
-                });
-                showPicture(timeLine.getImage2(), holder.pic2, R.drawable.image_default);
-            } else {
-                holder.pic2.setVisibility(View.INVISIBLE);
-            }
-
-            if (timeLine.getImage3() != null) {
-                holder.pic3.setOnClickListener(v -> {
-                    final String url = timeLine.getImage3().getUrl();
-                    presenter.showBigImage(bitmapCache.get(url), url);
-                });
-                showPicture(timeLine.getImage3(), holder.pic3, R.drawable.image_default);
-            } else {
-                holder.pic3.setVisibility(View.INVISIBLE);
-            }
-        }
-
-        private void showPicture(BmobFile file, ImageView view, int defaultResourse) {
-            if (!showCachePicture(file, view)) {
-                view.setImageResource(defaultResourse);
-                if (!showDiskPicture(file, view))
-                    showNetworkPicture(file, view);
-            }
-        }
-
-        private boolean showCachePicture(BmobFile pic, ImageView view) {
-            view.setVisibility(View.VISIBLE);
-            final String url = pic.getUrl();
-            Bitmap bitmap;
-            if ((bitmap = bitmapCache.get(url)) != null) {
-                view.setImageBitmap(bitmap);
-                return true;
-            }
-            return false;
-        }
-
-        private boolean showDiskPicture(BmobFile file, ImageView view) {
-            File pic = file.getLocalFile();
-            if (pic == null) return false;
-
-            Bitmap bitmap = BitmapFactory.decodeFile(pic.getAbsolutePath());
-            view.setImageBitmap(bitmap);
-            return true;
-        }
-
-        private void showNetworkPicture(BmobFile file, ImageView view) {
-            final String url = file.getUrl();
-            view.setTag(url);
-            file.download(new DownloadFileListener() {
-                @Override
-                public void done(String path, BmobException e) {
-                    Bitmap pic = BitmapFactory.decodeFile(path);
-                    if (pic != null) {
-                        bitmapCache.put(url, pic);
-                        if (view.getTag().equals(url)) {
-                            view.setImageBitmap(pic);
-                        }
-                    } else {
-                        showCachePicture(file, view);
-                    }
-                }
-
-                @Override
-                public void onProgress(Integer integer, long l) {
-                }
-            });
         }
 
         @Override
@@ -334,7 +280,7 @@ public class TimeLineFragment extends BaseFragment implements ITimeLineFragment 
                 pic2 = (IconButton) view.findViewById(R.id.ib_timeline_pic2);
                 pic3 = (IconButton) view.findViewById(R.id.ib_timeline_pic3);
                 ll_picGroup = (LinearLayout) view.findViewById(R.id.ll_timeline_pic_group);
-                tv_tag = (TextView) view.findViewWithTag(R.id.tv_timeline_tag);
+                tv_tag = (TextView) view.findViewById(R.id.tv_timeline_tag);
                 tv_author = (TextView) view.findViewById(R.id.tv_timeline_author);
                 tv_content = (TextView) view.findViewById(R.id.tv_timeline_content);
                 tv_time = (TextView) view.findViewById(R.id.tv_timeline_time);

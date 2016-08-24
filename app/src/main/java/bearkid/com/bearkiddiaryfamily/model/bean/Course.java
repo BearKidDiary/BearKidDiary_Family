@@ -1,5 +1,10 @@
 package bearkid.com.bearkiddiaryfamily.model.bean;
 
+import com.google.gson.annotations.Expose;
+
+import java.util.HashSet;
+import java.util.Set;
+
 import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.datatype.BmobDate;
 
@@ -7,81 +12,121 @@ import cn.bmob.v3.datatype.BmobDate;
  * 课程信息
  */
 public class Course extends BmobObject {
+    @Expose
+    private Long Cid;
     /**
-     * 开课时间
+     * 上课时间
      */
-    private BmobDate Cclasstime;
+    @Expose
+    private Long Cclasstime;
     /**
-     * 结束时间
+     * 下课时间
      */
-    private BmobDate Cendtime;
+    @Expose
+    private Long Cendtime;
     /**
      * 开学时间
      */
-    private BmobDate Ctime;
+    @Expose
+    private Long Ctime;
     /**
      * 毕业时间
      */
-    private BmobDate Cofftime;
+    @Expose
+    private Long Cofftime;
     /**
      * 开课审批人
      */
-    private Teacher Capprover;
+    private User approver;
     /**
      * 课程的开课背景、原因
      */
+    @Expose
     private String Cbackground;
     /**
      * 课程描述
      */
+    @Expose
     private String Cdesc;
     /**
      * 课程名称
      */
+    @Expose
     private String Cname;
     /**
      * 周一到周日是否需要上课
      */
-    private Boolean Cmonday, Ctuesday, Cwednesday, Cthursday, Cfriday, Csaturday;
+    @Expose
+    private Boolean Cmonday, Ctuesday, Cwednesday, Cthursday, Cfriday, Csaturday, Csunday;
+    /**
+     * 课程的简介图片URL
+     */
+    @Expose
+    private String Cimage;
+    /**
+     * 课程所属的机构
+     */
+    private Organization organization;
+    /**
+     * 课程的任课老师
+     */
+    @Expose
+    private User teacher;
+    /**
+     * 参与课程的孩子
+     */
+    private Set<Kid> students = new HashSet<>();
+    /**
+     * 课程中各个学生获得的成绩
+     */
+    private Set<Score> score = new HashSet<>();
 
-    public BmobDate getCclasstime() {
+    public Long getCid() {
+        return Cid;
+    }
+
+    public void setCid(Long cid) {
+        Cid = cid;
+    }
+
+    public Long getCclasstime() {
         return Cclasstime;
     }
 
-    public void setCclasstime(BmobDate cclasstime) {
+    public void setCclasstime(Long cclasstime) {
         Cclasstime = cclasstime;
     }
 
-    public BmobDate getCendtime() {
+    public Long getCendtime() {
         return Cendtime;
     }
 
-    public void setCendtime(BmobDate cendtime) {
+    public void setCendtime(Long cendtime) {
         Cendtime = cendtime;
     }
 
-    public BmobDate getCtime() {
+    public Long getCtime() {
         return Ctime;
     }
 
-    public void setCtime(BmobDate ctime) {
+    public void setCtime(Long ctime) {
         Ctime = ctime;
     }
 
-    public BmobDate getCofftime() {
+    public Long getCofftime() {
         return Cofftime;
     }
 
-    public void setCofftime(BmobDate cofftime) {
+    public void setCofftime(Long cofftime) {
         Cofftime = cofftime;
     }
 
-    public Teacher getCapprover() {
-        return Capprover;
+    public User getApprover() {
+        return approver;
     }
 
-    public void setCapprover(Teacher capprover) {
-        Capprover = capprover;
+    public void setApprover(User approver) {
+        this.approver = approver;
     }
 
     public String getCbackground() {
@@ -154,5 +199,53 @@ public class Course extends BmobObject {
 
     public void setCsaturday(Boolean csaturday) {
         Csaturday = csaturday;
+    }
+
+    public Boolean getCsunday() {
+        return Csunday;
+    }
+
+    public void setCsunday(Boolean csunday) {
+        Csunday = csunday;
+    }
+
+    public String getCimage() {
+        return Cimage;
+    }
+
+    public void setCimage(String cimage) {
+        Cimage = cimage;
+    }
+
+    public Organization getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
+    }
+
+    public User getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(User teacher) {
+        this.teacher = teacher;
+    }
+
+    public Set<Kid> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<Kid> students) {
+        this.students = students;
+    }
+
+    public Set<Score> getScore() {
+        return score;
+    }
+
+    public void setScore(Set<Score> score) {
+        this.score = score;
     }
 }
