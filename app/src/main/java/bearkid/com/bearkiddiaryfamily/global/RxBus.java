@@ -54,4 +54,27 @@ public class RxBus {
     public Observable<Object> toObserverable() {
         return _bus;
     }
+
+    public static class RxEvent<T>{
+        public Integer id;
+        public String desc;
+        public T data;
+
+        public RxEvent(){}
+
+        public RxEvent Id(Integer id){
+            this.id = id;
+            return this;
+        }
+
+        public RxEvent Desc(String desc){
+            this.desc = desc;
+            return this;
+        }
+
+        public RxEvent Data(T data){
+            this.data = data;
+            return this;
+        }
+    }
 }
