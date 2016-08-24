@@ -59,14 +59,14 @@ public class KidInfoModel {
     public interface SearchKidService {
         @FormUrlEncoded
         @POST(URL_KID)
-        Observable<Result<Kid>> searchKid(@Field("Uphone") String Uphone);
+        Observable<Result<List<Kid>>> searchKid(@Field("Uphone") String Uphone);
 
         @FormUrlEncoded
         @POST(URL_KID)
         Observable<Result<List<Kid>>> getKidInfo(@Field("Kid") Long Kid, @Field("Uphone") String Uphone, @Field("Fid") Long Fid, @Field("Cid") Long Cid);
     }
 
-    public static Observable<Result<Kid>> searchKid(String Uphone) {
+    public static Observable<Result<List<Kid>>> searchKid(String Uphone) {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Urls.BASE_URL)
