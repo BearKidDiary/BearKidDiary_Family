@@ -35,6 +35,7 @@ import rx.schedulers.Schedulers;
 public class LoginModel {
 
     private static User user;
+
     private LoginModel() {
     }
 
@@ -74,7 +75,8 @@ public class LoginModel {
 //        Observable<Result<User>> Login(@Body User user);
     }
 
-    public static Observable<Result<User>> Login(String Uphone, String Upsw){;
+    public static Observable<Result<User>> Login(String Uphone, String Upsw) {
+        ;
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Urls.BASE_URL)
@@ -94,18 +96,15 @@ public class LoginModel {
      *
      * @return User的Observable对象 User可能为null
      */
-    public static Observable<User> getCurrentUser(Context context) {
-        String phoneNum = new LocalDB(context).getPhoneNum();
-        BmobQuery<User> query = new BmobQuery<>();
-        query.setCachePolicy(BmobQuery.CachePolicy.CACHE_ONLY); // 只从缓存获取
-        query.addWhereEqualTo(User.PHONE, phoneNum);
-        return query.findObjectsObservable(User.class)
-                .subscribeOn(Schedulers.io())
-                .map(users -> {
-                    if (users.size() > 0) {
-                        return users.get(0);
-                    }
-                    return null;
-                });
+    public static User getCurrentUser(Context context) {
+        LocalDB db = new LocalDB(context);
+        String phoneNum = db.getPhoneNum();
+        if (phoneNum != null) {
+            User user = new User();
+            user.setUphone(db.getPhoneNum());
+            return user;
+        } else {
+            return null;
+        }
     }
 }

@@ -2,6 +2,7 @@ package bearkid.com.bearkiddiaryfamily.model.bean;
 
 import com.google.gson.annotations.Expose;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,7 +12,7 @@ import cn.bmob.v3.datatype.BmobDate;
 /**
  * 课程信息
  */
-public class Course extends BmobObject {
+public class Course implements Serializable {
     @Expose
     private Long Cid;
     /**

@@ -1,5 +1,7 @@
 package bearkid.com.bearkiddiaryfamily.model.bean;
 
+import java.io.Serializable;
+
 import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.datatype.BmobDate;
 import cn.bmob.v3.datatype.BmobFile;
@@ -7,7 +9,7 @@ import cn.bmob.v3.datatype.BmobFile;
 /**
  * Created by admin on 2016/7/4.
  */
-public class Organization extends BmobObject{
+public class Organization implements Serializable{
     /**
      * 机构的名称
      */

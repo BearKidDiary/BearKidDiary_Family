@@ -29,21 +29,27 @@ import bearkid.com.bearkiddiaryfamily.ui.view.IconButton;
  * <p>
  * 时间轴事件类型选择界面
  */
-public class TimeLineTypeFragment extends BaseFragment implements ITimeLineTypeFragment{
+public class TimeLineTypeFragment extends BaseFragment implements ITimeLineTypeFragment {
 
     private List<String> childName = Arrays.asList("王小宝", "王小帅", "丫丫");//孩子列表
     private final float textSize = 20f;//标题栏孩子名字的字体大小
     private AppCompatSpinner spinner_name;
+    private ArrayAdapter<String> nameAdapter;
     private TimeLineTypePresenter presenter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_timeline_type, container, false);
+        initPresenter();
         initView(view);
         return view;
     }
 
-    private final void initView(View v) {
+    private void initPresenter() {
+        presenter = new TimeLineTypePresenter(this);
+    }
+
+    private void initView(View v) {
         btn_camera = (IconButton) v.findViewById(R.id.btn_timeline_camera);
         btn_body = (IconButton) v.findViewById(R.id.btn_timeline_body);
         btn_firstTime = (IconButton) v.findViewById(R.id.btn_timeline_first_time);
@@ -62,19 +68,44 @@ public class TimeLineTypeFragment extends BaseFragment implements ITimeLineTypeF
         btn_add.setOnClickListener(listener);
 
         //点击名字时的下拉列表，可选择当前用户的不同孩子
-        spinner_name.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, childName) {
+        spinner_name.setAdapter(nameAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, childName) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 TextView tv = new TextView(getContext());
                 tv.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                 tv.setText(childName.get(position));
-                Log.i("zy", "spinner" + childName.get(position) + " pos:" + position);
                 tv.setTextSize(textSize);
                 tv.setGravity(Gravity.CENTER);
                 tv.setTextColor(0xffffffff);
                 return tv;
             }
+
+            @Override
+            public int getCount() {
+                return childName.size();
+            }
+
+            @Override
+            public String getItem(int position) {
+                return childName.get(position);
+            }
         });
+
+        presenter.init();
+    }
+
+    @Override
+    public void setChidrenName(List<String> name) {
+        childName = name;
+        nameAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public String getCurrentKidName() {
+        Object obj = spinner_name.getSelectedItem();
+        if (obj != null)
+            return obj.toString();
+        else return "";
     }
 
     private View.OnClickListener listener = v -> {

@@ -2,10 +2,12 @@ package bearkid.com.bearkiddiaryfamily.model.bean;
 
 import com.google.gson.annotations.Expose;
 
+import java.io.Serializable;
+
 /**
  * Created by admin on 2016/8/23.
  */
-public class Weight {
+public class Weight implements Serializable{
     @Expose
     private Long Hid;
 

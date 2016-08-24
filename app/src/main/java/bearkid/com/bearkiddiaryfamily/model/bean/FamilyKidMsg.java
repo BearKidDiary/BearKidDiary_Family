@@ -9,6 +9,7 @@ import cn.bmob.v3.datatype.BmobFile;
 /**
  * 孩子页面 我的孩子列表上的信息
  */
+@Deprecated
 public class FamilyKidMsg {
     private String name;
     private int age;

@@ -1,6 +1,7 @@
 package bearkid.com.bearkiddiaryfamily.presenter;
 
 import bearkid.com.bearkiddiaryfamily.model.LoginModel;
+import bearkid.com.bearkiddiaryfamily.model.bean.User;
 import bearkid.com.bearkiddiaryfamily.ui.activity.LoginActivity;
 import bearkid.com.bearkiddiaryfamily.ui.activity.MainActivity;
 import bearkid.com.bearkiddiaryfamily.ui.activity.iactivity.IMainView;
@@ -22,12 +23,11 @@ public class MainPresenter {
      * 2、用户若已经登陆，跳转到导航界面（未实现）
      */
     public void init() {
-        LoginModel.getCurrentUser(view.getContext())
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .subscribe(familyUser -> {
-                    //TODO:已经登陆
-                }, throwable -> {//未登录
-                    LoginActivity.startActivity(view.getContext());
-                });
+        User user = LoginModel.getCurrentUser(view.getContext());
+        if (user == null) {
+            LoginActivity.startActivity(view.getContext());
+        } else {
+            //TODO:已登录
+        }
     }
 }

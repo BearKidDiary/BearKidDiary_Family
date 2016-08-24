@@ -32,13 +32,12 @@ public class LocalDB {
         return sharedPreferences.getString("phoneNum", "");
     }
 
-    public void putBmobId(String id) {
-        editor.putString("bmobId", id);
-        editor.commit();
+    public void putUid(Long Uid) {
+        editor.putLong("Uid", Uid).commit();
     }
 
-    public String getBmobId() {
-        return sharedPreferences.getString("bmobId", null);
+    public Long getUid() {
+        return sharedPreferences.getLong("Uid", -1);
     }
 
     public void putUserName(String userName) {
@@ -48,6 +47,14 @@ public class LocalDB {
 
     public String getUserName() {
         return sharedPreferences.getString("userName", "");
+    }
+
+    public void putUserSex(String sex) {
+        editor.putString("userSex", sex).commit();
+    }
+
+    public String getUserSex() {
+        return sharedPreferences.getString("userSex", "男");
     }
 
     public void putUserAddress(String userAddress) {

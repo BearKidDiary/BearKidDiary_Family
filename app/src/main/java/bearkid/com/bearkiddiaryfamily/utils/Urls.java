@@ -11,5 +11,6 @@ public class Urls {
     public static final String URL_UPDATEUERINFO = "user/updateinfo";
     public static final String URL_ADDKID = "kid/add";
     public static final String URL_KID = "kid";
-    public static final String URL_GET_TIMELINE = "kid/timeline";
+    public static final String URL_TIMELINE = "kid/timeline";
+    public static final String URL_ADD_TIMELINE = "kid/timeline/add";
 }

@@ -2,13 +2,15 @@ package bearkid.com.bearkiddiaryfamily.model.bean;
 
 import com.google.gson.annotations.Expose;
 
+import java.io.Serializable;
+
 import cn.bmob.v3.BmobObject;
 
 /**
  * Created by admin on 2016/7/20.
  * 身高
  */
-public class Height extends BmobObject {
+public class Height implements Serializable{
     public static final String ID = "Kid";
     public static final String HEIGHT = "Kheight";
     public static final String DATE = "Htime";

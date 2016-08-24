@@ -1,7 +1,9 @@
 package bearkid.com.bearkiddiaryfamily.ui.fragment.ifragment;
 
-/**
- * Created by admin on 2016/7/20.
- */
+
+import java.util.List;
+
 public interface ITimeLineTypeFragment extends IBaseFragment{
+    void setChidrenName(List<String> name);
+    String getCurrentKidName();
 }
