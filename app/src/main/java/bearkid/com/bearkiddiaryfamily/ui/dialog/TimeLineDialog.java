@@ -1,10 +1,11 @@
 package bearkid.com.bearkiddiaryfamily.ui.dialog;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.gc.materialdesign.views.ButtonFlat;
 
@@ -31,7 +32,6 @@ public abstract class TimeLineDialog extends DialogFragment implements ITimeLine
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-
         presenter = new TimeLinePostPresenter(this);
 
         getPositiveButton().setOnClickListener(v -> {
@@ -88,8 +88,15 @@ public abstract class TimeLineDialog extends DialogFragment implements ITimeLine
                 return "运动";
             case TimeLine.Type.STUDY:
                 return "学习";
+            case TimeLine.Type.BODY:
+                return "身体";
         }
         return "自定义";
+    }
+
+    @Override
+    public void showError(String e) {
+        Toast.makeText(getContext(), e, Toast.LENGTH_SHORT).show();
     }
 
     protected abstract ButtonFlat getPositiveButton();

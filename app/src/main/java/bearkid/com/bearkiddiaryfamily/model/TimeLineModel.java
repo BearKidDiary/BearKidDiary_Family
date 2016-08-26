@@ -63,7 +63,9 @@ public class TimeLineModel {
                                                           String type, Integer typeLogo,
                                                           @Nullable String image1, @Nullable String image2,
                                                           @Nullable String image3) {
-        return getService().postTimeLine(Kid, Uphone, Uid, content, time, type, typeLogo, image1, image2, image3);
+        return getService()
+                .postTimeLine(Kid, Uphone, Uid, content, time, type, typeLogo, image1, image2, image3)
+                .subscribeOn(Schedulers.io());
     }
 
     public interface TimeLineService {

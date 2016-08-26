@@ -12,11 +12,9 @@ import android.widget.TextView;
 import bearkid.com.bearkiddiaryfamily.R;
 import bearkid.com.bearkiddiaryfamily.presenter.MainPresenter;
 import bearkid.com.bearkiddiaryfamily.ui.activity.iactivity.IMainView;
-import bearkid.com.bearkiddiaryfamily.ui.fragment.FamilyFragment;
 import bearkid.com.bearkiddiaryfamily.ui.fragment.GalleryFragment;
 import bearkid.com.bearkiddiaryfamily.ui.fragment.MessageFragment;
 import bearkid.com.bearkiddiaryfamily.ui.fragment.MeFragment;
-import bearkid.com.bearkiddiaryfamily.ui.fragment.TestFragment;
 import bearkid.com.bearkiddiaryfamily.ui.fragment.TimeLineFragment;
 import bearkid.com.bearkiddiaryfamily.ui.fragment.TimeLineTypeFragment;
 

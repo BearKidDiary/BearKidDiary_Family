@@ -58,7 +58,7 @@ public class KidInfoModel {
 
         @FormUrlEncoded
         @POST(URL_KID)
-        Observable<Result<List<Kid>>> getKidInfo(@Field("Kid") Long Kid, @Field("Uphone") String Uphone, @Field("Fid") Long Fid, @Field("Cid") Long Cid);
+        Observable<Result<List<Kid>>> getKidInfo(@Field("Kid") Long Kid, @Field("Uphone") String Uphone, @Field("Fid") Long Fid, @Field("Cid") Long Cid, @Field("Range") String Range);
     }
 
     public static Observable<Result<List<Kid>>> searchKid(String Uphone) {
@@ -87,19 +87,20 @@ public class KidInfoModel {
     /**
      * 获取孩子的个人信息
      *
-     * @param Kid    孩子的编号
-     * @param Uphone 孩子所在家庭的创建者手机号码，也就是监护人手机号码
-     * @param Fid    孩子所在家庭的编号
-     * @param Cid    孩子所在课程的编号
+     * @param Kid    是 	long 	孩子的编号
+     * @param Uphone 是 	string 	用户手机号码
+     * @param Fid    是 	long 	孩子所在家庭的编号
+     * @param Cid    是 	long 	孩子所在课程的编号
+     * @param Range  否 	string 	查找范围{"Creator""ALL"}
      */
-    public static Observable<List<Kid>> getKidInfo(Long Kid, String Uphone, Long Fid, Long Cid) {
+    public static Observable<List<Kid>> getKidInfo(Long Kid, String Uphone, Long Fid, Long Cid, String Range) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Urls.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
         return retrofit.create(SearchKidService.class)
-                .getKidInfo(Kid, Uphone, Fid, Cid)
+                .getKidInfo(Kid, Uphone, Fid, Cid, Range)
                 .subscribeOn(Schedulers.io())
                 .map(result -> result.getData());
     }

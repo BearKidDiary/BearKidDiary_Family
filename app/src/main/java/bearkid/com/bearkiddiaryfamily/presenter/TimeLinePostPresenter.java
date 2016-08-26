@@ -1,13 +1,9 @@
 package bearkid.com.bearkiddiaryfamily.presenter;
 
-import android.support.annotation.Nullable;
 import android.util.Log;
-
-import java.io.File;
 import java.util.Date;
 
 import bearkid.com.bearkiddiaryfamily.model.TimeLineModel;
-import bearkid.com.bearkiddiaryfamily.model.bean.Kid;
 import bearkid.com.bearkiddiaryfamily.ui.dialog.TimeLineDialog;
 import bearkid.com.bearkiddiaryfamily.ui.dialog.idialog.ITimeLineView;
 import bearkid.com.bearkiddiaryfamily.utils.LocalDB;
@@ -36,8 +32,10 @@ public class TimeLinePostPresenter {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(result -> {
                     Log.i(TAG, "resultCode = " + result.getResultCode() + " , desc = " + result.getResultMessage());
+                    view.dismiss();
                 }, throwable -> {
                     Log.e(TAG, "error: " + throwable);
+                    view.showError("发布失败！");
                 });
     }
 }
