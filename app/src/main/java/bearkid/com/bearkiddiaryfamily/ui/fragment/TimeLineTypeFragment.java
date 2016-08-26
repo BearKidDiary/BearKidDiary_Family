@@ -15,8 +15,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import bearkid.com.bearkiddiaryfamily.R;
+import bearkid.com.bearkiddiaryfamily.model.bean.TimeLine;
 import bearkid.com.bearkiddiaryfamily.presenter.TimeLineTypePresenter;
 import bearkid.com.bearkiddiaryfamily.ui.dialog.TimeLineBodyDialog;
+import bearkid.com.bearkiddiaryfamily.ui.dialog.TimeLineDialog;
 import bearkid.com.bearkiddiaryfamily.ui.dialog.TimeLineEatDialog;
 import bearkid.com.bearkiddiaryfamily.ui.dialog.TimeLineFirstTimeDialog;
 import bearkid.com.bearkiddiaryfamily.ui.dialog.TimeLineSportDialog;
@@ -59,13 +61,15 @@ public class TimeLineTypeFragment extends BaseFragment implements ITimeLineTypeF
         btn_add = (IconButton) v.findViewById(R.id.btn_timeline_add);
         spinner_name = (AppCompatSpinner) v.findViewById(R.id.spinner_child_name);
 
-        btn_camera.setOnClickListener(listener);
-        btn_body.setOnClickListener(listener);
-        btn_firstTime.setOnClickListener(listener);
-        btn_eat.setOnClickListener(listener);
-        btn_sport.setOnClickListener(listener);
-        btn_study.setOnClickListener(listener);
-        btn_add.setOnClickListener(listener);
+        btn_camera.setOnClickListener(presenter);
+        btn_body.setOnClickListener(presenter);
+        btn_firstTime.setOnClickListener(presenter);
+        btn_eat.setOnClickListener(presenter);
+        btn_sport.setOnClickListener(presenter);
+        btn_study.setOnClickListener(presenter);
+        btn_add.setOnClickListener(v1 -> {
+
+        });
 
         //点击名字时的下拉列表，可选择当前用户的不同孩子
         spinner_name.setAdapter(nameAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, childName) {
@@ -107,32 +111,6 @@ public class TimeLineTypeFragment extends BaseFragment implements ITimeLineTypeF
             return obj.toString();
         else return "";
     }
-
-    private View.OnClickListener listener = v -> {
-        switch (v.getId()) {
-            case R.id.btn_timeline_camera:
-                break;
-            case R.id.btn_timeline_body:
-                TimeLineBodyDialog.show(getFragmentManager());
-                break;
-            case R.id.btn_timeline_first_time:
-                TimeLineFirstTimeDialog.show(getFragmentManager());
-                break;
-            case R.id.btn_timeline_eat:
-                TimeLineEatDialog.show(getFragmentManager());
-                break;
-            case R.id.btn_timeline_sport:
-                TimeLineSportDialog.show(getFragmentManager());
-                break;
-            case R.id.btn_timeline_study:
-                TimeLineStudyDialog.show(getFragmentManager());
-                break;
-            case R.id.btn_chat_add:
-                break;
-            default:
-                break;
-        }
-    };
 
     private IconButton btn_camera, btn_body, btn_firstTime, btn_eat, btn_sport, btn_study, btn_add;
 }

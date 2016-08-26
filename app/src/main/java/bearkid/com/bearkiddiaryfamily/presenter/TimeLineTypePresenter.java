@@ -3,12 +3,14 @@ package bearkid.com.bearkiddiaryfamily.presenter;
 import android.graphics.Bitmap;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.View;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import bearkid.com.bearkiddiaryfamily.R;
 import bearkid.com.bearkiddiaryfamily.model.KidInfoModel;
 import bearkid.com.bearkiddiaryfamily.model.TimeLineModel;
 import bearkid.com.bearkiddiaryfamily.model.bean.Kid;
@@ -16,6 +18,11 @@ import bearkid.com.bearkiddiaryfamily.model.bean.Result;
 import bearkid.com.bearkiddiaryfamily.model.bean.ResultCode;
 import bearkid.com.bearkiddiaryfamily.model.bean.TimeLine;
 import bearkid.com.bearkiddiaryfamily.model.bean.User;
+import bearkid.com.bearkiddiaryfamily.ui.dialog.TimeLineBodyDialog;
+import bearkid.com.bearkiddiaryfamily.ui.dialog.TimeLineDialog;
+import bearkid.com.bearkiddiaryfamily.ui.dialog.TimeLineEatDialog;
+import bearkid.com.bearkiddiaryfamily.ui.dialog.TimeLineSportDialog;
+import bearkid.com.bearkiddiaryfamily.ui.dialog.TimeLineStudyDialog;
 import bearkid.com.bearkiddiaryfamily.ui.fragment.TimeLineTypeFragment;
 import bearkid.com.bearkiddiaryfamily.ui.fragment.ifragment.ITimeLineTypeFragment;
 import bearkid.com.bearkiddiaryfamily.utils.LocalDB;
@@ -31,7 +38,7 @@ import rx.schedulers.Schedulers;
  *
  * @author 张宇
  */
-public class TimeLineTypePresenter {
+public class TimeLineTypePresenter implements View.OnClickListener {
     private static final String TAG = "TimeLineTypePresenter";
     private final ITimeLineTypeFragment view;
     private List<Kid> kids;
@@ -59,20 +66,39 @@ public class TimeLineTypePresenter {
                 });
     }
 
-    public void uploadTimeLine(String content, String type, int typeLogo, @Nullable File pic1, @Nullable File pic2, @Nullable File pic3) {
-        final String phone = db.getPhoneNum();
-        final String kidName = view.getCurrentKidName();
+    @Override
+    public void onClick(View v) {
+        Long Kid = null;
+        final String name = view.getCurrentKidName();
         for (Kid kid : kids) {
-            if (kid.getKname().equals(kidName)) {
-                TimeLineModel.postTimeLine(kid.getKid(), phone, null, content, new Date().getTime(), type, typeLogo, null, null, null)
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(result -> {
-                            Log.i(TAG, "resultCode = " + result.getResultCode() + " , desc = " + result.getResultMessage());
-                        }, throwable -> {
-                            Log.e(TAG, "error: " + throwable);
-                        });
+            if (kid.getKname().equals(name)) {
+                Kid = kid.getKid();
+                break;
             }
-            break;
         }
+        if (Kid == null) return;
+
+        int type = TimeLine.Type.BODY;
+        switch (v.getId()) {
+            case R.id.btn_timeline_camera:
+                type = TimeLine.Type.CAMERA;
+                break;
+            case R.id.btn_timeline_body:
+                type = TimeLine.Type.BODY;
+                break;
+            case R.id.btn_timeline_first_time:
+                type = TimeLine.Type.FIRSTTIME;
+                break;
+            case R.id.btn_timeline_eat:
+                type = TimeLine.Type.EAT;
+                break;
+            case R.id.btn_timeline_sport:
+                type = TimeLine.Type.SPORT;
+                break;
+            case R.id.btn_timeline_study:
+                type = TimeLine.Type.STUDY;
+                break;
+        }
+        TimeLineDialog.show(view.getChildFragmentManager(), type, Kid);
     }
 }
