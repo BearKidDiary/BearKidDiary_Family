@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bearkid="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
+    android:background="#fff"
     tools:context="bearkid.com.bearkiddiaryfamily.ui.activity.KidInfoActivity">
 
     <RelativeLayout
@@ -39,7 +41,7 @@
             android:layout_alignParentRight="true"
             android:gravity="center"
             android:padding="16dp"
-            android:text="@string/edit"
+            android:text="@string/add"
             android:textColor="#ffffff"
             android:textSize="16sp"
             android:clickable="true" />
@@ -52,11 +54,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/bg_gray_Me_lv"
             android:orientation="vertical">
 
             <LinearLayout
-                android:background="#fff"
+                android:id="@+id/ll_kid_info"
+                android:background="@drawable/selector_translucent_white"
+                android:clickable="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -68,10 +71,9 @@
                     android:layout_height="72dp"
                     android:src="@drawable/avatar"/>
                 <RelativeLayout
-                    android:padding="3dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="56dp"
-                    android:layout_marginLeft="8dp">
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp">
                     <TextView
                         android:id="@+id/tv_kid_info_name"
                         android:layout_width="wrap_content"
@@ -87,18 +89,14 @@
                         android:singleLine="true"
                         android:textStyle="italic"
                         android:textSize="16sp"/>
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
                     <ImageView
                         android:id="@+id/iv_kid_info_sex"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"/>
+
                 </RelativeLayout>
 
             </LinearLayout>
@@ -109,6 +107,7 @@
                 android:layout_width="match_parent"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
+                android:background="@color/bg_gray_Me_lv"
                 android:paddingTop="4dp"
                 android:paddingBottom="4dp"
                 android:layout_height="wrap_content">
@@ -116,7 +115,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="@string/height_and_weight"
+                    android:text="@string/height"
                     android:textSize="18sp"/>
                 <ImageView
                     android:id="@+id/iv_kid_info_list_1"
@@ -128,34 +127,21 @@
                     android:layout_centerVertical="true"/>
             </RelativeLayout>
 
-            <LinearLayout
-                android:id="@+id/ll_kid_info_list_1"
+            <bearkid.com.bearkiddiaryfamily.ui.view.BodyDataView
+                android:id="@+id/bdv_height"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:background="#fff"
-                android:orientation="vertical">
-            </LinearLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#fff">
-                <ImageView
-                    android:visibility="gone"
-                    android:id="@+id/iv_kid_info_add_list_1"
-                    android:clickable="true"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_centerInParent="true"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/ic_me_add"/>
-            </RelativeLayout>
+                bearkid:type="height"/>
 
             <RelativeLayout
                 android:id="@+id/rl_kid_info_list_2"
                 android:clickable="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="@color/bg_gray_Me_lv"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
                 android:paddingTop="4dp"
@@ -164,7 +150,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="@string/vision"
+                    android:text="@string/weight"
                     android:textSize="18sp"/>
                 <ImageView
                     android:id="@+id/iv_kid_info_list_2"
@@ -176,29 +162,13 @@
                     android:layout_centerVertical="true" />
             </RelativeLayout>
 
-            <LinearLayout
-                android:id="@+id/ll_kid_info_list_2"
+            <bearkid.com.bearkiddiaryfamily.ui.view.BodyDataView
+                android:id="@+id/bdv_weight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="#fff">
-
-            </LinearLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#fff">
-                <ImageView
-                    android:visibility="gone"
-                    android:id="@+id/iv_kid_info_add_list_2"
-                    android:clickable="true"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_centerInParent="true"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/ic_me_add"/>
-            </RelativeLayout>
+                android:background="#fff"
+                bearkid:type="weight"/>
 
             <RelativeLayout
                 android:id="@+id/rl_kid_info_list_3"
@@ -206,6 +176,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="16dp"
+                android:layout_marginTop="2dp"
+                android:background="@color/bg_gray_Me_lv"
                 android:paddingRight="16dp"
                 android:paddingTop="4dp"
                 android:paddingBottom="4dp">
@@ -213,7 +185,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="@string/exhort"
+                    android:text="@string/vision"
                     android:textSize="18sp"/>
                 <ImageView
                     android:id="@+id/iv_kid_info_list_3"
@@ -225,29 +197,48 @@
                     android:layout_centerVertical="true"/>
             </RelativeLayout>
 
-            <LinearLayout
-                android:id="@+id/ll_kid_info_list_3"
+            <bearkid.com.bearkiddiaryfamily.ui.view.BodyDataView
+                android:id="@+id/bdv_vision"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="#fff">
-            </LinearLayout>
+                android:background="#fff"
+                bearkid:type="vision"/>
 
             <RelativeLayout
+                android:id="@+id/rl_kid_info_list_4"
+                android:clickable="true"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#fff">
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:background="@color/bg_gray_Me_lv"
+                android:layout_marginTop="2dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/exhort"
+                    android:textSize="18sp"/>
                 <ImageView
-                    android:visibility="gone"
-                    android:id="@+id/iv_kid_info_add_list_3"
-                    android:clickable="true"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_centerInParent="true"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/ic_me_add"/>
+                    android:id="@+id/iv_kid_info_list_4"
+                    android:layout_width="24dp"
+                    android:layout_height="12dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/arrow_up"
+                    android:layout_centerVertical="true"/>
             </RelativeLayout>
 
+            <TextView
+                android:id="@+id/tv_exhort"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/drawable_edit_normal"
+                android:padding="16dp"
+                android:textSize="14sp" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

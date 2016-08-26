@@ -51,10 +51,12 @@
     <!-- 孩子信息 -->
     <string name="kid_info">孩子信息</string>
     <string name="qrcode_title">我的二维码</string>
-    <string name="edit">编辑</string>
-    <string name="height_and_weight">身高、体重</string>
+    <string name="add">添加</string>
+    <string name="height">身高</string>
+    <string name="weight">体重</string>
     <string name="vision">视力</string>
     <string name="exhort">家长叮嘱</string>
     <string name="add_kid_title">添加孩子</string>
     <string name="birthday">生日</string>
+    <string name="add_body_data">添加身体数据</string>
 </resources>

@@ -56,6 +56,7 @@
         <activity android:name=".ui.activity.SettingActivity" />
         <activity android:name=".ui.activity.MyQRCodeActivity" />
         <activity android:name=".ui.activity.AddKidActivity" />
+        <activity android:name=".ui.activity.AddBodyDataActivity"></activity>
     </application>
 
 </manifest>

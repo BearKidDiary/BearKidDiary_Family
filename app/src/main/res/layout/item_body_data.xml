@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="#fff"
     android:padding="8dp">
 
     <TextView
-        android:id="@+id/tv_kid_info_show_height"
+        android:id="@+id/tv_data_1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="1.4m"
+        android:singleLine="true"
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/tv_kid_info_show_weight"
+        android:id="@+id/tv_data_2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="35kg"
+        android:singleLine="true"
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/tv_kid_info_show_date"
+        android:id="@+id/tv_date"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="2014-05-01"
+        android:singleLine="true"
         android:textSize="16sp" />
 </LinearLayout>

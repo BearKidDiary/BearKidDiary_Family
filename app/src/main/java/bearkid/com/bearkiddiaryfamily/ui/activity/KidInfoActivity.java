@@ -9,13 +9,15 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.List;
 
 import bearkid.com.bearkiddiaryfamily.R;
+import bearkid.com.bearkiddiaryfamily.model.bean.Height;
 import bearkid.com.bearkiddiaryfamily.model.bean.Kid;
+import bearkid.com.bearkiddiaryfamily.model.bean.Vision;
+import bearkid.com.bearkiddiaryfamily.model.bean.Weight;
 import bearkid.com.bearkiddiaryfamily.ui.activity.iactivity.IKidInfoView;
-import bearkid.com.bearkiddiaryfamily.ui.view.KidInfoView;
+import bearkid.com.bearkiddiaryfamily.ui.view.BodyDataView;
 import bearkid.com.bearkiddiaryfamily.utils.DateTimePickerUtil;
 
 public class KidInfoActivity extends BaseActivity implements IKidInfoView, View.OnClickListener{
@@ -25,14 +27,14 @@ public class KidInfoActivity extends BaseActivity implements IKidInfoView, View.
     TextView name;
     TextView birth;
     ImageView sex;
+    TextView exhort;
 
-    RelativeLayout list_1, list_2, list_3;
-    ImageView list_1_iv, list_2_iv, list_3_iv;
-    ImageView list_1_add, list_2_add, list_3_add;
-    LinearLayout ll_1, ll_2, ll_3;
+    LinearLayout ll_kid_info;//编辑个人资料
+    RelativeLayout list_1, list_2, list_3, list_4;//数据标题列表
+    ImageView icon1, icon2, icon3, icon4;//展开图标
+    BodyDataView heightView, weightView, visionView;
 
-    protected boolean list_1_expand, list_2_expand, list_3_expand;
-    protected boolean isEdit;
+    protected boolean heightVisible = true, weightVisible = true, visionVisible = true, exhortVisible = true;
     private Kid kid;
 
     @Override
@@ -44,6 +46,7 @@ public class KidInfoActivity extends BaseActivity implements IKidInfoView, View.
     }
 
     private void initView() {
+        ll_kid_info = (LinearLayout) this.findViewById(R.id.ll_kid_info);
         edit = (TextView) findViewById(R.id.tv_kid_info_edit);
         avatar = (ImageView) findViewById(R.id.iv_kid_info_avatar);
         name = (TextView) findViewById(R.id.tv_kid_info_name);
@@ -52,28 +55,22 @@ public class KidInfoActivity extends BaseActivity implements IKidInfoView, View.
         list_1 = (RelativeLayout) findViewById(R.id.rl_kid_info_list_1);
         list_2 = (RelativeLayout) findViewById(R.id.rl_kid_info_list_2);
         list_3 = (RelativeLayout) findViewById(R.id.rl_kid_info_list_3);
-        list_1_iv = (ImageView) findViewById(R.id.iv_kid_info_list_1);
-        list_2_iv = (ImageView) findViewById(R.id.iv_kid_info_list_2);
-        list_3_iv = (ImageView) findViewById(R.id.iv_kid_info_list_3);
-        list_1_add = (ImageView) findViewById(R.id.iv_kid_info_add_list_1);
-        list_2_add = (ImageView) findViewById(R.id.iv_kid_info_add_list_2);
-        list_3_add = (ImageView) findViewById(R.id.iv_kid_info_add_list_3);
-        ll_1 = (LinearLayout) findViewById(R.id.ll_kid_info_list_1);
-        ll_2 = (LinearLayout) findViewById(R.id.ll_kid_info_list_2);
-        ll_3 = (LinearLayout) findViewById(R.id.ll_kid_info_list_3);
+        list_4 = (RelativeLayout) findViewById(R.id.rl_kid_info_list_4);
+        icon1 = (ImageView) findViewById(R.id.iv_kid_info_list_1);
+        icon2 = (ImageView) findViewById(R.id.iv_kid_info_list_2);
+        icon3 = (ImageView) findViewById(R.id.iv_kid_info_list_3);
+        icon4 = (ImageView) findViewById(R.id.iv_kid_info_list_4);
+        heightView = (BodyDataView) findViewById(R.id.bdv_height);
+        weightView = (BodyDataView) findViewById(R.id.bdv_weight);
+        visionView = (BodyDataView) findViewById(R.id.bdv_vision);
+        exhort = (TextView) findViewById(R.id.tv_exhort);
 
+        ll_kid_info.setOnClickListener(this);
         edit.setOnClickListener(this);
         list_1.setOnClickListener(this);
         list_2.setOnClickListener(this);
         list_3.setOnClickListener(this);
-        list_1_add.setOnClickListener(this);
-        list_2_add.setOnClickListener(this);
-        list_3_add.setOnClickListener(this);
-
-        list_1_expand = true;
-        list_2_expand = true;
-        list_3_expand = true;
-        isEdit = false;
+        list_4.setOnClickListener(this);
 
         name.setText(kid.getKname());
 
@@ -89,55 +86,36 @@ public class KidInfoActivity extends BaseActivity implements IKidInfoView, View.
             }
         }
 
+        if (kid.getKask() != null) {
+            setExhort(kid.getKask());
+        }
+
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.tv_kid_info_edit:
-                if (isEdit) {
-                    edit.setText("编辑");
-                    list_1_add.setVisibility(View.GONE);
-                    list_2_add.setVisibility(View.GONE);
-                    list_3_add.setVisibility(View.GONE);
-                } else {
-                    edit.setText("完成");
-                    list_1_add.setVisibility(View.VISIBLE);
-                    list_2_add.setVisibility(View.VISIBLE);
-                    list_3_add.setVisibility(View.VISIBLE);
-                }
-                isEdit = !isEdit;
+            case R.id.tv_kid_info_edit://添加身体数据
+
+                break;
+            case R.id.ll_kid_info://修改孩子信息
+                AddBodyDataActivity.startActivity(KidInfoActivity.this);
                 break;
             case R.id.rl_kid_info_list_1:
-                expandDataList(list_1_expand, ll_1, list_1_iv);
-                list_1_expand = !list_1_expand;
+                expandDataList(heightVisible, heightView, icon1);
+                heightVisible = !heightVisible;
                 break;
             case R.id.rl_kid_info_list_2:
-                expandDataList(list_2_expand, ll_2, list_2_iv);
-                if (list_2_expand) {
-                    ll_2.setVisibility(View.GONE);
-                    list_2_iv.setBackgroundResource(R.drawable.arrow_down);
-                } else {
-                    ll_2.setVisibility(View.VISIBLE);
-                    list_2_iv.setBackgroundResource(R.drawable.arrow_up);
-                }
-                list_2_expand = !list_2_expand;
+                expandDataList(weightVisible, weightView, icon2);
+                weightVisible = !weightVisible;
                 break;
             case R.id.rl_kid_info_list_3:
-                if (list_3_expand) {
-                    ll_3.setVisibility(View.GONE);
-                    list_3_iv.setBackgroundResource(R.drawable.arrow_down);
-                } else {
-                    ll_3.setVisibility(View.VISIBLE);
-                    list_3_iv.setBackgroundResource(R.drawable.arrow_up);
-                }
-                list_3_expand = !list_3_expand;
+                expandDataList(visionVisible, visionView, icon3);
+                visionVisible = !visionVisible;
                 break;
-            case R.id.iv_kid_info_add_list_1:
-                break;
-            case R.id.iv_kid_info_add_list_2:
-                break;
-            case R.id.iv_kid_info_add_list_3:
+            case R.id.rl_kid_info_list_4:
+                expandDataList(exhortVisible, exhort, icon4);
+                exhortVisible = !exhortVisible;
                 break;
             default:
                 break;
@@ -150,37 +128,48 @@ public class KidInfoActivity extends BaseActivity implements IKidInfoView, View.
         context.startActivity(intent);
     }
 
-    private void expandDataList(boolean isExpand, LinearLayout ll, ImageView iv) {
+    private void expandDataList(boolean isExpand, View view, ImageView iv) {
         if (isExpand) {
-            ll.setVisibility(View.GONE);
+            view.setVisibility(View.GONE);
             iv.setBackgroundResource(R.drawable.arrow_down);
         } else {
-            ll.setVisibility(View.VISIBLE);
+            view.setVisibility(View.VISIBLE);
             iv.setBackgroundResource(R.drawable.arrow_up);
         }
     }
 
     @Override
-    public void showHeightAndWeight(int height, int weight, String date) {
-        new KidInfoView(KidInfoActivity.this)
-                .init(KidInfoView.HEIGHTANDWEIGHT)
-                .setHWValue(height, weight, date)
-                .done(ll_1);
+    public void showHeight(List<Height> heightList) {
+        heightView.show(heightList);
     }
 
     @Override
-    public void showVision(double left, double right, String date) {
-        new KidInfoView(KidInfoActivity.this)
-                .init(KidInfoView.VISION)
-                .setVValue(left, right, date)
-                .done(ll_2);
+    public void clearHeightData() {
+        heightView.clear();
     }
 
     @Override
-    public void showExhort(int count, String exhort) {
-        new KidInfoView(KidInfoActivity.this)
-                .init(KidInfoView.EXHORT)
-                .setExhort(count, exhort)
-                .done(ll_3);
+    public void showWeight(List<Weight> weightList) {
+        weightView.show(weightList);
+    }
+
+    @Override
+    public void clearWeightData() {
+        weightView.clear();
+    }
+
+    @Override
+    public void showVision(List<Vision> visionList) {
+        visionView.show(visionList);
+    }
+
+    @Override
+    public void clearVisionData() {
+        visionView.clear();
+    }
+
+    @Override
+    public void setExhort(String exhort) {
+        this.exhort.setText(exhort);
     }
 }
