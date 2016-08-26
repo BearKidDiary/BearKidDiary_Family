@@ -1,7 +1,6 @@
 package bearkid.com.bearkiddiaryfamily.ui.activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,7 +15,6 @@ import com.gc.materialdesign.widgets.ProgressDialog;
 import bearkid.com.bearkiddiaryfamily.R;
 import bearkid.com.bearkiddiaryfamily.presenter.AddKidPresenter;
 import bearkid.com.bearkiddiaryfamily.ui.activity.iactivity.IAddKidView;
-import bearkid.com.bearkiddiaryfamily.ui.fragment.BaseFragment;
 import bearkid.com.bearkiddiaryfamily.utils.DateTimePickerUtil;
 
 public class AddKidActivity extends BaseActivity implements IAddKidView, View.OnClickListener{
@@ -24,10 +22,11 @@ public class AddKidActivity extends BaseActivity implements IAddKidView, View.On
     protected TextView confirm;
     protected EditText name;
     protected Button male, female;
-    protected TextView birthday;
+    protected TextView birthdayTv;
     public static final String MALE = "男";
     public static final String FEMALE = "女";
     protected String gender;
+    private long birthday;
 
     protected ProgressDialog progressDialog;
     private AddKidPresenter presenter;
@@ -50,12 +49,12 @@ public class AddKidActivity extends BaseActivity implements IAddKidView, View.On
         name = (EditText) findViewById(R.id.et_kid_name);
         male = (Button) findViewById(R.id.btn_kid_gender_male);
         female = (Button) findViewById(R.id.btn_kid_gender_female);
-        birthday = (TextView) findViewById(R.id.tv_kid_birthday);
+        birthdayTv = (TextView) findViewById(R.id.tv_kid_birthday);
 
         confirm.setOnClickListener(this);
         male.setOnClickListener(this);
         female.setOnClickListener(this);
-        birthday.setOnClickListener(this);
+        birthdayTv.setOnClickListener(this);
 
         progressDialog = new ProgressDialog(this, "添加中", R.color.colorPrimary);
 
@@ -85,11 +84,9 @@ public class AddKidActivity extends BaseActivity implements IAddKidView, View.On
                 male.setBackgroundResource(R.color.gender_normal);
                 break;
             case R.id.tv_kid_birthday:
-                DateTimePickerUtil.showDatePicker(AddKidActivity.this, new DateTimePickerUtil.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(String date) {
-                        birthday.setText(date);
-                    }
+                DateTimePickerUtil.showDatePicker(AddKidActivity.this, (date, realTime) -> {
+                    birthdayTv.setText(date);
+                    birthday = realTime;
                 });
                 break;
             default:
@@ -104,12 +101,12 @@ public class AddKidActivity extends BaseActivity implements IAddKidView, View.On
 
     @Override
     public String getKidGender() {
-        return gender;
+        return this.gender;
     }
 
     @Override
     public long getKidBirthday() {
-        return 0;
+        return this.birthday;
     }
 
     @Override

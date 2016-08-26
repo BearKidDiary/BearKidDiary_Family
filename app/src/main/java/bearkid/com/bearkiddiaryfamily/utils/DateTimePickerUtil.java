@@ -15,6 +15,7 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by YarenChoi on 2016/7/29.
@@ -38,8 +39,11 @@ public class DateTimePickerUtil {
         Calendar calendar = Calendar.getInstance();
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 context,
-                (view, year, monthOfYear, dayOfMonth) ->
-                        onDateSetListener.onDateSet(getFormatDate(year, monthOfYear, dayOfMonth)),
+                (view, year, monthOfYear, dayOfMonth) -> {
+                    Calendar cal = Calendar.getInstance();
+                    cal.set(year, monthOfYear, dayOfMonth);
+                    onDateSetListener.onDateSet(getFormatDate(year, monthOfYear, dayOfMonth), cal.getTimeInMillis());
+                },
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH));
@@ -161,6 +165,16 @@ public class DateTimePickerUtil {
 
     /**
      *
+     * @param time 毫秒级时间
+     * @return 格式化后的日期字符串，例 2016-01-01
+     */
+    public static String getFormatDate(long time) {
+        Date birthday = new Date(time);
+        return dateFormat.format(birthday);
+    }
+
+    /**
+     *
      * @param hour 小时
      * @param minute 分钟
      * @return 格式化后的时/分，例 09:00
@@ -168,6 +182,7 @@ public class DateTimePickerUtil {
     public static String getFormatTime(int hour, int minute) {
         return decimalFormat.format(hour) + ":" + decimalFormat.format(minute);
     }
+
 
     /**
      *
@@ -189,7 +204,7 @@ public class DateTimePickerUtil {
     }
 
     public interface OnDateSetListener {
-        void onDateSet(String date);
+        void onDateSet(String date, long realTime);
     }
 
     public interface OnMonthSetListener {

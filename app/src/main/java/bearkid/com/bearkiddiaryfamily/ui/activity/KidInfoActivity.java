@@ -16,6 +16,7 @@ import bearkid.com.bearkiddiaryfamily.R;
 import bearkid.com.bearkiddiaryfamily.model.bean.Kid;
 import bearkid.com.bearkiddiaryfamily.ui.activity.iactivity.IKidInfoView;
 import bearkid.com.bearkiddiaryfamily.ui.view.KidInfoView;
+import bearkid.com.bearkiddiaryfamily.utils.DateTimePickerUtil;
 
 public class KidInfoActivity extends BaseActivity implements IKidInfoView, View.OnClickListener{
     TextView edit;
@@ -73,16 +74,11 @@ public class KidInfoActivity extends BaseActivity implements IKidInfoView, View.
         list_2_expand = true;
         list_3_expand = true;
         isEdit = false;
-        list_1_add.setVisibility(View.GONE);
-        list_2_add.setVisibility(View.GONE);
-        list_3_add.setVisibility(View.GONE);
 
         name.setText(kid.getKname());
 
         if (kid.getKbirthday() != null) {
-            Date birthday = new Date(kid.getKbirthday());
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            birth.setText(simpleDateFormat.format(birthday));
+            birth.setText(DateTimePickerUtil.getFormatDate(kid.getKbirthday()));
         }
 
         if (kid.getKsex() != null) {
@@ -104,47 +100,38 @@ public class KidInfoActivity extends BaseActivity implements IKidInfoView, View.
                     list_1_add.setVisibility(View.GONE);
                     list_2_add.setVisibility(View.GONE);
                     list_3_add.setVisibility(View.GONE);
-                    isEdit = !isEdit;
                 } else {
                     edit.setText("完成");
                     list_1_add.setVisibility(View.VISIBLE);
                     list_2_add.setVisibility(View.VISIBLE);
                     list_3_add.setVisibility(View.VISIBLE);
-                    isEdit = !isEdit;
                 }
+                isEdit = !isEdit;
                 break;
             case R.id.rl_kid_info_list_1:
-                if (list_1_expand) {
-                    ll_1.setVisibility(View.GONE);
-                    list_1_iv.setBackgroundResource(R.drawable.arrow_down);
-                    list_1_expand = !list_1_expand;
-                } else {
-                    ll_1.setVisibility(View.VISIBLE);
-                    list_1_iv.setBackgroundResource(R.drawable.arrow_up);
-                    list_1_expand = !list_1_expand;
-                }
+                expandDataList(list_1_expand, ll_1, list_1_iv);
+                list_1_expand = !list_1_expand;
                 break;
             case R.id.rl_kid_info_list_2:
+                expandDataList(list_2_expand, ll_2, list_2_iv);
                 if (list_2_expand) {
                     ll_2.setVisibility(View.GONE);
                     list_2_iv.setBackgroundResource(R.drawable.arrow_down);
-                    list_2_expand = !list_2_expand;
                 } else {
                     ll_2.setVisibility(View.VISIBLE);
                     list_2_iv.setBackgroundResource(R.drawable.arrow_up);
-                    list_2_expand = !list_2_expand;
                 }
+                list_2_expand = !list_2_expand;
                 break;
             case R.id.rl_kid_info_list_3:
                 if (list_3_expand) {
                     ll_3.setVisibility(View.GONE);
                     list_3_iv.setBackgroundResource(R.drawable.arrow_down);
-                    list_3_expand = !list_3_expand;
                 } else {
                     ll_3.setVisibility(View.VISIBLE);
                     list_3_iv.setBackgroundResource(R.drawable.arrow_up);
-                    list_3_expand = !list_3_expand;
                 }
+                list_3_expand = !list_3_expand;
                 break;
             case R.id.iv_kid_info_add_list_1:
                 break;
@@ -161,6 +148,16 @@ public class KidInfoActivity extends BaseActivity implements IKidInfoView, View.
         Intent intent = new Intent(context, KidInfoActivity.class);
         intent.putExtra("kid", kid);
         context.startActivity(intent);
+    }
+
+    private void expandDataList(boolean isExpand, LinearLayout ll, ImageView iv) {
+        if (isExpand) {
+            ll.setVisibility(View.GONE);
+            iv.setBackgroundResource(R.drawable.arrow_down);
+        } else {
+            ll.setVisibility(View.VISIBLE);
+            iv.setBackgroundResource(R.drawable.arrow_up);
+        }
     }
 
     @Override

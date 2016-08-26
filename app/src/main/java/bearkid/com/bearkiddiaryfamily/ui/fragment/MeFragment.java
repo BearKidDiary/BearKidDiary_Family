@@ -57,6 +57,7 @@ public class MeFragment extends BaseFragment implements IMeFragment, View.OnClic
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.d("MeFragment", "onCreateView");
         View view = inflater.inflate(R.layout.frament_me, container, false);
         context = getContext();
 
@@ -132,6 +133,7 @@ public class MeFragment extends BaseFragment implements IMeFragment, View.OnClic
 
         adapter = new GridViewAdapter(context, myKids);
         kidsGView.setAdapter(adapter);
+        resetGridView();
     }
 
     private void resetGridView() {

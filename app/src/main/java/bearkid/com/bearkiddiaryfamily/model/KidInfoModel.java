@@ -32,23 +32,18 @@ public class KidInfoModel {
     public interface AddKidService {
         @FormUrlEncoded
         @POST(Urls.URL_ADDKID)
-        Observable<Result<Kid>> addKid(@Field("Uphone") String Uphone, @FieldMap Map<String, String> map);
+        Observable<Result<Kid>> addKid(@Field("Uphone") String Uphone, @FieldMap Map<String, Object> map);
     }
 
-    public static Observable<Result<Kid>> addKid(String Uphone, String[] parameter, String[] value) {
+    public static Observable<Result<Kid>> addKid(String Uphone, String[] parameter, Object[] value) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Urls.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
         AddKidService addKidService = retrofit.create(AddKidService.class);
-        Map<String, String> kidInfoMap = new HashMap<>();
+        Map<String, Object> kidInfoMap = new HashMap<>();
         for (int i = 0; i < parameter.length; i++) {
-//            try {
-//                kidInfoMap.put(parameter[i], URLEncoder.encode(value[i],"UTF-8"));
-//            } catch (UnsupportedEncodingException e) {
-//                e.printStackTrace();
-//            }
             kidInfoMap.put(parameter[i], value[i]);
         }
 

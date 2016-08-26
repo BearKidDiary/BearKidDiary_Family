@@ -22,10 +22,10 @@ public class AddKidPresenter {
 
     public void addKid() {
         view.showProgressDialog();
-        addKid(new String[]{Kid.NAME, Kid.SEX}, new String[]{view.getKidName(), view.getKidGender()});
+        addKid(new String[]{Kid.NAME, Kid.SEX, Kid.BIRTHDAY}, new Object[]{view.getKidName(), view.getKidGender(), view.getKidBirthday()});
     }
 
-    private void addKid(String[] parameter, String[] value){
+    private void addKid(String[] parameter, Object[] value){
         KidInfoModel.addKid(Uphone, parameter, value)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(userResult -> {

@@ -32,7 +32,7 @@ public class MePresenter {
                         Log.d("加载孩子", "失败");
                     }
                 }, Throwable -> {
-                    Log.d("加载孩子", "失败");
+                    Log.d("加载孩子", "异常");
                 });
     }
 }
