@@ -165,8 +165,9 @@ public class TimeLine implements Serializable {
                     return R.drawable.timeline_type_fish;
                 case FOOTPRINT:
                     return R.drawable.timeline_type_footprint;
+                default:
+                    return R.drawable.timeline_type_camera;
             }
-            return -1;
         }
     }
 }

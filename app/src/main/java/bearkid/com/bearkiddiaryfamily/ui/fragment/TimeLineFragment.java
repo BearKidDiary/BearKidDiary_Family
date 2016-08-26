@@ -180,7 +180,11 @@ public class TimeLineFragment extends BaseFragment implements ITimeLineFragment 
                 }
             }
         });
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
         presenter.init();
     }
 
@@ -248,6 +252,8 @@ public class TimeLineFragment extends BaseFragment implements ITimeLineFragment 
             /*3.发布的类型的图标*/
             //TODO: 发布类型的图标
             Integer logoType = timeLine.getTtypelogo();
+            int resId = TimeLine.Type.getLogoResource(logoType);
+            holder.iv_icon.setImageResource(resId);
 
             /*4.发布的人*/
             String userName = timeLine.getAuthor().getUname();
@@ -257,7 +263,7 @@ public class TimeLineFragment extends BaseFragment implements ITimeLineFragment 
             /*5.发布时间*/
             Long time = timeLine.getTreleasetime();
             if (time != null) {
-                String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date(time));
+                String date = new SimpleDateFormat("yyyy-MM-dd hh:mm").format(new Date(time));
                 holder.tv_time.setText(date);
             }
             /*6.发布的图片 先显示缓存中存在的图片*/

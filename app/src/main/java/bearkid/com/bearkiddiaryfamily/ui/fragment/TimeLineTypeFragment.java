@@ -33,7 +33,7 @@ import bearkid.com.bearkiddiaryfamily.ui.view.IconButton;
  */
 public class TimeLineTypeFragment extends BaseFragment implements ITimeLineTypeFragment {
 
-    private List<String> childName = Arrays.asList("王小宝", "王小帅", "丫丫");//孩子列表
+    private List<String> childName = Arrays.asList("获取中");//孩子列表
     private final float textSize = 20f;//标题栏孩子名字的字体大小
     private AppCompatSpinner spinner_name;
     private ArrayAdapter<String> nameAdapter;
@@ -94,7 +94,11 @@ public class TimeLineTypeFragment extends BaseFragment implements ITimeLineTypeF
                 return childName.get(position);
             }
         });
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
         presenter.init();
     }
 

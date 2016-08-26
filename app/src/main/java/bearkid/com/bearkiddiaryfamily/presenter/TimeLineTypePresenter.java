@@ -51,7 +51,7 @@ public class TimeLineTypePresenter implements View.OnClickListener {
 
     public void init() {
         final String phoneNum = db.getPhoneNum();
-        KidInfoModel.getKidInfo(null, phoneNum, null, null)
+        KidInfoModel.getKidInfo(null, phoneNum, null, null, "ALL")
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(kids -> {
                     List<String> name = new ArrayList<>();
