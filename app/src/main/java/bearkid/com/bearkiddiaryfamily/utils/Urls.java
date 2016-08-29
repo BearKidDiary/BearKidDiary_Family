@@ -26,6 +26,10 @@ public class Urls {
     public static final String URL_TIMELINE = "kid/timeline";
     //添加时间轴事件
     public static final String URL_ADD_TIMELINE = "kid/timeline/add";
+    //获取孩子身体数据
+    public static final String URL_BODY = "kid/body";
+    //添加孩子身体数据
+    public static final String URL_BODY_ADD = "kid/body/add";
     /**
      * 家庭
      */

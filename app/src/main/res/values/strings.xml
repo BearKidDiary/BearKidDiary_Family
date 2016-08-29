@@ -59,4 +59,11 @@
     <string name="add_kid_title">添加孩子</string>
     <string name="birthday">生日</string>
     <string name="add_body_data">添加身体数据</string>
+    <string name="add_height_data">添加身高数据</string>
+    <string name="meters">m</string>
+    <string name="add_weight_data">添加体重数据</string>
+    <string name="kg">kg</string>
+    <string name="add_vision_data">添加视力数据</string>
+    <string name="left_vision">左眼</string>
+    <string name="right_vision">右眼</string>
 </resources>
