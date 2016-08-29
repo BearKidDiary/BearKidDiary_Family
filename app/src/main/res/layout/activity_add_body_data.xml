@@ -31,6 +31,19 @@
             android:text="@string/add_body_data"
             android:textColor="#ffffff"
             android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_body_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="@string/confirm"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            android:clickable="true" />
     </RelativeLayout>
 
     <TextView
@@ -38,7 +51,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="8dp"
-        android:text="添加身高数据"/>
+        android:text="@string/add_height_data"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -47,6 +60,7 @@
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp">
         <EditText
+            android:id="@+id/et_body_height"
             android:background="@drawable/drawable_edit_normal"
             android:layout_weight="1"
             android:layout_width="0dp"
@@ -58,12 +72,53 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:text="m"/>
+            android:text="@string/meters"/>
         <TextView
+            android:id="@+id/tv_body_height_date"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:background="@drawable/drawable_edit_normal"
             android:layout_height="match_parent"
+            android:singleLine="true"
+            android:clickable="true"
+            android:gravity="center"
+            android:layout_marginLeft="16dp"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="@string/add_weight_data"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp">
+        <EditText
+            android:id="@+id/et_body_weight"
+            android:background="@drawable/drawable_edit_normal"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:gravity="center"
+            android:singleLine="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="@string/kg"/>
+        <TextView
+            android:id="@+id/tv_body_weight_date"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:background="@drawable/drawable_edit_normal"
+            android:layout_height="match_parent"
+            android:singleLine="true"
             android:clickable="true"
             android:gravity="center"
             android:layout_marginLeft="16dp"
@@ -75,7 +130,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="8dp"
-        android:text="添加体重数据"/>
+        android:text="@string/add_vision_data"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -83,7 +138,12 @@
         android:orientation="horizontal"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/left_vision"/>
         <EditText
+            android:id="@+id/et_body_vision_left"
             android:background="@drawable/drawable_edit_normal"
             android:layout_weight="1"
             android:layout_width="0dp"
@@ -95,36 +155,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:text="kg"/>
-        <TextView
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:background="@drawable/drawable_edit_normal"
-            android:layout_height="match_parent"
-            android:clickable="true"
-            android:gravity="center"
-            android:layout_marginLeft="16dp"
-            android:text="2016-04-05"/>
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="8dp"
-        android:text="添加视力数据"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="左眼"/>
+            android:text="@string/right_vision"/>
         <EditText
+            android:id="@+id/et_body_vision_right"
             android:background="@drawable/drawable_edit_normal"
             android:layout_weight="1"
             android:layout_width="0dp"
@@ -133,23 +166,12 @@
             android:gravity="center"
             android:singleLine="true"/>
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:text="右眼"/>
-        <EditText
-            android:background="@drawable/drawable_edit_normal"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:gravity="center"
-            android:singleLine="true"/>
-        <TextView
+            android:id="@+id/tv_body_vision_date"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:background="@drawable/drawable_edit_normal"
             android:layout_height="match_parent"
+            android:singleLine="true"
             android:clickable="true"
             android:gravity="center"
             android:layout_marginLeft="16dp"

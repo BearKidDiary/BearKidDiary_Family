@@ -1,13 +1,18 @@
 package bearkid.com.bearkiddiaryfamily.model;
 
+import android.support.annotation.Nullable;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import bearkid.com.bearkiddiaryfamily.model.bean.Height;
 import bearkid.com.bearkiddiaryfamily.model.bean.Kid;
 import bearkid.com.bearkiddiaryfamily.model.bean.Result;
+import bearkid.com.bearkiddiaryfamily.model.bean.Vision;
+import bearkid.com.bearkiddiaryfamily.model.bean.Weight;
 import bearkid.com.bearkiddiaryfamily.utils.Urls;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -59,6 +64,12 @@ public class KidInfoModel {
         @FormUrlEncoded
         @POST(URL_KID)
         Observable<Result<List<Kid>>> getKidInfo(@Field("Kid") Long Kid, @Field("Uphone") String Uphone, @Field("Fid") Long Fid, @Field("Cid") Long Cid, @Field("Range") String Range);
+
+        @FormUrlEncoded
+        @POST(URL_BODY)
+        Observable<Result<List>> getKidBodyData(@Field("Kid") Long Kid,
+                                                @Field("Order") String Order,
+                                                @Field("Range") String Range);
     }
 
     public static Observable<Result<List<Kid>>> searchKid(String Uphone) {
@@ -104,4 +115,44 @@ public class KidInfoModel {
                 .subscribeOn(Schedulers.io())
                 .map(result -> result.getData());
     }
+
+    /**
+     *
+     * @param Kid      是  Long    孩子的编号
+     * @param Order    否  String  排序方式 {"desc"，"asc"}
+     * @param Range    否  String  获取类型 {"Height"，"Weight"，"Vision"}
+     * @return 可能为List<Height>或List<Weight>或List<Vision>
+     */
+    public static Observable<Result<List>> getKidBodyData(Long Kid, @Nullable String Order, @Nullable String Range) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Urls.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        return retrofit.create(SearchKidService.class)
+                .getKidBodyData(Kid, Order, Range)
+                .subscribeOn(Schedulers.io());
+    }
+
+    public interface AddBodyDataService {
+        @FormUrlEncoded
+        @POST(Urls.URL_BODY_ADD)
+        Observable<Result> addBodyData(@Field("Kid") Long kidId, @FieldMap Map<String, Object> map);
+    }
+
+    public static Observable<Result> addBodyData(Long Kid, @Nullable Height height, @Nullable Weight weight, @Nullable Vision vision) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Urls.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        Map<String, Object> bodyDataMap = new HashMap<>();
+        if (height != null) {
+//            bodyDataMap.put(Height.HEIGHT)
+        }
+        return retrofit.create(AddBodyDataService.class)
+                .addBodyData(Kid, bodyDataMap)
+                .subscribeOn(Schedulers.io());
+    }
+
 }

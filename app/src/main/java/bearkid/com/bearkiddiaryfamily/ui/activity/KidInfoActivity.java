@@ -1,5 +1,6 @@
 package bearkid.com.bearkiddiaryfamily.ui.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,10 +13,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import bearkid.com.bearkiddiaryfamily.R;
-import bearkid.com.bearkiddiaryfamily.model.bean.Height;
 import bearkid.com.bearkiddiaryfamily.model.bean.Kid;
-import bearkid.com.bearkiddiaryfamily.model.bean.Vision;
-import bearkid.com.bearkiddiaryfamily.model.bean.Weight;
+import bearkid.com.bearkiddiaryfamily.presenter.KidInfoPresenter;
 import bearkid.com.bearkiddiaryfamily.ui.activity.iactivity.IKidInfoView;
 import bearkid.com.bearkiddiaryfamily.ui.view.BodyDataView;
 import bearkid.com.bearkiddiaryfamily.utils.DateTimePickerUtil;
@@ -34,8 +33,11 @@ public class KidInfoActivity extends BaseActivity implements IKidInfoView, View.
     ImageView icon1, icon2, icon3, icon4;//展开图标
     BodyDataView heightView, weightView, visionView;
 
+    private static final int REQUEST_ADD_DATA = 11;
+
     protected boolean heightVisible = true, weightVisible = true, visionVisible = true, exhortVisible = true;
     private Kid kid;
+    private KidInfoPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,11 @@ public class KidInfoActivity extends BaseActivity implements IKidInfoView, View.
         setContentView(R.layout.activity_kid_info);
         kid = (Kid) getIntent().getSerializableExtra("kid");
         initView();
+        initPresenter();
+    }
+
+    private void initPresenter() {
+        presenter = new KidInfoPresenter(this, kid.getKid());
     }
 
     private void initView() {
@@ -92,14 +99,28 @@ public class KidInfoActivity extends BaseActivity implements IKidInfoView, View.
 
     }
 
+
+    @Override
+    public void onActivityResult(int request, int result, Intent data) {
+        super.onActivityResult(request, result, data);
+        switch (request) {
+            case REQUEST_ADD_DATA:
+                if (result == Activity.RESULT_OK) {
+                    presenter.init();
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_kid_info_edit://添加身体数据
-
+                AddBodyDataActivity.startActivity(KidInfoActivity.this, REQUEST_ADD_DATA, kid.getKid());
                 break;
             case R.id.ll_kid_info://修改孩子信息
-                AddBodyDataActivity.startActivity(KidInfoActivity.this);
                 break;
             case R.id.rl_kid_info_list_1:
                 expandDataList(heightVisible, heightView, icon1);
@@ -139,7 +160,7 @@ public class KidInfoActivity extends BaseActivity implements IKidInfoView, View.
     }
 
     @Override
-    public void showHeight(List<Height> heightList) {
+    public void showHeight(List heightList) {
         heightView.show(heightList);
     }
 
@@ -149,7 +170,7 @@ public class KidInfoActivity extends BaseActivity implements IKidInfoView, View.
     }
 
     @Override
-    public void showWeight(List<Weight> weightList) {
+    public void showWeight(List weightList) {
         weightView.show(weightList);
     }
 
@@ -159,7 +180,7 @@ public class KidInfoActivity extends BaseActivity implements IKidInfoView, View.
     }
 
     @Override
-    public void showVision(List<Vision> visionList) {
+    public void showVision(List visionList) {
         visionView.show(visionList);
     }
 
