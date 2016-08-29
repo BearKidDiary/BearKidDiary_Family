@@ -13,20 +13,30 @@ import android.widget.Toast;
 import com.gc.materialdesign.widgets.ProgressDialog;
 
 import bearkid.com.bearkiddiaryfamily.R;
+import bearkid.com.bearkiddiaryfamily.model.bean.Kid;
 import bearkid.com.bearkiddiaryfamily.presenter.AddKidPresenter;
 import bearkid.com.bearkiddiaryfamily.ui.activity.iactivity.IAddKidView;
 import bearkid.com.bearkiddiaryfamily.utils.DateTimePickerUtil;
 
 public class AddKidActivity extends BaseActivity implements IAddKidView, View.OnClickListener{
 
-    protected TextView confirm;
-    protected EditText name;
+    protected TextView titleTv;
+    protected TextView confirmTv;
+    protected EditText nameEt;
     protected Button male, female;
     protected TextView birthdayTv;
+    protected EditText askEt;
     public static final String MALE = "男";
     public static final String FEMALE = "女";
     protected String gender;
     private long birthday;
+
+    public static final int ADD_KID = 0;
+    public static final int UPDATE_INFO = 1;
+    //判断是添加孩子操作还是更新孩子信息操作
+    private int type;
+    private Kid kid;
+
 
     protected ProgressDialog progressDialog;
     private AddKidPresenter presenter;
@@ -35,9 +45,9 @@ public class AddKidActivity extends BaseActivity implements IAddKidView, View.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_kid);
-
-        initView();
+        type = getIntent().getIntExtra("type", ADD_KID);
         initPresenter();
+        initView();
     }
 
     private void initPresenter() {
@@ -45,34 +55,56 @@ public class AddKidActivity extends BaseActivity implements IAddKidView, View.On
     }
 
     private void initView() {
-        confirm = (TextView) findViewById(R.id.tv_add_kid_confirm);
-        name = (EditText) findViewById(R.id.et_kid_name);
-        male = (Button) findViewById(R.id.btn_kid_gender_male);
-        female = (Button) findViewById(R.id.btn_kid_gender_female);
-        birthdayTv = (TextView) findViewById(R.id.tv_kid_birthday);
+        titleTv = (TextView) this.findViewById(R.id.tv_title);
+        confirmTv = (TextView) this.findViewById(R.id.tv_add_kid_confirm);
+        nameEt = (EditText) this.findViewById(R.id.et_kid_name);
+        male = (Button) this.findViewById(R.id.btn_kid_gender_male);
+        female = (Button) this.findViewById(R.id.btn_kid_gender_female);
+        birthdayTv = (TextView) this.findViewById(R.id.tv_kid_birthday);
+        askEt = (EditText) this.findViewById(R.id.et_kid_ask);
 
-        confirm.setOnClickListener(this);
         male.setOnClickListener(this);
         female.setOnClickListener(this);
         birthdayTv.setOnClickListener(this);
 
         progressDialog = new ProgressDialog(this, "添加中", R.color.colorPrimary);
 
-        male.callOnClick();
+        if (type == ADD_KID) {
+            confirmTv.setOnClickListener(v -> {
+                presenter.addKid();
+            });
+            male.callOnClick();
+        } else if (type == UPDATE_INFO) {
+            kid = (Kid) getIntent().getSerializableExtra("kid");
+            confirmTv.setOnClickListener(v -> {
+                // TODO: 2016/8/29 update info
+            });
+            nameEt.setText(kid.getKname());
+            if (kid.getKsex().equals(MALE)) {
+                male.callOnClick();
+            } else {
+                female.callOnClick();
+            }
+            birthdayTv.setText(DateTimePickerUtil.getFormatDate(kid.getKbirthday()));
+        }
     }
 
     public static void startActivity(Fragment fragment, int requestCode) {
-        fragment.startActivityForResult(new Intent(fragment.getContext(), AddKidActivity.class), requestCode);
+        Intent intent = new Intent(fragment.getContext(), AddKidActivity.class);
+        intent.putExtra("type", ADD_KID);
+        fragment.startActivityForResult(intent, requestCode);
+    }
+
+    public static void startActivity(BaseActivity activity, int requestCode, Kid kid) {
+        Intent intent = new Intent(activity, AddKidActivity.class);
+        intent.putExtra("type", UPDATE_INFO);
+        intent.putExtra("kid", kid);
+        activity.startActivityForResult(intent, requestCode);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.tv_add_kid_confirm:
-                if (presenter != null) {
-                    presenter.addKid();
-                }
-                break;
             case R.id.btn_kid_gender_male:
                 gender = MALE;
                 male.setBackgroundResource(R.color.gender_choose);
@@ -96,7 +128,7 @@ public class AddKidActivity extends BaseActivity implements IAddKidView, View.On
 
     @Override
     public String getKidName() {
-        return name.getText().toString();
+        return nameEt.getText().toString();
     }
 
     @Override

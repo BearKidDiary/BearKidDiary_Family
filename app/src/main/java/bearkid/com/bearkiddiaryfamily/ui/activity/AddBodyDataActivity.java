@@ -10,6 +10,8 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gc.materialdesign.widgets.ProgressDialog;
+
 import bearkid.com.bearkiddiaryfamily.R;
 import bearkid.com.bearkiddiaryfamily.presenter.AddBodyDataPresenter;
 import bearkid.com.bearkiddiaryfamily.ui.activity.iactivity.IAddBodyDataView;
@@ -25,6 +27,7 @@ public class AddBodyDataActivity extends BaseActivity implements IAddBodyDataVie
     protected TextView heightDateTv;
     protected TextView weightDateTv;
     protected TextView visionDateTv;
+    protected ProgressDialog progressDialog;
 
     private Long kidId;
     private Long heightDate;
@@ -56,6 +59,8 @@ public class AddBodyDataActivity extends BaseActivity implements IAddBodyDataVie
         weightDateTv = (TextView) this.findViewById(R.id.tv_body_weight_date);
         visionDateTv = (TextView) this.findViewById(R.id.tv_body_vision_date);
 
+        progressDialog = new ProgressDialog(this, "加载中，请稍候", R.color.colorPrimary);
+
         confirmTv.setOnClickListener(this);
         heightDateTv.setOnClickListener(this);
         weightDateTv.setOnClickListener(this);
@@ -70,17 +75,21 @@ public class AddBodyDataActivity extends BaseActivity implements IAddBodyDataVie
 
     @Override
     public void showProgress() {
-
+        if (progressDialog != null) {
+            progressDialog.show();
+        }
     }
 
     @Override
     public void hideProgress() {
-
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
     }
 
     @Override
     public void showResult(String result) {
-        Toast.makeText(AddBodyDataActivity.this, result, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, result, Toast.LENGTH_LONG).show();
     }
 
     @Override

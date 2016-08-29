@@ -6,7 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/MaterialDesign/MaterialDesign.iml" filepath="$PROJECT_DIR$/MaterialDesign/MaterialDesign.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/galleryfinal/galleryfinal.iml" filepath="$PROJECT_DIR$/galleryfinal/galleryfinal.iml" />
-      <module fileurl="file://$PROJECT_DIR$/multiple-images-selector/multiple-images-selector.iml" filepath="$PROJECT_DIR$/multiple-images-selector/multiple-images-selector.iml" />
+      <module fileurl="file://$PROJECT_DIR$/galleryfinal/galleryfinal.iml" filepath="$PROJECT_DIR$/galleryfinal/galleryfinal.iml" />
       <module fileurl="file://$PROJECT_DIR$/qrcodelib/qrcodelib.iml" filepath="$PROJECT_DIR$/qrcodelib/qrcodelib.iml" />
     </modules>
   </component>

@@ -34,6 +34,7 @@ public class KidInfoActivity extends BaseActivity implements IKidInfoView, View.
     BodyDataView heightView, weightView, visionView;
 
     private static final int REQUEST_ADD_DATA = 11;
+    private static final int REQUEST_UPDATE_INFO = 12;
 
     protected boolean heightVisible = true, weightVisible = true, visionVisible = true, exhortVisible = true;
     private Kid kid;
@@ -109,6 +110,11 @@ public class KidInfoActivity extends BaseActivity implements IKidInfoView, View.
                     presenter.init();
                 }
                 break;
+            case REQUEST_UPDATE_INFO:
+                if (result == Activity.RESULT_OK) {
+                    // TODO: 2016/8/29 刷新孩子信息
+                }
+                break;
             default:
                 break;
         }
@@ -121,6 +127,7 @@ public class KidInfoActivity extends BaseActivity implements IKidInfoView, View.
                 AddBodyDataActivity.startActivity(KidInfoActivity.this, REQUEST_ADD_DATA, kid.getKid());
                 break;
             case R.id.ll_kid_info://修改孩子信息
+                AddKidActivity.startActivity(this, REQUEST_UPDATE_INFO, kid);
                 break;
             case R.id.rl_kid_info_list_1:
                 expandDataList(heightVisible, heightView, icon1);

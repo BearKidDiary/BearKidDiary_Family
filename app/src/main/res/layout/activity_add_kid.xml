@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:fitsSystemWindows="true"
     android:background="@color/bg_white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
     tools:context=".ui.activity.AddKidActivity">
 
     <RelativeLayout
@@ -24,12 +24,13 @@
             android:src="@drawable/selector_title_back" />
 
         <TextView
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textSize="20sp"
+            android:text="@string/add_kid_title"
             android:textColor="@color/txt_title"
-            android:text="@string/add_kid_title"/>
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/tv_add_kid_confirm"
@@ -49,9 +50,9 @@
     <bearkid.com.bearkiddiaryfamily.ui.view.CircleImageview
         android:layout_width="72dp"
         android:layout_height="72dp"
+        android:layout_gravity="center_horizontal"
         android:layout_margin="16dp"
-        android:src="@drawable/avatar"
-        android:layout_gravity="center_horizontal"/>
+        android:src="@drawable/avatar" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -59,38 +60,39 @@
         android:padding="8dp">
 
         <TextView
-            android:layout_toLeftOf="@+id/et_kid_name"
-            android:layout_toStartOf="@+id/et_kid_name"
-            android:layout_marginRight="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/personal_info_name"
             android:layout_centerVertical="true"
-            android:textSize="16sp"/>
+            android:layout_marginRight="8dp"
+            android:layout_toLeftOf="@+id/et_kid_name"
+            android:layout_toStartOf="@+id/et_kid_name"
+            android:text="@string/personal_info_name"
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/et_kid_name"
             android:layout_width="120dp"
-            android:gravity="center_vertical"
+            android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:singleLine="true"
             android:background="@android:drawable/edit_text"
-            android:layout_height="wrap_content" />
+            android:gravity="center_vertical"
+            android:singleLine="true" />
     </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp">
 
         <TextView
-            android:layout_toLeftOf="@+id/ll_gender"
-            android:layout_toStartOf="@+id/ll_gender"
-            android:layout_marginRight="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/personal_info_gender"
             android:layout_centerVertical="true"
-            android:textSize="16sp"/>
+            android:layout_marginRight="8dp"
+            android:layout_toLeftOf="@+id/ll_gender"
+            android:layout_toStartOf="@+id/ll_gender"
+            android:text="@string/personal_info_gender"
+            android:textSize="16sp" />
 
 
         <LinearLayout
@@ -118,29 +120,56 @@
                 android:textColor="@color/text_white" />
         </LinearLayout>
     </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp">
 
         <TextView
-            android:layout_toLeftOf="@+id/tv_kid_birthday"
-            android:layout_toStartOf="@+id/tv_kid_birthday"
-            android:layout_marginRight="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/birthday"
             android:layout_centerVertical="true"
-            android:textSize="16sp"/>
+            android:layout_marginRight="8dp"
+            android:layout_toLeftOf="@+id/tv_kid_birthday"
+            android:layout_toStartOf="@+id/tv_kid_birthday"
+            android:text="@string/birthday"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tv_kid_birthday"
             android:layout_width="120dp"
-            android:gravity="center_vertical"
+            android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:singleLine="true"
-            android:clickable="true"
             android:background="@android:drawable/edit_text"
-            android:layout_height="wrap_content" />
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:singleLine="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            android:layout_toLeftOf="@+id/et_kid_ask"
+            android:layout_toStartOf="@+id/et_kid_ask"
+            android:text="@string/exhort"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/et_kid_ask"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@android:drawable/edit_text"
+            android:gravity="top"
+            android:maxLines="3"
+            android:minLines="3" />
     </RelativeLayout>
 </LinearLayout>

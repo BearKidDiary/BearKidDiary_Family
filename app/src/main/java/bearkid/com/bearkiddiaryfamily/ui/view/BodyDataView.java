@@ -76,10 +76,10 @@ public class BodyDataView extends LinearLayout {
                     TextView tv_data1 = (TextView) content.findViewById(R.id.tv_data_1);
                     TextView tv_data2 = (TextView) content.findViewById(R.id.tv_data_2);
                     TextView tv_date = (TextView) content.findViewById(R.id.tv_date);
-                    String value = ((Weight)object).getHheight() + "kg";
+                    String value = ((Weight)object).getWweight() + "kg";
                     tv_data1.setText(value);
                     tv_data2.setVisibility(GONE);
-                    tv_date.setText(DateTimePickerUtil.getFormatDate(((Weight)object).getHtime()));
+                    tv_date.setText(DateTimePickerUtil.getFormatDate(((Weight)object).getWtime()));
                 }
                 break;
             case VISION:
