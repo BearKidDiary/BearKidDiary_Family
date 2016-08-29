@@ -35,7 +35,7 @@ public class TimeLinePostPresenter {
         final String content = view.getContent();
         final Integer typeLogo = view.getTypeLogo();
         final String type = view.getType();
-        final List<String> pic = view.getPicPath();
+        final List<String> pic = view. getPicPath();
 
         if (content.trim().equals("")) {
             view.showError("内容不能为空");

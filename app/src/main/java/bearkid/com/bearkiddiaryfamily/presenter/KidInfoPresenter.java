@@ -14,8 +14,5 @@ public class KidInfoPresenter {
     }
 
     public void init() {
-        view.showHeightAndWeight(181, 45, "2015-02-23");
-        view.showVision(2.5, 5.2, "2015-02-03");
-        view.showExhort(1, "不能吃辣");
     }
 }

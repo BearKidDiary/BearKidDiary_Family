@@ -9,38 +9,38 @@ import java.io.Serializable;
  */
 public class Weight implements Serializable{
     @Expose
-    private Long Hid;
+    private Long Wid;
 
     @Expose
-    private Long Htime;
+    private Long Wtime;
 
     @Expose
-    private Float Hheight;
+    private float Wweight;
 
     private Kid kid;
 
-    public Long getHid() {
-        return Hid;
+    public Long getWid() {
+        return Wid;
     }
 
-    public void setHid(Long hid) {
-        Hid = hid;
+    public void setWid(Long wid) {
+        Wid = wid;
     }
 
-    public Long getHtime() {
-        return Htime;
+    public Long getWtime() {
+        return Wtime;
     }
 
-    public void setHtime(Long htime) {
-        Htime = htime;
+    public void setWtime(Long wtime) {
+        Wtime = wtime;
     }
 
-    public Float getHheight() {
-        return Hheight;
+    public float getWweight() {
+        return Wweight;
     }
 
-    public void setHheight(Float hheight) {
-        Hheight = hheight;
+    public void setWweight(float wweight) {
+        Wweight = wweight;
     }
 
     public Kid getKid() {
@@ -50,4 +50,5 @@ public class Weight implements Serializable{
     public void setKid(Kid kid) {
         this.kid = kid;
     }
+
 }

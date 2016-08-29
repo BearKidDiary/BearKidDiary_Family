@@ -54,6 +54,7 @@
             android:src="@drawable/btn_chat_add_camera_selector" />
 
         <ImageView
+            android:id="@+id/iv_timeline_pic1"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_weight="1"
@@ -62,6 +63,7 @@
             android:visibility="invisible" />
 
         <ImageView
+            android:id="@+id/iv_timeline_pic2"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_weight="1"
@@ -70,6 +72,7 @@
             android:visibility="invisible" />
 
         <ImageView
+            android:id="@+id/iv_timeline_pic3"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_weight="1"

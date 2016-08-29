@@ -50,5 +50,4 @@ public class TimeLineFirstTimeDialog extends TimeLineDialog {
     public String getContent() {
         return et_content.getText().toString();
     }
-
 }

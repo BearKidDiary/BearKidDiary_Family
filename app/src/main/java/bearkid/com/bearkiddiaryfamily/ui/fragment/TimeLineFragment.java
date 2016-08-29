@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.gc.materialdesign.views.ButtonFloat;
 import com.nineoldandroids.animation.ObjectAnimator;
 
@@ -107,10 +108,12 @@ public class TimeLineFragment extends BaseFragment implements ITimeLineFragment 
                 tv.setTextColor(0xffffffff);
                 return tv;
             }
+
             @Override
             public String getItem(int position) {
                 return childName.get(position);
             }
+
             @Override
             public int getCount() {
                 return childName.size();
@@ -267,6 +270,30 @@ public class TimeLineFragment extends BaseFragment implements ITimeLineFragment 
                 holder.tv_time.setText(date);
             }
             /*6.发布的图片 先显示缓存中存在的图片*/
+            final String pic1 = timeLine.getTimage1();
+            final String pic2 = timeLine.getTimage2();
+            final String pic3 = timeLine.getTimage3();
+            if (pic1 == null) {
+                holder.ll_picGroup.setVisibility(View.GONE);
+            } else {
+                holder.ll_picGroup.setVisibility(View.VISIBLE);
+                holder.pic1.setVisibility(View.VISIBLE);
+                Glide.with(TimeLineFragment.this).load(pic1).into(holder.pic1);
+            }
+
+            if (pic2 == null) {
+                holder.pic2.setVisibility(View.INVISIBLE);
+            } else {
+                holder.pic2.setVisibility(View.VISIBLE);
+                Glide.with(TimeLineFragment.this).load(pic2).into(holder.pic2);
+            }
+
+            if (pic3 == null) {
+                holder.pic3.setVisibility(View.INVISIBLE);
+            } else {
+                holder.pic3.setVisibility(View.VISIBLE);
+                Glide.with(TimeLineFragment.this).load(pic3).into(holder.pic3);
+            }
         }
 
         @Override
