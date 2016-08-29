@@ -41,7 +41,7 @@ import rx.schedulers.Schedulers;
 public class TimeLineTypePresenter implements View.OnClickListener {
     private static final String TAG = "TimeLineTypePresenter";
     private final ITimeLineTypeFragment view;
-    private List<Kid> kids;
+    private List<Kid> kids = new ArrayList<>();
     private LocalDB db;
 
     public TimeLineTypePresenter(TimeLineTypeFragment view) {

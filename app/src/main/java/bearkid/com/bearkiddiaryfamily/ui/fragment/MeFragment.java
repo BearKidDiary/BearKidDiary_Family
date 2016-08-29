@@ -78,7 +78,6 @@ public class MeFragment extends BaseFragment implements IMeFragment, View.OnClic
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.img_me_avatar:
-                Log.d("avatarImg", "点击");
                 PersonalInfoActivity.startActivity(context);
                 break;
             case R.id.rlayout_me_scan:
@@ -104,7 +103,6 @@ public class MeFragment extends BaseFragment implements IMeFragment, View.OnClic
                     //TODO:处理扫描后获得的内容
                     Bitmap QRcode = QRCodeModel.getBitmap(data);
                     String content = QRCodeModel.getContent(data);
-                    Log.i("zy", "扫描成功：" + content);
                 }
                 break;
             case REQUEST_ADD_KID:

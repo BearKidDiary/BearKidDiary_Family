@@ -9,13 +9,16 @@ import android.widget.Toast;
 
 import com.gc.materialdesign.views.ButtonFlat;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import bearkid.com.bearkiddiaryfamily.model.bean.TimeLine;
 import bearkid.com.bearkiddiaryfamily.presenter.TimeLinePostPresenter;
 import bearkid.com.bearkiddiaryfamily.ui.dialog.idialog.ITimeLineView;
 import bearkid.com.bearkiddiaryfamily.ui.view.IconButton;
 
 /**
- * Created by admin on 2016/8/24.
+ * Created by zy on 2016/8/24.
  */
 public abstract class TimeLineDialog extends DialogFragment implements ITimeLineView {
 
@@ -36,6 +39,13 @@ public abstract class TimeLineDialog extends DialogFragment implements ITimeLine
 
         getPositiveButton().setOnClickListener(v -> {
             presenter.uploadTimeLine();
+        });
+
+        getChoosePictureButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
         });
     }
 
@@ -65,6 +75,11 @@ public abstract class TimeLineDialog extends DialogFragment implements ITimeLine
         dialog.setArguments(args);
         dialog.show(manager, "TimeLineDialog");
         return dialog;
+    }
+
+    @Override
+    public List<String> getPicPath() {
+        return new ArrayList<>();
     }
 
     @Override
@@ -100,6 +115,12 @@ public abstract class TimeLineDialog extends DialogFragment implements ITimeLine
     }
 
     protected abstract ButtonFlat getPositiveButton();
+
+    protected abstract void setPic1(String picPath);
+
+    protected abstract void setPic2(String picPath);
+
+    protected abstract void setPic3(String picPath);
 
     protected abstract IconButton getChoosePictureButton();
 }
