@@ -1,6 +1,7 @@
 package bearkid.com.bearkiddiaryfamily.model;
 
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -140,15 +141,32 @@ public class KidInfoModel {
         Observable<Result> addBodyData(@Field("Kid") Long kidId, @FieldMap Map<String, Object> map);
     }
 
-    public static Observable<Result> addBodyData(Long Kid, @Nullable Height height, @Nullable Weight weight, @Nullable Vision vision) {
+    public static Observable<Result> addBodyData(Long Kid,
+                                                 @Nullable Long Htime,
+                                                 @Nullable String Hheight,
+                                                 @Nullable Long Wtime,
+                                                 @Nullable String Wweight,
+                                                 @Nullable Long Vtime,
+                                                 @Nullable String Vleft,
+                                                 @Nullable String Vright) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Urls.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
         Map<String, Object> bodyDataMap = new HashMap<>();
-        if (height != null) {
-//            bodyDataMap.put(Height.HEIGHT)
+        if (Htime != null && !TextUtils.isEmpty(Hheight)) {
+            bodyDataMap.put(Height.DATE, Htime);
+            bodyDataMap.put(Height.HEIGHT, Float.parseFloat(Hheight));
+        }
+        if (Wtime != null && !TextUtils.isEmpty(Wweight)) {
+            bodyDataMap.put(Weight.DATE, Htime);
+            bodyDataMap.put(Weight.WEIGHT, Float.parseFloat(Wweight));
+        }
+        if (Vtime != null && !TextUtils.isEmpty(Vleft) && !TextUtils.isEmpty(Vright)) {
+            bodyDataMap.put(Vision.DATE, Vtime);
+            bodyDataMap.put(Vision.VISIONLEFT, Float.parseFloat(Vleft));
+            bodyDataMap.put(Vision.VISIONRIGHT, Float.parseFloat(Vright));
         }
         return retrofit.create(AddBodyDataService.class)
                 .addBodyData(Kid, bodyDataMap)

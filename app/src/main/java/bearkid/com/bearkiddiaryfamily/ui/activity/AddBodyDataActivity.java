@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import bearkid.com.bearkiddiaryfamily.R;
+import bearkid.com.bearkiddiaryfamily.presenter.AddBodyDataPresenter;
 import bearkid.com.bearkiddiaryfamily.ui.activity.iactivity.IAddBodyDataView;
 import bearkid.com.bearkiddiaryfamily.utils.DateTimePickerUtil;
 
@@ -30,6 +31,8 @@ public class AddBodyDataActivity extends BaseActivity implements IAddBodyDataVie
     private Long weightDate;
     private Long visionDate;
 
+    private AddBodyDataPresenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +43,7 @@ public class AddBodyDataActivity extends BaseActivity implements IAddBodyDataVie
     }
 
     private void initPresenter() {
-
+        presenter = new AddBodyDataPresenter(AddBodyDataActivity.this, kidId);
     }
 
     private void initView() {
@@ -125,6 +128,7 @@ public class AddBodyDataActivity extends BaseActivity implements IAddBodyDataVie
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_body_confirm:
+                presenter.addBodyData();
                 break;
             case R.id.tv_body_height_date:
                 DateTimePickerUtil.showDatePicker(AddBodyDataActivity.this, new DateTimePickerUtil.OnDateSetListener() {
