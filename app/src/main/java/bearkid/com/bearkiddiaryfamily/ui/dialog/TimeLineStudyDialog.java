@@ -8,7 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.gc.materialdesign.views.ButtonFlat;
 
 import bearkid.com.bearkiddiaryfamily.R;
@@ -31,10 +33,33 @@ public class TimeLineStudyDialog extends TimeLineDialog {
     private ButtonFlat btn_ok;
     private IconButton btn_pic;
     private EditText et_content;
-    private void initView(View v){
+    private ImageView iv_pic1, iv_pic2, iv_pic3;
+
+    private void initView(View v) {
         btn_ok = (ButtonFlat) v.findViewById(R.id.btn_timeline_ok);
         btn_pic = (IconButton) v.findViewById(R.id.ib_timeline_choose_pic);
         et_content = (EditText) v.findViewById(R.id.et_timeline_content);
+        iv_pic1 = (ImageView) v.findViewById(R.id.iv_timeline_pic1);
+        iv_pic2 = (ImageView) v.findViewById(R.id.iv_timeline_pic2);
+        iv_pic3 = (ImageView) v.findViewById(R.id.iv_timeline_pic3);
+    }
+
+    @Override
+    protected void setPic1(String picPath) {
+        iv_pic1.setVisibility(View.VISIBLE);
+        Glide.with(this).load(picPath).into(iv_pic1);
+    }
+
+    @Override
+    protected void setPic2(String picPath) {
+        iv_pic2.setVisibility(View.VISIBLE);
+        Glide.with(this).load(picPath).into(iv_pic2);
+    }
+
+    @Override
+    protected void setPic3(String picPath) {
+        iv_pic3.setVisibility(View.VISIBLE);
+        Glide.with(this).load(picPath).into(iv_pic3);
     }
 
     @Override

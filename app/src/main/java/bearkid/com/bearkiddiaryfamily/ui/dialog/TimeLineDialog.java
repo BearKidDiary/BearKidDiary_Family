@@ -16,6 +16,8 @@ import bearkid.com.bearkiddiaryfamily.model.bean.TimeLine;
 import bearkid.com.bearkiddiaryfamily.presenter.TimeLinePostPresenter;
 import bearkid.com.bearkiddiaryfamily.ui.dialog.idialog.ITimeLineView;
 import bearkid.com.bearkiddiaryfamily.ui.view.IconButton;
+import bearkid.com.bearkiddiaryfamily.utils.BitmapSelector;
+import bearkid.com.bearkiddiaryfamily.utils.GalleryFinalHelper;
 
 /**
  * Created by zy on 2016/8/24.
@@ -25,6 +27,7 @@ public abstract class TimeLineDialog extends DialogFragment implements ITimeLine
     private TimeLinePostPresenter presenter;
     private Long kid;
     private int typeLogo;
+    private List<String> picPath = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,16 +40,26 @@ public abstract class TimeLineDialog extends DialogFragment implements ITimeLine
     public void onViewCreated(View view, Bundle savedInstanceState) {
         presenter = new TimeLinePostPresenter(this);
 
-        getPositiveButton().setOnClickListener(v -> {
-            presenter.uploadTimeLine();
-        });
+        final ButtonFlat btn_ok = getPositiveButton();
+        if (btn_ok != null)
+            btn_ok.setOnClickListener(v -> presenter.uploadTimeLine());
 
-        getChoosePictureButton().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        final IconButton btn_pic = getChoosePictureButton();
+        if (btn_pic != null)
+            btn_pic.setOnClickListener(v -> {
+                BitmapSelector bitmapSelector = new GalleryFinalHelper(getContext());
+                bitmapSelector.openGallery(3, new BitmapSelector.CallBack() {
+                    @Override
+                    public void finish(List<String> path, int picNum) {
+                        picPath = path;
+                    }
 
-            }
-        });
+                    @Override
+                    public void error(String msg) {
+                        showError(msg);
+                    }
+                });
+            });
     }
 
     public static TimeLineDialog show(FragmentManager manager, int type, Long Kid) {
@@ -79,7 +92,7 @@ public abstract class TimeLineDialog extends DialogFragment implements ITimeLine
 
     @Override
     public List<String> getPicPath() {
-        return new ArrayList<>();
+        return picPath;
     }
 
     @Override

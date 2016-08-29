@@ -44,6 +44,21 @@ public class TimeLineBodyDialog extends TimeLineDialog {
     }
 
     @Override
+    protected void setPic1(String picPath) {
+        throw new RuntimeException("can not call setPic in TimeLineBodyDialog");
+    }
+
+    @Override
+    protected void setPic2(String picPath) {
+        throw new RuntimeException("can not call setPic in TimeLineBodyDialog");
+    }
+
+    @Override
+    protected void setPic3(String picPath) {
+        throw new RuntimeException("can not call setPic in TimeLineBodyDialog");
+    }
+
+    @Override
     protected IconButton getChoosePictureButton() {
         return null;
     }
