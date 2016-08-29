@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="BodyDataView">
-        <attr name="type" format="flag">
+        <attr name="type" format="integer">
             <flag name="height" value="0" />
             <flag name="weight" value="1" />
             <flag name="vision" value="2" />
