@@ -5,6 +5,11 @@ import com.google.gson.annotations.Expose;
 import java.io.Serializable;
 
 public class Vision implements Serializable {
+    public static final String ID = "Kid";
+    public static final String VISIONLEFT = "Vleft";
+    public static final String VISIONRIGHT = "Vright";
+    public static final String DATE = "Vtime";
+
     @Expose
     private Long Vid;
 

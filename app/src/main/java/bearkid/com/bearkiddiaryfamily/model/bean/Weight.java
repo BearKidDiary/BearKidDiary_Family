@@ -8,6 +8,10 @@ import java.io.Serializable;
  * Created by admin on 2016/8/23.
  */
 public class Weight implements Serializable{
+    public static final String ID = "Kid";
+    public static final String WEIGHT = "Wweight";
+    public static final String DATE = "Wtime";
+
     @Expose
     private Long Wid;
 
