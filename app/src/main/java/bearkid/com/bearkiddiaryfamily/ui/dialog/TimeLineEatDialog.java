@@ -15,9 +15,6 @@ import bearkid.com.bearkiddiaryfamily.R;
 import bearkid.com.bearkiddiaryfamily.ui.view.IconButton;
 
 public class TimeLineEatDialog extends TimeLineDialog {
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         getDialog().requestWindowFeature(STYLE_NO_TITLE);

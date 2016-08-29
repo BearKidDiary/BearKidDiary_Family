@@ -9,6 +9,9 @@ import android.widget.Toast;
 
 import com.gc.materialdesign.views.ButtonFlat;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import bearkid.com.bearkiddiaryfamily.model.bean.TimeLine;
 import bearkid.com.bearkiddiaryfamily.presenter.TimeLinePostPresenter;
 import bearkid.com.bearkiddiaryfamily.ui.dialog.idialog.ITimeLineView;
@@ -65,6 +68,11 @@ public abstract class TimeLineDialog extends DialogFragment implements ITimeLine
         dialog.setArguments(args);
         dialog.show(manager, "TimeLineDialog");
         return dialog;
+    }
+
+    @Override
+    public List<String> getPicPath() {
+        return new ArrayList<>();
     }
 
     @Override

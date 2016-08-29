@@ -14,15 +14,14 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.zfdang.multiple_images_selector.ImagesSelectorActivity;
-import com.zfdang.multiple_images_selector.SelectorSettings;
-
 import java.util.ArrayList;
+import java.util.List;
 
 import bearkid.com.bearkiddiaryfamily.R;
 import bearkid.com.bearkiddiaryfamily.presenter.PersonInfoPresenter;
 import bearkid.com.bearkiddiaryfamily.ui.activity.iactivity.IPersonalInfoView;
-import retrofit2.http.PUT;
+import bearkid.com.bearkiddiaryfamily.utils.BitmapSelector;
+import bearkid.com.bearkiddiaryfamily.utils.GalleryFinalHelper;
 
 public class PersonalInfoActivity extends BaseActivity implements IPersonalInfoView, View.OnClickListener {
 
@@ -32,7 +31,7 @@ public class PersonalInfoActivity extends BaseActivity implements IPersonalInfoV
     protected RelativeLayout avatarRlayout;
     protected LinearLayout nameLlayout;
     protected LinearLayout genderLlayout;
-//    protected LinearLayout phoneLlayout;
+    //    protected LinearLayout phoneLlayout;
     protected LinearLayout addressLlayout;
     protected LinearLayout emailLlayout;
 
@@ -66,18 +65,23 @@ public class PersonalInfoActivity extends BaseActivity implements IPersonalInfoV
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.rl_personal_info_avatar://更换头像
-                mResults = new ArrayList<>();
-                Intent intent = new Intent(PersonalInfoActivity.this, ImagesSelectorActivity.class);
-                //选择5张图片
-                intent.putExtra(SelectorSettings.SELECTOR_MAX_IMAGE_NUMBER, 1);
-                intent.putExtra(SelectorSettings.SELECTOR_MIN_IMAGE_SIZE, 100000);
-                intent.putExtra(SelectorSettings.SELECTOR_SHOW_CAMERA, true);
-                intent.putStringArrayListExtra(SelectorSettings.SELECTOR_INITIAL_SELECTED_LIST, mResults);
-                //判断跳转到相册是 换头像（单张）  还是  发图片（多张）
-                intent.putExtra("SelectorType",ImagesSelectorActivity.SELECTOR_TYPE_ONE);
-                startActivityForResult(intent, REQUEST_CODE_AVATAR);
+                new GalleryFinalHelper(getContext()).openGallery(1, new BitmapSelector.CallBack() {
+                    @Override
+                    public void finish(List<String> path, int picNum) {
+                        String image = path.get(0);
+                        Bitmap bitmap = BitmapFactory.decodeFile(image);
+                        Drawable drawable = new BitmapDrawable(bitmap);
+                        avatarImg.setImageDrawable(drawable);
+                    }
+
+                    @Override
+                    public void error(String msg) {
+
+                    }
+                });
+
                 break;
             case R.id.ll_personal_info_name://编辑姓名
                 PersonalInfoEditActivity.startActivity(PersonalInfoActivity.this,
@@ -102,6 +106,7 @@ public class PersonalInfoActivity extends BaseActivity implements IPersonalInfoV
         }
 
     }
+
     @Override
     public Bitmap getAvatar() {
         return null;
@@ -133,7 +138,7 @@ public class PersonalInfoActivity extends BaseActivity implements IPersonalInfoV
     }
 
 
-    public void initView(){
+    public void initView() {
         avatarRlayout = (RelativeLayout) findViewById(R.id.rl_personal_info_avatar);
         nameLlayout = (LinearLayout) findViewById(R.id.ll_personal_info_name);
         genderLlayout = (LinearLayout) findViewById(R.id.ll_personal_info_gender);
@@ -153,29 +158,6 @@ public class PersonalInfoActivity extends BaseActivity implements IPersonalInfoV
         genderLlayout.setOnClickListener(this);
         addressLlayout.setOnClickListener(this);
         emailLlayout.setOnClickListener(this);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == REQUEST_CODE_AVATAR) {
-            if(resultCode == RESULT_OK) {
-//                mResults = data.getStringArrayListExtra(SelectorSettings.SELECTOR_RESULTS);
-//                assert mResults != null;
-//                StringBuilder sb = new StringBuilder();
-//                for(String result : mResults) {
-//                    sb.append(result);
-//                }
-//                Toast.makeText(PersonalInfoActivity.this, sb.toString(), Toast.LENGTH_SHORT).show();
-//                Log.d("fileImage", sb.toString());
-                String image = data.getStringExtra("imageName");
-                Log.d("fileImage", image);
-
-                Bitmap bitmap = BitmapFactory.decodeFile(image);
-                Drawable drawable = new BitmapDrawable(bitmap);
-                avatarImg.setImageDrawable(drawable);
-            }
-        }
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
     public static void startActivity(Context context) {

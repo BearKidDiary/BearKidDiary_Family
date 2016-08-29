@@ -1,1 +1,1 @@
-include ':app', ':MaterialDesign', ':qrcodelib', ':multiple-images-selector'
+include ':app', ':MaterialDesign', ':qrcodelib', ':multiple-images-selector', ':galleryfinal'
