@@ -28,7 +28,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="@string/add_kid_title"
             android:textColor="@color/txt_title"
             android:textSize="20sp" />
 

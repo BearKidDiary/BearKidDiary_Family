@@ -22,7 +22,7 @@ public class AddKidPresenter {
 
     public void addKid() {
         view.showProgressDialog();
-        addKid(new String[]{Kid.NAME, Kid.SEX, Kid.BIRTHDAY}, new Object[]{view.getKidName(), view.getKidGender(), view.getKidBirthday()});
+        addKid(new String[]{Kid.NAME, Kid.SEX, Kid.BIRTHDAY, Kid.ASK}, new Object[]{view.getKidName(), view.getKidGender(), view.getKidBirthday(), view.getKidAsk()});
     }
 
     private void addKid(String[] parameter, Object[] value){
@@ -39,6 +39,29 @@ public class AddKidPresenter {
                 }, Throwable -> {
                     view.hideProgressDialog();
                     view.showResult("添加失败！异常");
+                });
+    }
+
+    public void updateInfo() {
+        view.showProgressDialog();
+        KidInfoModel.updateInfo(view.getKidId(),
+                view.getKidName(),
+                view.getKidBirthday(),
+                "",
+                view.getKidGender(),
+                view.getKidAsk())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe(result -> {
+                    view.hideProgressDialog();
+                    if (result.getResultCode() == 0) {
+                        view.showResult("修改成功!");
+                        view.exit();
+                    } else {
+                        view.showResult("修改失败!");
+                    }
+                }, throwable -> {
+                    view.hideProgressDialog();
+                    view.showResult("修改失败!异常");
                 });
     }
 }

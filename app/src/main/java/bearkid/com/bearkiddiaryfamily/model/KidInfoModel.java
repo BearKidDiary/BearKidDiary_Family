@@ -173,4 +173,31 @@ public class KidInfoModel {
                 .subscribeOn(Schedulers.io());
     }
 
+    public interface UpdateKidInfoService {
+        @FormUrlEncoded
+        @POST(Urls.URL_KID_UPDATE)
+        Observable<Result> update(@Field("Kid") Long kidId,
+                                  @Field("Kname") String Kname,
+                                  @Field("Kbirthday") Long Kbirthday,
+                                  @Field("Kavatar") String Kavatar,
+                                  @Field("Ksex") String Ksex,
+                                  @Field("Kask") String Kask);
+    }
+
+    public static Observable<Result> updateInfo(Long kidId,
+                                                @Nullable String Kname,
+                                                @Nullable Long Kbirthday,
+                                                @Nullable String Kavatar,
+                                                @Nullable String Ksex,
+                                                @Nullable String Kask) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Urls.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        return retrofit.create(UpdateKidInfoService.class)
+                .update(kidId, Kname, Kbirthday, Kavatar, Ksex, Kask)
+                .subscribeOn(Schedulers.io());
+    }
+
 }

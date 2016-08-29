@@ -22,6 +22,8 @@ public class Urls {
     public static final String URL_ADDKID = "kid/add";
     //获取孩子信息
     public static final String URL_KID = "kid";
+    //更新孩子信息
+    public static final String URL_KID_UPDATE = "kid/update";
     //获取时间轴事件
     public static final String URL_TIMELINE = "kid/timeline";
     //添加时间轴事件

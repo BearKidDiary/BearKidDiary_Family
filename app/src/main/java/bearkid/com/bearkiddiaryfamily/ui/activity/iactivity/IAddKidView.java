@@ -7,6 +7,12 @@ public interface IAddKidView {
 
     /**
      *
+     * @return 孩子id
+     */
+    Long getKidId();
+
+    /**
+     *
      * @return 孩子姓名
      */
     String getKidName();
@@ -22,6 +28,12 @@ public interface IAddKidView {
      * @return 孩子生日
      */
     long getKidBirthday();
+
+    /**
+     *
+     * @return 家长叮嘱
+     */
+    String getKidAsk();
 
     /**
      * 显示加载进度条

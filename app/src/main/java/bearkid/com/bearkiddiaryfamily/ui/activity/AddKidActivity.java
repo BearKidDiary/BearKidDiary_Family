@@ -70,14 +70,16 @@ public class AddKidActivity extends BaseActivity implements IAddKidView, View.On
         progressDialog = new ProgressDialog(this, "添加中", R.color.colorPrimary);
 
         if (type == ADD_KID) {
+            titleTv.setText("添加孩子");
             confirmTv.setOnClickListener(v -> {
                 presenter.addKid();
             });
             male.callOnClick();
         } else if (type == UPDATE_INFO) {
+            titleTv.setText("修改孩子信息");
             kid = (Kid) getIntent().getSerializableExtra("kid");
             confirmTv.setOnClickListener(v -> {
-                // TODO: 2016/8/29 update info
+                presenter.updateInfo();
             });
             nameEt.setText(kid.getKname());
             if (kid.getKsex().equals(MALE)) {
@@ -86,6 +88,7 @@ public class AddKidActivity extends BaseActivity implements IAddKidView, View.On
                 female.callOnClick();
             }
             birthdayTv.setText(DateTimePickerUtil.getFormatDate(kid.getKbirthday()));
+            askEt.setText(kid.getKask());
         }
     }
 
@@ -127,6 +130,15 @@ public class AddKidActivity extends BaseActivity implements IAddKidView, View.On
     }
 
     @Override
+    public Long getKidId() {
+        Long kidId = null;
+        if (kid != null) {
+            kidId = kid.getKid();
+        }
+        return kidId;
+    }
+
+    @Override
     public String getKidName() {
         return nameEt.getText().toString();
     }
@@ -139,6 +151,11 @@ public class AddKidActivity extends BaseActivity implements IAddKidView, View.On
     @Override
     public long getKidBirthday() {
         return this.birthday;
+    }
+
+    @Override
+    public String getKidAsk() {
+        return askEt.getText().toString();
     }
 
     @Override
