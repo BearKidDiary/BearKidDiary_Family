@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.gc.materialdesign.views.ButtonFlat;
 
 import bearkid.com.bearkiddiaryfamily.R;
@@ -54,17 +55,20 @@ public class TimeLineEatDialog extends TimeLineDialog {
 
     @Override
     protected void setPic1(String picPath) {
-
+        iv_pic1.setVisibility(View.VISIBLE);
+        Glide.with(this).load(picPath).into(iv_pic1);
     }
 
     @Override
     protected void setPic2(String picPath) {
-
+        iv_pic2.setVisibility(View.VISIBLE);
+        Glide.with(this).load(picPath).into(iv_pic2);
     }
 
     @Override
     protected void setPic3(String picPath) {
-
+        iv_pic3.setVisibility(View.VISIBLE);
+        Glide.with(this).load(picPath).into(iv_pic3);
     }
 
     @Override
