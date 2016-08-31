@@ -1,5 +1,7 @@
 package bearkid.com.bearkiddiaryfamily.presenter;
 
+import android.util.Log;
+
 import bearkid.com.bearkiddiaryfamily.model.KidInfoModel;
 import bearkid.com.bearkiddiaryfamily.ui.activity.AddBodyDataActivity;
 import bearkid.com.bearkiddiaryfamily.ui.activity.iactivity.IAddBodyDataView;
@@ -21,7 +23,7 @@ public class AddBodyDataPresenter {
 
     public void  addBodyData() {
 
-        view.showProgress();
+//        view.showProgress();
 
         KidInfoModel.addBodyData(kidId,
                 view.getHeightDate(),
@@ -33,15 +35,17 @@ public class AddBodyDataPresenter {
                 view.getRightVision())
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .subscribe(result -> {
-                    view.hideProgress();
+//                    view.hideProgress();
                     if (result.getResultCode() == 0) {
-                        view.showResult("添加成功!");
+//                        view.showResult("添加成功!");
                         view.exit();
                     } else {
-                        view.showResult("添加失败,请重试!");
+//                        view.showResult("添加失败,请重试!");
+//                        Log.d("添加身体数据", result.getResultCode()+"");
+//                        Log.d("添加身体数据", kidId+"");
                     }
                 }, throwable -> {
-                    view.hideProgress();
+//                    view.hideProgress();
                     view.showResult("添加失败,异常!");
                 });
     }

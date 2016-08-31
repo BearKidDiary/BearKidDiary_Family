@@ -1,5 +1,7 @@
 package bearkid.com.bearkiddiaryfamily.presenter;
 
+import android.util.Log;
+
 import bearkid.com.bearkiddiaryfamily.model.KidInfoModel;
 import bearkid.com.bearkiddiaryfamily.model.bean.Kid;
 import bearkid.com.bearkiddiaryfamily.ui.activity.AddKidActivity;
@@ -34,6 +36,7 @@ public class AddKidPresenter {
                         view.showResult("添加成功！");
                         view.exit();
                     }else {
+                        Log.d("添加失败", userResult.getResultCode()+"");
                         view.showResult("添加失败！");
                     }
                 }, Throwable -> {

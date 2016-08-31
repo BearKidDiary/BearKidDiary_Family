@@ -66,4 +66,5 @@
     <string name="add_vision_data">添加视力数据</string>
     <string name="left_vision">左眼</string>
     <string name="right_vision">右眼</string>
+    <string name="delete_kid">删除孩子</string>
 </resources>

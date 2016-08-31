@@ -1,12 +1,11 @@
 package bearkid.com.bearkiddiaryfamily.ui.activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Looper;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,7 +58,7 @@ public class AddBodyDataActivity extends BaseActivity implements IAddBodyDataVie
         weightDateTv = (TextView) this.findViewById(R.id.tv_body_weight_date);
         visionDateTv = (TextView) this.findViewById(R.id.tv_body_vision_date);
 
-        progressDialog = new ProgressDialog(this, "加载中，请稍候", R.color.colorPrimary);
+        progressDialog = new ProgressDialog(AddBodyDataActivity.this, "加载中，请稍候", R.color.colorPrimary);
 
         confirmTv.setOnClickListener(this);
         heightDateTv.setOnClickListener(this);
@@ -89,7 +88,9 @@ public class AddBodyDataActivity extends BaseActivity implements IAddBodyDataVie
 
     @Override
     public void showResult(String result) {
+        Looper.prepare();
         Toast.makeText(this, result, Toast.LENGTH_LONG).show();
+        Looper.loop();
     }
 
     @Override

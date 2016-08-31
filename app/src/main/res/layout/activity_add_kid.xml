@@ -171,4 +171,14 @@
             android:maxLines="3"
             android:minLines="3" />
     </RelativeLayout>
+
+    <Button
+        style="@style/style_text_white"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_marginLeft="56dp"
+        android:layout_marginRight="56dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/selector_btn_dismiss"
+        android:text="@string/delete_kid"/>
 </LinearLayout>

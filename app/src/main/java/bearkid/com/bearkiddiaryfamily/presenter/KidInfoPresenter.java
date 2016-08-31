@@ -35,16 +35,17 @@ public class KidInfoPresenter {
 
         view.clearHeightData();
 
-        KidInfoModel.getKidBodyData(kidId, "asc", "Height")
+        KidInfoModel.getKidHeight(kidId, "asc")
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(kidResult -> {
                     if (kidResult.getResultCode() == 0){
-                        view.showHeight(kidResult.getData());
+//                        view.showHeight(kidResult.getData());
+                        Log.d("加载孩子身高数据", "成功");
                     }else {
                         Log.d("加载孩子身高数据", "失败");
                     }
                 }, Throwable -> {
-                    Log.d("加载孩子身高数据", "异常");
+                    Log.d("加载孩子身高数据", "异常"+Throwable.toString());
                 });
     }
 
@@ -52,7 +53,7 @@ public class KidInfoPresenter {
 
         view.clearWeightData();
 
-        KidInfoModel.getKidBodyData(kidId, "asc", "Weight")
+        KidInfoModel.getKidWeight(kidId, "asc")
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(kidResult -> {
                     if (kidResult.getResultCode() == 0){
@@ -69,7 +70,7 @@ public class KidInfoPresenter {
 
         view.clearVisionData();
 
-        KidInfoModel.getKidBodyData(kidId, "asc", "Vision")
+        KidInfoModel.getKidVision(kidId, "asc")
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(kidResult -> {
                     if (kidResult.getResultCode() == 0){

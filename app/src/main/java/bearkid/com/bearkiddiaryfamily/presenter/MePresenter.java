@@ -28,8 +28,11 @@ public class MePresenter {
                 .subscribe(kidResult -> {
                     if (kidResult.getResultCode() == 0){
                         view.refreshKidList(kidResult.getData());
+                        Log.d("加载孩子", kidResult.getData().get(0).getKname());
+                        Log.d("加载孩子", kidResult.getData().get(0).getKsex());
+                        Log.d("加载孩子", kidResult.getData().get(0).getKask());
                     }else {
-                        Log.d("加载孩子", "失败");
+                        Log.d("加载孩子", "失败" + kidResult.getResultCode());
                     }
                 }, Throwable -> {
                     Log.d("加载孩子", "异常");

@@ -51,6 +51,8 @@ public class KidInfoActivity extends BaseActivity implements IKidInfoView, View.
 
     private void initPresenter() {
         presenter = new KidInfoPresenter(this, kid.getKid());
+
+        presenter.init();
     }
 
     private void initView() {

@@ -121,8 +121,7 @@
             android:singleLine="true"
             android:clickable="true"
             android:gravity="center"
-            android:layout_marginLeft="16dp"
-            android:text="2016-04-05"/>
+            android:layout_marginLeft="16dp" />
     </LinearLayout>
 
     <TextView
@@ -174,7 +173,6 @@
             android:singleLine="true"
             android:clickable="true"
             android:gravity="center"
-            android:layout_marginLeft="16dp"
-            android:text="2016-04-05"/>
+            android:layout_marginLeft="16dp" />
     </LinearLayout>
 </LinearLayout>

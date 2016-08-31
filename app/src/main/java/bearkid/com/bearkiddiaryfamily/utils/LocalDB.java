@@ -29,7 +29,7 @@ public class LocalDB {
      * 获取当前用户的手机号码
      */
     public String getPhoneNum() {
-        return sharedPreferences.getString("phoneNum", "");
+        return sharedPreferences.getString("phoneNum", null);
     }
 
     public void putUid(Long Uid) {

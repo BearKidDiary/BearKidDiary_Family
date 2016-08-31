@@ -27,4 +27,6 @@
     <color name="gender_choose">#ff263238</color>
 
     <color name="text_white">#ffffffff</color>
+    <color name="text_clicked">#ff00ff</color>
+    <color name="text_clickable">#ff0fff</color>
 </resources>

@@ -2,6 +2,7 @@ package bearkid.com.bearkiddiaryfamily.model;
 
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -68,9 +69,19 @@ public class KidInfoModel {
 
         @FormUrlEncoded
         @POST(URL_BODY)
-        Observable<Result<List>> getKidBodyData(@Field("Kid") Long Kid,
+        Observable<Result<List<Height>>> getKidHeight(@Field("Kid") Long Kid,
                                                 @Field("Order") String Order,
                                                 @Field("Range") String Range);
+        @FormUrlEncoded
+        @POST(URL_BODY)
+        Observable<Result<List<Weight>>> getKidWeight(@Field("Kid") Long Kid,
+                                                        @Field("Order") String Order,
+                                                        @Field("Range") String Range);
+        @FormUrlEncoded
+        @POST(URL_BODY)
+        Observable<Result<List<Vision>>> getKidVision(@Field("Kid") Long Kid,
+                                                        @Field("Order") String Order,
+                                                        @Field("Range") String Range);
     }
 
     public static Observable<Result<List<Kid>>> searchKid(String Uphone) {
@@ -121,19 +132,42 @@ public class KidInfoModel {
      *
      * @param Kid      是  Long    孩子的编号
      * @param Order    否  String  排序方式 {"desc"，"asc"}
-     * @param Range    否  String  获取类型 {"Height"，"Weight"，"Vision"}
      * @return 可能为List<Height>或List<Weight>或List<Vision>
      */
-    public static Observable<Result<List>> getKidBodyData(Long Kid, @Nullable String Order, @Nullable String Range) {
+    public static Observable<Result<List<Height>>> getKidHeight(Long Kid, @Nullable String Order) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Urls.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
         return retrofit.create(SearchKidService.class)
-                .getKidBodyData(Kid, Order, Range)
+                .getKidHeight(Kid, Order, "Height")
                 .subscribeOn(Schedulers.io());
     }
+
+    public static Observable<Result<List<Weight>>> getKidWeight(Long Kid, @Nullable String Order) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Urls.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        return retrofit.create(SearchKidService.class)
+                .getKidWeight(Kid, Order, "Weight")
+                .subscribeOn(Schedulers.io());
+    }
+
+    public static Observable<Result<List<Vision>>> getKidVision(Long Kid, @Nullable String Order) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Urls.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        return retrofit.create(SearchKidService.class)
+                .getKidVision(Kid, Order, "Vision")
+                .subscribeOn(Schedulers.io());
+    }
+
+
 
     public interface AddBodyDataService {
         @FormUrlEncoded
@@ -156,14 +190,17 @@ public class KidInfoModel {
                 .build();
         Map<String, Object> bodyDataMap = new HashMap<>();
         if (Htime != null && !TextUtils.isEmpty(Hheight)) {
+            Log.d("添加身体数据", "身高");
             bodyDataMap.put(Height.DATE, Htime);
             bodyDataMap.put(Height.HEIGHT, Float.parseFloat(Hheight));
         }
         if (Wtime != null && !TextUtils.isEmpty(Wweight)) {
+            Log.d("添加身体数据", "体重");
             bodyDataMap.put(Weight.DATE, Htime);
             bodyDataMap.put(Weight.WEIGHT, Float.parseFloat(Wweight));
         }
         if (Vtime != null && !TextUtils.isEmpty(Vleft) && !TextUtils.isEmpty(Vright)) {
+            Log.d("添加身体数据", "视力");
             bodyDataMap.put(Vision.DATE, Vtime);
             bodyDataMap.put(Vision.VISIONLEFT, Float.parseFloat(Vleft));
             bodyDataMap.put(Vision.VISIONRIGHT, Float.parseFloat(Vright));
