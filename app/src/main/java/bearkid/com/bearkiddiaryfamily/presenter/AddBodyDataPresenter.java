@@ -23,7 +23,7 @@ public class AddBodyDataPresenter {
 
     public void  addBodyData() {
 
-//        view.showProgress();
+        view.showProgress();
 
         KidInfoModel.addBodyData(kidId,
                 view.getHeightDate(),
@@ -35,7 +35,7 @@ public class AddBodyDataPresenter {
                 view.getRightVision())
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .subscribe(result -> {
-//                    view.hideProgress();
+                    view.hideProgress();
                     if (result.getResultCode() == 0) {
 //                        view.showResult("添加成功!");
                         view.exit();
@@ -45,7 +45,7 @@ public class AddBodyDataPresenter {
 //                        Log.d("添加身体数据", kidId+"");
                     }
                 }, throwable -> {
-//                    view.hideProgress();
+                    view.hideProgress();
                     view.showResult("添加失败,异常!");
                 });
     }

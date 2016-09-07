@@ -35,7 +35,7 @@ public class MePresenter {
                         Log.d("加载孩子", "失败" + kidResult.getResultCode());
                     }
                 }, Throwable -> {
-                    Log.d("加载孩子", "异常");
+                    Log.d("加载孩子", "异常" + Throwable.toString());
                 });
     }
 }

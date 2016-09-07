@@ -4,16 +4,16 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.gc.materialdesign.widgets.ProgressDialog;
-
 import bearkid.com.bearkiddiaryfamily.R;
 import bearkid.com.bearkiddiaryfamily.presenter.AddBodyDataPresenter;
 import bearkid.com.bearkiddiaryfamily.ui.activity.iactivity.IAddBodyDataView;
+import bearkid.com.bearkiddiaryfamily.ui.view.ProgressDialog;
 import bearkid.com.bearkiddiaryfamily.utils.DateTimePickerUtil;
 
 public class AddBodyDataActivity extends BaseActivity implements IAddBodyDataView, View.OnClickListener{
@@ -26,7 +26,7 @@ public class AddBodyDataActivity extends BaseActivity implements IAddBodyDataVie
     protected TextView heightDateTv;
     protected TextView weightDateTv;
     protected TextView visionDateTv;
-    protected ProgressDialog progressDialog;
+    protected AlertDialog progressDialog;
 
     private Long kidId;
     private Long heightDate;
@@ -58,7 +58,8 @@ public class AddBodyDataActivity extends BaseActivity implements IAddBodyDataVie
         weightDateTv = (TextView) this.findViewById(R.id.tv_body_weight_date);
         visionDateTv = (TextView) this.findViewById(R.id.tv_body_vision_date);
 
-        progressDialog = new ProgressDialog(AddBodyDataActivity.this, "加载中，请稍候", R.color.colorPrimary);
+        progressDialog = ProgressDialog.build(this);
+
 
         confirmTv.setOnClickListener(this);
         heightDateTv.setOnClickListener(this);

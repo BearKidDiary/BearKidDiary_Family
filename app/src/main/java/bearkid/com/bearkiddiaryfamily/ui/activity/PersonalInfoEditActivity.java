@@ -61,7 +61,7 @@ public class PersonalInfoEditActivity extends BaseActivity implements IPersonalI
         btn_male = (Button) findViewById(R.id.btn_personal_info_gender_male);
         btn_female = (Button) findViewById(R.id.btn_personal_info_gender_female);
 
-        progressDialog = new ProgressDialog(this, "加载中，请稍候", R.color.colorPrimary);
+        progressDialog = new ProgressDialog(this, "加载中，请稍候", getResources().getColor(R.color.colorPrimary));
 
         this.findViewById(R.id.tv_personal_info_confirm).setOnClickListener(this);
         iv_clear.setOnClickListener(this);

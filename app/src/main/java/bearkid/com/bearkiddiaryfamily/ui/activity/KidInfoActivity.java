@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -37,6 +38,7 @@ public class KidInfoActivity extends BaseActivity implements IKidInfoView, View.
     private static final int REQUEST_UPDATE_INFO = 12;
 
     protected boolean heightVisible = true, weightVisible = true, visionVisible = true, exhortVisible = true;
+    private Long kidId;
     private Kid kid;
     private KidInfoPresenter presenter;
 
@@ -44,15 +46,9 @@ public class KidInfoActivity extends BaseActivity implements IKidInfoView, View.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kid_info);
-        kid = (Kid) getIntent().getSerializableExtra("kid");
+        kidId = getIntent().getLongExtra("kidId", -1);
         initView();
         initPresenter();
-    }
-
-    private void initPresenter() {
-        presenter = new KidInfoPresenter(this, kid.getKid());
-
-        presenter.init();
     }
 
     private void initView() {
@@ -81,25 +77,11 @@ public class KidInfoActivity extends BaseActivity implements IKidInfoView, View.
         list_2.setOnClickListener(this);
         list_3.setOnClickListener(this);
         list_4.setOnClickListener(this);
+    }
 
-        name.setText(kid.getKname());
-
-        if (kid.getKbirthday() != null) {
-            birth.setText(DateTimePickerUtil.getFormatDate(kid.getKbirthday()));
-        }
-
-        if (kid.getKsex() != null) {
-            if (kid.getKsex().equals("男")) {
-                sex.setImageResource(R.drawable.male);
-            } else {
-                sex.setImageResource(R.drawable.female);
-            }
-        }
-
-        if (kid.getKask() != null) {
-            setExhort(kid.getKask());
-        }
-
+    private void initPresenter() {
+        presenter = new KidInfoPresenter(this, kidId);
+        presenter.init();
     }
 
 
@@ -109,12 +91,12 @@ public class KidInfoActivity extends BaseActivity implements IKidInfoView, View.
         switch (request) {
             case REQUEST_ADD_DATA:
                 if (result == Activity.RESULT_OK) {
-                    presenter.init();
+                    presenter.refreshBodyData();
                 }
                 break;
             case REQUEST_UPDATE_INFO:
                 if (result == Activity.RESULT_OK) {
-                    // TODO: 2016/8/29 刷新孩子信息
+                    presenter.refreshInfo();
                 }
                 break;
             default:
@@ -126,10 +108,14 @@ public class KidInfoActivity extends BaseActivity implements IKidInfoView, View.
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_kid_info_edit://添加身体数据
-                AddBodyDataActivity.startActivity(KidInfoActivity.this, REQUEST_ADD_DATA, kid.getKid());
+                AddBodyDataActivity.startActivity(KidInfoActivity.this, REQUEST_ADD_DATA, kidId);
                 break;
             case R.id.ll_kid_info://修改孩子信息
-                AddKidActivity.startActivity(this, REQUEST_UPDATE_INFO, kid);
+                if (kid != null) {
+                    AddKidActivity.startActivity(KidInfoActivity.this, REQUEST_UPDATE_INFO, kid);
+                } else {
+                    Toast.makeText(this, "查询不到该孩子信息", Toast.LENGTH_LONG).show();
+                }
                 break;
             case R.id.rl_kid_info_list_1:
                 expandDataList(heightVisible, heightView, icon1);
@@ -152,9 +138,9 @@ public class KidInfoActivity extends BaseActivity implements IKidInfoView, View.
         }
     }
 
-    public static void startActivity(Context context, Kid kid){
+    public static void startActivity(Context context, Long kidId){
         Intent intent = new Intent(context, KidInfoActivity.class);
-        intent.putExtra("kid", kid);
+        intent.putExtra("kidId", kidId);
         context.startActivity(intent);
     }
 
@@ -165,6 +151,30 @@ public class KidInfoActivity extends BaseActivity implements IKidInfoView, View.
         } else {
             view.setVisibility(View.VISIBLE);
             iv.setBackgroundResource(R.drawable.arrow_up);
+        }
+    }
+
+    @Override
+    public void initKid(Kid kid) {
+        this.kid = kid;
+    }
+
+    @Override
+    public void showName(String name) {
+        this.name.setText(name);
+    }
+
+    @Override
+    public void showBirthday(String birthday) {
+        this.birth.setText(birthday);
+    }
+
+    @Override
+    public void showGender(String gender) {
+        if (gender.equals("男")) {
+            sex.setImageResource(R.drawable.male);
+        } else if (gender.equals("女")){
+            sex.setImageResource(R.drawable.female);
         }
     }
 
@@ -199,7 +209,7 @@ public class KidInfoActivity extends BaseActivity implements IKidInfoView, View.
     }
 
     @Override
-    public void setExhort(String exhort) {
-        this.exhort.setText(exhort);
+    public void setAsk(String ask) {
+        this.exhort.setText(ask);
     }
 }

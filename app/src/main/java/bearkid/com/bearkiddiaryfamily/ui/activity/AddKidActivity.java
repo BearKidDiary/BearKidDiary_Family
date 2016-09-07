@@ -67,7 +67,7 @@ public class AddKidActivity extends BaseActivity implements IAddKidView, View.On
         female.setOnClickListener(this);
         birthdayTv.setOnClickListener(this);
 
-        progressDialog = new ProgressDialog(AddKidActivity.this, "添加中", R.color.colorPrimary);
+        progressDialog = new ProgressDialog(AddKidActivity.this, "添加中", getResources().getColor(R.color.colorPrimary));
 
         if (type == ADD_KID) {
             titleTv.setText("添加孩子");

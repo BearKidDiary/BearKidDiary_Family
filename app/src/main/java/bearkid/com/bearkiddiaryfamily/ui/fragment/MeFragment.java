@@ -192,7 +192,7 @@ public class MeFragment extends BaseFragment implements IMeFragment, View.OnClic
                 holder.avatar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        KidInfoActivity.startActivity(context, myKids.get(position));
+                        KidInfoActivity.startActivity(context, myKids.get(position).getKid());
                     }
                 });
             }

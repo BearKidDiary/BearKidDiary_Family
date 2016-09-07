@@ -60,7 +60,7 @@ public class BodyDataView extends LinearLayout {
         switch (type) {
             case HEIGHT:
                 for (Object object:data) {
-                    View content = inflate(this.getContext(), R.layout.item_body_data, this);
+                    View content = inflate(this.getContext(), R.layout.item_body_data, null);
                     TextView tv_data1 = (TextView) content.findViewById(R.id.tv_data_1);
                     TextView tv_data2 = (TextView) content.findViewById(R.id.tv_data_2);
                     TextView tv_date = (TextView) content.findViewById(R.id.tv_date);
@@ -68,11 +68,12 @@ public class BodyDataView extends LinearLayout {
                     tv_data1.setText(value);
                     tv_data2.setVisibility(GONE);
                     tv_date.setText(DateTimePickerUtil.getFormatDate(((Height)object).getHtime()));
+                    this.addView(content);
                 }
                 break;
             case WEIGHT:
                 for (Object object:data) {
-                    View content = inflate(this.getContext(), R.layout.item_body_data, this);
+                    View content = inflate(this.getContext(), R.layout.item_body_data, null);
                     TextView tv_data1 = (TextView) content.findViewById(R.id.tv_data_1);
                     TextView tv_data2 = (TextView) content.findViewById(R.id.tv_data_2);
                     TextView tv_date = (TextView) content.findViewById(R.id.tv_date);
@@ -80,11 +81,12 @@ public class BodyDataView extends LinearLayout {
                     tv_data1.setText(value);
                     tv_data2.setVisibility(GONE);
                     tv_date.setText(DateTimePickerUtil.getFormatDate(((Weight)object).getWtime()));
+                    this.addView(content);
                 }
                 break;
             case VISION:
                 for (Object object:data) {
-                    View content = inflate(this.getContext(), R.layout.item_body_data, this);
+                    View content = inflate(this.getContext(), R.layout.item_body_data, null);
                     TextView tv_data1 = (TextView) content.findViewById(R.id.tv_data_1);
                     TextView tv_data2 = (TextView) content.findViewById(R.id.tv_data_2);
                     TextView tv_date = (TextView) content.findViewById(R.id.tv_date);
@@ -93,6 +95,7 @@ public class BodyDataView extends LinearLayout {
                     tv_data1.setText(leftValue);
                     tv_data2.setText(rightValue);
                     tv_date.setText(DateTimePickerUtil.getFormatDate(((Vision)object).getVtime()));
+                    this.addView(content);
                 }
                 break;
             default:
