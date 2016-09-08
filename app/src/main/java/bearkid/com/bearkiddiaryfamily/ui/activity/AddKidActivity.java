@@ -4,18 +4,18 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.gc.materialdesign.widgets.ProgressDialog;
-
 import bearkid.com.bearkiddiaryfamily.R;
 import bearkid.com.bearkiddiaryfamily.model.bean.Kid;
 import bearkid.com.bearkiddiaryfamily.presenter.AddKidPresenter;
 import bearkid.com.bearkiddiaryfamily.ui.activity.iactivity.IAddKidView;
+import bearkid.com.bearkiddiaryfamily.ui.view.ProgressDialog;
 import bearkid.com.bearkiddiaryfamily.utils.DateTimePickerUtil;
 
 public class AddKidActivity extends BaseActivity implements IAddKidView, View.OnClickListener{
@@ -38,7 +38,7 @@ public class AddKidActivity extends BaseActivity implements IAddKidView, View.On
     private Kid kid;
 
 
-    protected ProgressDialog progressDialog;
+    protected AlertDialog progressDialog;
     private AddKidPresenter presenter;
 
     @Override
@@ -67,7 +67,7 @@ public class AddKidActivity extends BaseActivity implements IAddKidView, View.On
         female.setOnClickListener(this);
         birthdayTv.setOnClickListener(this);
 
-        progressDialog = new ProgressDialog(AddKidActivity.this, "添加中", getResources().getColor(R.color.colorPrimary));
+        progressDialog = ProgressDialog.build(this);
 
         if (type == ADD_KID) {
             titleTv.setText("添加孩子");
@@ -78,9 +78,7 @@ public class AddKidActivity extends BaseActivity implements IAddKidView, View.On
         } else if (type == UPDATE_INFO) {
             titleTv.setText("修改孩子信息");
             kid = (Kid) getIntent().getSerializableExtra("kid");
-            confirmTv.setOnClickListener(v -> {
-                presenter.updateInfo();
-            });
+            confirmTv.setOnClickListener(v -> presenter.updateInfo());
             nameEt.setText(kid.getKname());
             if (kid.getKsex().equals(MALE)) {
                 male.callOnClick();

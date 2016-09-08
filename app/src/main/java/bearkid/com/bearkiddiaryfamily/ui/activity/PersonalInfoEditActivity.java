@@ -3,6 +3,7 @@ package bearkid.com.bearkiddiaryfamily.ui.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,11 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.gc.materialdesign.widgets.ProgressDialog;
-
 import bearkid.com.bearkiddiaryfamily.R;
 import bearkid.com.bearkiddiaryfamily.presenter.PersonInfoEditPresenter;
 import bearkid.com.bearkiddiaryfamily.ui.activity.iactivity.IPersonalInfoEditView;
+import bearkid.com.bearkiddiaryfamily.ui.view.ProgressDialog;
 
 /**
  * Created by YarenChoi on 2016/8/12.
@@ -37,7 +37,7 @@ public class PersonalInfoEditActivity extends BaseActivity implements IPersonalI
     protected ImageView iv_clear;
     protected Button btn_male;
     protected Button btn_female;
-    protected ProgressDialog progressDialog;
+    protected AlertDialog progressDialog;
 
     private PersonInfoEditPresenter presenter;
 
@@ -61,7 +61,7 @@ public class PersonalInfoEditActivity extends BaseActivity implements IPersonalI
         btn_male = (Button) findViewById(R.id.btn_personal_info_gender_male);
         btn_female = (Button) findViewById(R.id.btn_personal_info_gender_female);
 
-        progressDialog = new ProgressDialog(this, "加载中，请稍候", getResources().getColor(R.color.colorPrimary));
+        progressDialog = ProgressDialog.build(this);
 
         this.findViewById(R.id.tv_personal_info_confirm).setOnClickListener(this);
         iv_clear.setOnClickListener(this);

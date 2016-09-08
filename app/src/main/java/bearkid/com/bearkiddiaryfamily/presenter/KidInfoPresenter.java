@@ -54,13 +54,18 @@ public class KidInfoPresenter {
                         view.showBirthday(DateTimePickerUtil.getFormatDate(kid.getKbirthday()));
                         view.showGender(kid.getKsex());
                         view.setAsk(kid.getKask());
+                        initKid();
                     }
                 }, throwable -> {
                     Log.e("KidInfoPresenter", "获取孩子信息失败" + throwable);
                 });
     }
 
-    public void initKid() {
+    /**
+     * 将查询到的kid对象返回给activity
+     * 用于跳转到kid修改界面
+     */
+    private void initKid() {
         view.initKid(kid);
     }
 
@@ -68,7 +73,7 @@ public class KidInfoPresenter {
 
         view.clearHeightData();
 
-        KidInfoModel.getKidHeight(kidId, "asc")
+        KidInfoModel.getKidHeight(kidId, "desc")
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(kidResult -> {
                     if (kidResult.getResultCode() == 0){
@@ -86,7 +91,7 @@ public class KidInfoPresenter {
 
         view.clearWeightData();
 
-        KidInfoModel.getKidWeight(kidId, "asc")
+        KidInfoModel.getKidWeight(kidId, "desc")
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(kidResult -> {
                     if (kidResult.getResultCode() == 0){
@@ -103,7 +108,7 @@ public class KidInfoPresenter {
 
         view.clearVisionData();
 
-        KidInfoModel.getKidVision(kidId, "asc")
+        KidInfoModel.getKidVision(kidId, "desc")
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(kidResult -> {
                     if (kidResult.getResultCode() == 0){
