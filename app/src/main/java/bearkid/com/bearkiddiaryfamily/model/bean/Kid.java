@@ -6,11 +6,6 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import cn.bmob.v3.BmobObject;
-import cn.bmob.v3.datatype.BmobDate;
-import cn.bmob.v3.datatype.BmobFile;
-import cn.bmob.v3.datatype.BmobRelation;
-
 public class Kid implements Serializable{
     public static final String NAME = "Kname";
     public static final String SEX = "Ksex";
