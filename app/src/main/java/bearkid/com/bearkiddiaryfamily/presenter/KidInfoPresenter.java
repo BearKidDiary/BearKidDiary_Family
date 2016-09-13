@@ -1,21 +1,10 @@
 package bearkid.com.bearkiddiaryfamily.presenter;
 
-import android.util.Log;
-import android.widget.TabHost;
-
-import java.util.List;
-
-import bearkid.com.bearkiddiaryfamily.model.KidInfoModel;
-import bearkid.com.bearkiddiaryfamily.model.bean.Height;
-import bearkid.com.bearkiddiaryfamily.model.bean.Kid;
 import bearkid.com.bearkiddiaryfamily.ui.activity.KidInfoActivity;
 import bearkid.com.bearkiddiaryfamily.ui.activity.iactivity.IKidInfoView;
-import bearkid.com.bearkiddiaryfamily.utils.DateTimePickerUtil;
-import rx.android.schedulers.AndroidSchedulers;
 
 /**
- * Created by YrenChoi on 2016/7/20.
- * 孩子信息展示界面适配器
+ * Created by admin on 2016/7/20.
  */
 public class KidInfoPresenter {
 

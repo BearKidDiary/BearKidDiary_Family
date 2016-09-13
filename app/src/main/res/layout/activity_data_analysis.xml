@@ -46,29 +46,36 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
+        android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="@dimen/activity_vertical_margin"
             android:orientation="vertical">
 
-            <RelativeLayout
-                android:id="@+id/rlayout_kid_height"
+            <lecho.lib.hellocharts.view.LineChartView
+                android:id="@+id/lineview_height"
+                android:background="@drawable/shape_line_kid"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></RelativeLayout>
+                android:layout_height="400dp"
+                android:layout_marginTop="10dp"
+                />
 
-            <RelativeLayout
-                android:id="@+id/rlayout_kid_weight"
+            <lecho.lib.hellocharts.view.LineChartView
+                android:id="@+id/lineview_weight"
+                android:background="@drawable/shape_line_kid"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></RelativeLayout>
+                android:layout_height="400dp"
+                android:layout_marginTop="10dp"/>
 
-            <RelativeLayout
-                android:id="@+id/rlayout_kid_vision"
+            <lecho.lib.hellocharts.view.LineChartView
+                android:id="@+id/lineview_vision"
+                android:background="@drawable/shape_line_kid"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></RelativeLayout>
+                android:layout_height="400dp"
+                android:layout_marginTop="10dp"/>
+
         </LinearLayout>
-
     </ScrollView>
 
 </LinearLayout>
